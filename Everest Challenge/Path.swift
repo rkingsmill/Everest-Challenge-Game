@@ -9,22 +9,25 @@
 import Foundation
 
 class Path {
-    let basecamps = [BaseCamp]()
+  
+    var baseCamps = [BaseCamp]()
     var currentCamp = BaseCamp?()
     var nextCampHeight = Float()
-//    
-//    init(){
-//        let baseCamp0 = BaseCamp(x: <#T##CGFloat#>, y: <#T##CGFloat#>)
-//        let baseCamp1 = BaseCamp(x: <#T##CGFloat#>, y: <#T##CGFloat#>)
-//        let baseCamp2 = BaseCamp(x: <#T##CGFloat#>, y: <#T##CGFloat#>)
-//        let baseCamp3 = BaseCamp(x: <#T##CGFloat#>, y: <#T##CGFloat#>)
-//        let baseCamp4 = BaseCamp(x: <#T##CGFloat#>, y: <#T##CGFloat#>)
-//        let baseCamp5 = BaseCamp(x: <#T##CGFloat#>, y: <#T##CGFloat#>)
-//        
-//        basecamps.append(baseCamp0, baseCamp1, baseCamp2, baseCamp3, baseCamp4, baseCamp5)
-//        
-//        currentCamp = baseCamp0
-//    }
-//    
+  
+    init(){
+        let baseCamp0 = BaseCamp(x: 0.0033, y: 1 - 0.729)
+        let baseCamp1 = BaseCamp(x: 0.413, y: 1 - 0.403)
+        let baseCamp2 = BaseCamp(x: 0.438, y: 1 - 0.375)
+        let baseCamp3 = BaseCamp(x: 0.493, y: 1 - 0.328)
+        let baseCamp4 = BaseCamp(x: 0.542, y: 1 - 0.278)
+        let baseCamp5 = BaseCamp(x: 0.598, y: 1 - 0.219)
+        
+        baseCamps += [baseCamp0, baseCamp1, baseCamp2, baseCamp3, baseCamp4, baseCamp5]
+        
+        currentCamp = baseCamp0
+    }
+    
+    
+    
 }
 //initializes camp objects and put them in an array. like a camp manager
