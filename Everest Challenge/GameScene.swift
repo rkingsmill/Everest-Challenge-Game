@@ -15,7 +15,6 @@ class GameScene: SKScene {
         
     override func didMoveToView(view: SKView) {
         //sprite setup
-        
         let background = SKSpriteNode(imageNamed: "Mount-Everest Compressed")
         background.zPosition = 1
         background.position = CGPoint(x:CGRectGetMidX(frame), y:CGRectGetMidY(frame))
@@ -31,7 +30,9 @@ class GameScene: SKScene {
         self.addChild(sprite!)
         
         //create path - need to change to our mountain path
+        self.multiplyRelativeCoordinates()
         self.createPath()
+        self.addTentImages()
         
         let followLine = SKAction.followPath(route, asOffset: false, orientToPath: false, duration: 10.0)
         
@@ -39,17 +40,35 @@ class GameScene: SKScene {
     }
     
     func createPath() {
+
+        CGPathMoveToPoint(route, nil, path.baseCamps[0].x, path.baseCamps[0].y)
+        print("x: \(path.baseCamps[0].x) y: \(path.baseCamps[0].x)")
+        for idx in 1...(path.baseCamps.count - 1) {
+            print("x: \(path.baseCamps[idx].x) y: \(path.baseCamps[idx].x)")
+            CGPathAddLineToPoint(route, nil, path.baseCamps[idx].x, path.baseCamps[idx].y)
+        }
+    }
+    
+    func addTentImages() {
         
+        for idx in 1...(path.baseCamps.count - 1) {
+            let tent = SKSpriteNode(imageNamed: "tent")
+            tent.xScale = 0.2
+            tent.yScale = 0.2
+            tent.zPosition = 2
+            tent.position = CGPoint(x:path.baseCamps[idx].x, y:path.baseCamps[idx].y)
+            addChild(tent)
+        }
+    }
+    
+    func multiplyRelativeCoordinates() {
         let width = CGRectGetWidth(frame)
         let height = CGRectGetHeight(frame)
-        print("width:", width)
-        print("height:", height)
-        CGPathMoveToPoint(route, nil, path.baseCamps[0].x*width, path.baseCamps[0].y*height)
-        print("x: \(path.baseCamps[0].x*width) y: \(path.baseCamps[0].x*height)")
-        for idx in 1...(path.baseCamps.count - 1) {
-            print("x: \(path.baseCamps[idx].x*width) y: \(path.baseCamps[idx].x*height)")
-            CGPathAddLineToPoint(route, nil, path.baseCamps[idx].x*width, path.baseCamps[idx].y*height)
+        for idx in 0...(path.baseCamps.count - 1) {
+            path.baseCamps[idx].x = path.baseCamps[idx].x*width
+            path.baseCamps[idx].y = path.baseCamps[idx].y*height
         }
+        
     }
     
 }

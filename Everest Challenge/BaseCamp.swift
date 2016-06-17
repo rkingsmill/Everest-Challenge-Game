@@ -8,16 +8,19 @@
 
 import Foundation
 import CoreGraphics
+import UIKit
 
 class BaseCamp {
     
     //relative x and y
     var x = CGFloat()
     var y = CGFloat()
+    var distance = Float?()
     
     init (x: CGFloat, y: CGFloat){
         self.x = x
         self.y = y
     }
+    
 }
 

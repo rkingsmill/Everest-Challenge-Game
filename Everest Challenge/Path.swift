@@ -9,11 +9,10 @@
 import Foundation
 
 class Path {
-  
+    
     var baseCamps = [BaseCamp]()
     var currentCamp = BaseCamp?()
-    var nextCampHeight = Float()
-  
+    
     init(){
         let baseCamp0 = BaseCamp(x: 0.0033, y: 1 - 0.729)
         let baseCamp1 = BaseCamp(x: 0.413, y: 1 - 0.403)
@@ -26,8 +25,6 @@ class Path {
         
         currentCamp = baseCamp0
     }
-    
-    
     
 }
 //initializes camp objects and put them in an array. like a camp manager

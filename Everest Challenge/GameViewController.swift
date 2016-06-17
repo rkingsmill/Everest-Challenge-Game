@@ -30,6 +30,7 @@
     
     @objc private func pedometerDidUpdate() {
         print("current height", dataManager.floorTracker.currentHeight)
+        self.getDistance()
        // self.checkCurrentBaseCamp(dataManager.floorTracker.currentHeight)
     }
 
@@ -87,9 +88,54 @@
         dataManager.restartGame()
     }
     
-//    func checkCurrentBaseCamp(currentHeight:(NSNumber))-> BaseCamp {
-//    
-//        
-//    }
+    func checkMoveToNextBaseCamp() {
+        self.getDistance()
+        //        convert distance
+        //        find current index
+        self.getCurrentBaseCamp(dataManager.floorTracker.currentHeight)
+        //find next index
+        
+        if dataManager.floorTracker.currentHeight.floatValue <= path.currentCamp!.distance {
+            reachNextBaseCamp = true
+            //do animation with sprite
+        }
+    }
+
+    func getCurrentBaseCamp(currentHeight:(NSNumber)) {
+        
+        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[1].distance {
+            path.currentCamp = path.baseCamps[0]
+        }
+        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[2].distance {
+            path.currentCamp = path.baseCamps[1]
+        }
+        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[3].distance {
+            path.currentCamp = path.baseCamps[2]
+        }
+        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[4].distance {
+            path.currentCamp = path.baseCamps[3]
+        }
+        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[5].distance {
+            path.currentCamp = path.baseCamps[4]
+        }
+        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[5].distance {
+            path.currentCamp = path.baseCamps[5]
+        }
+        else {
+            path.currentCamp = path.baseCamps[0]
+        }
+    }
+    
+    func getDistance() {
+        
+        for idx in 0...(path.baseCamps.count - 1) {
+            let xDist = CGFloat(path.baseCamps[idx].x - path.baseCamps[0].x)
+            let yDist = CGFloat(path.baseCamps[idx].y - path.baseCamps[0].y)
+            path.baseCamps[idx].distance = Float(sqrt((xDist * xDist) + (yDist * yDist)))
+            //print("BaseCamp Distance (0-5): ", path.baseCamps[idx].distance)
+        }
+        //let totalDistance = path.baseCamps[5].distance! - path.baseCamps[0].distance!
+        //print("Total Distance: ", totalDistance)
+    }
     
  }

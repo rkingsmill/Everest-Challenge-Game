@@ -34,7 +34,7 @@ class FloorTracker: NSObject {
             self.startFakePedometerUpdate()
         }
     }
- 
+    
     func pedometerDidUpdate() {
         pedometer.startPedometerUpdatesFromDate(lastLoginDate!) { (data: CMPedometerData?, error: NSError?) in
             
