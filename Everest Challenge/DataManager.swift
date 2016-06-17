@@ -11,6 +11,7 @@ import Foundation
 class DataManager: NSObject {
     
     var defaults = NSUserDefaults.standardUserDefaults()
+//    var currentBaseCamp = BaseCamp?()
     
     let floorTracker:FloorTracker
     
@@ -20,23 +21,32 @@ class DataManager: NSObject {
     
     func saveUserDefaults() {
         self.defaults.setValue(NSDate(), forKey: "LastDate")
-        print("current height before saving", self.floorTracker.currentHeight)
         self.defaults.setValue(self.floorTracker.currentHeight, forKey: "Height")
+        print("current height before saving", self.floorTracker.currentHeight)
+//        self.saveCurrentCampUserDefaults()
     }
+    
+//    func saveCurrentCampUserDefaults() {
+//        self.defaults.setObject(self.currentBaseCamp, forKey: "CurrentCamp")
+//    }
     
     func fetchDefaults() {
         let lastLogoutDate = defaults.valueForKey("LastDate") as? NSDate ?? NSDate()
         let lastSavedHeight = self.defaults.valueForKey("Height") as? NSNumber ?? NSNumber(float:0.0)
+//        let lastSavedCamp = self.defaults.objectForKey("CurrentCamp") as! BaseCamp
         print("last logout", lastLogoutDate)
         print("last saved", lastSavedHeight)
         self.floorTracker.lastLoginDate = lastLogoutDate
-        self.floorTracker.lastSavedHeight = lastSavedHeight
+        self.floorTracker.lastSavedHeight = Float(lastSavedHeight)
+//        self.currentBaseCamp = lastSavedCamp
     }
     
     func getStartDate() {
         guard let startDate = self.defaults.objectForKey("StartDate") else {
             print("initial startdate set")
             self.defaults.setObject(NSDate(), forKey: "StartDate")
+//            self.currentBaseCamp = BaseCamp(x: 0.0033, y: 1 - 0.729)
+//            self.defaults.setObject(self.currentBaseCamp, forKey: "CurrentCamp")
             return
         }
         print("start Date already set as:", startDate)
@@ -51,5 +61,14 @@ class DataManager: NSObject {
     func resetStartDate() {
         self.defaults.setValue(NSDate(), forKey: "StartDate")
     }
+    
+//    func resetCurrentBaseCamp() {
+//        
+//        for idx in 0...(path.baseCamps.count - 1) {
+//            if dataManager.currentBaseCamp!.x == path.baseCamps[idx].x {
+//                dataManager.currentBaseCamp = path.baseCamps[idx + 1]
+//            }
+//        }
+//    }
     
 }

@@ -28,7 +28,7 @@ class FloorTracker: NSObject {
     
     //comment out self.pedometerDidUpdate and add startFakePedometerUpdate for demo
     
-    var lastSavedHeight: NSNumber? {
+    var lastSavedHeight: Float? {
         didSet {
             //self.pedometerDidUpdate()
             self.startFakePedometerUpdate()
@@ -51,7 +51,7 @@ class FloorTracker: NSObject {
                 return
             }
             let floorsAscended = data.floorsAscended
-            self.currentHeight = floorsAscended!.floatValue + self.lastSavedHeight!.floatValue
+            self.currentHeight = Float(floorsAscended!) + self.lastSavedHeight!
             print("current height", self.currentHeight)
         }
     }

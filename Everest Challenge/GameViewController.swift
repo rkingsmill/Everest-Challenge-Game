@@ -30,15 +30,22 @@
     
     @objc private func pedometerDidUpdate() {
         print("current height", dataManager.floorTracker.currentHeight)
-        self.getDistance()
+//        self.getDistance()
        // self.checkCurrentBaseCamp(dataManager.floorTracker.currentHeight)
     }
+    
+    var scene: GameScene?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set current camp based on current height
+        
+        // next base camp height
+       
         if let scene = GameScene(fileNamed:"GameScene") {
             // Configure the view.
+            self.scene = scene
             let skView = self.view as! SKView
             skView.showsFPS = true
             skView.showsNodeCount = true
@@ -52,31 +59,12 @@
             skView.presentScene(scene)
         }
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(GameViewController.tapped))
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    func viewDidAppear() {
-        super.viewDidAppear(true)
-        
-    }
+
     
-//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-//        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-//            return .AllButUpsideDown
-//        } else {
-//            return .All
-//        }
-//    }
-    override func viewDidLayoutSubviews() {
-        //print(mountainImageView.
-    }
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
-    //remove observers when view controller doesnt exist. good practise
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
     private func showWinningState() {
         // show some confetti
         print(#function)
@@ -90,52 +78,45 @@
     
     func checkMoveToNextBaseCamp() {
         self.getDistance()
-        //        convert distance
-        //        find current index
-        self.getCurrentBaseCamp(dataManager.floorTracker.currentHeight)
-        //find next index
         
-        if dataManager.floorTracker.currentHeight.floatValue <= path.currentCamp!.distance {
+        if dataManager.currentBaseCamp!.distance >= dataManager.floorTracker.currentHeight.floatValue {
             reachNextBaseCamp = true
+            GameScene().isReadyToPress = reachNextBaseCamp
             //do animation with sprite
+            //need to call this after they press and move the sprite self.resetCurrentBaseCamp()
         }
     }
 
-    func getCurrentBaseCamp(currentHeight:(NSNumber)) {
-        
-        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[1].distance {
-            path.currentCamp = path.baseCamps[0]
-        }
-        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[2].distance {
-            path.currentCamp = path.baseCamps[1]
-        }
-        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[3].distance {
-            path.currentCamp = path.baseCamps[2]
-        }
-        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[4].distance {
-            path.currentCamp = path.baseCamps[3]
-        }
-        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[5].distance {
-            path.currentCamp = path.baseCamps[4]
-        }
-        if mountain.simulatedMountainHeight.floatValue < path.baseCamps[5].distance {
-            path.currentCamp = path.baseCamps[5]
-        }
-        else {
-            path.currentCamp = path.baseCamps[0]
-        }
+    @objc func tapped(sender: UITapGestureRecognizer){
+//        if isReadyToPress == true {
+//            
+//            self.createPath()
+//            //make paths for each current base camp
+//            let followLine = SKAction.followPath(route, asOffset: false, orientToPath: false, duration: 10.0)
+//            sprite!.runAction(SKAction.sequence([followLine]))
+//            
+//            //reset current base camp and save in NSDefaults
+//            dataManager.resetCurrentBaseCamp()
+//            print("tapped")
+//        }
     }
     
-    func getDistance() {
+    func getPaths() {
         
-        for idx in 0...(path.baseCamps.count - 1) {
-            let xDist = CGFloat(path.baseCamps[idx].x - path.baseCamps[0].x)
-            let yDist = CGFloat(path.baseCamps[idx].y - path.baseCamps[0].y)
-            path.baseCamps[idx].distance = Float(sqrt((xDist * xDist) + (yDist * yDist)))
-            //print("BaseCamp Distance (0-5): ", path.baseCamps[idx].distance)
-        }
-        //let totalDistance = path.baseCamps[5].distance! - path.baseCamps[0].distance!
-        //print("Total Distance: ", totalDistance)
+        
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        //print(mountainImageView.
+    }
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    //remove observers when view controller doesnt exist. good practise
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
  }

@@ -10,8 +10,9 @@ import SpriteKit
 
 class GameScene: SKScene {
     var sprite: SKSpriteNode?
-    let route = CGPathCreateMutable()
+    var route = CGPathCreateMutable()
     let path = Path()
+    var isReadyToPress = Bool(false)
         
     override func didMoveToView(view: SKView) {
         //sprite setup
@@ -33,20 +34,18 @@ class GameScene: SKScene {
         self.multiplyRelativeCoordinates()
         self.createPath()
         self.addTentImages()
-        
-        let followLine = SKAction.followPath(route, asOffset: false, orientToPath: false, duration: 10.0)
-        
-        sprite!.runAction(SKAction.sequence([followLine]))
     }
     
     func createPath() {
 
-        CGPathMoveToPoint(route, nil, path.baseCamps[0].x, path.baseCamps[0].y)
-        print("x: \(path.baseCamps[0].x) y: \(path.baseCamps[0].x)")
-        for idx in 1...(path.baseCamps.count - 1) {
-            print("x: \(path.baseCamps[idx].x) y: \(path.baseCamps[idx].x)")
-            CGPathAddLineToPoint(route, nil, path.baseCamps[idx].x, path.baseCamps[idx].y)
-        }
+        CGPathMoveToPoint(route, nil, dataManager.currentBaseCamp.x, dataManager.currentBaseCamp.y)
+        CGPathAddLineToPoint(route, nil, dataManager.[idx].x, path.baseCamps[idx].y)
+        
+//        CGPathMoveToPoint(route, nil, path.baseCamps[0].x, path.baseCamps[0].y)
+//        print("x: \(path.baseCamps[0].x) y: \(path.baseCamps[0].x)")
+//        for idx in 1...(path.baseCamps.count - 1) {
+//            print("x: \(path.baseCamps[idx].x) y: \(path.baseCamps[idx].x)")
+//            CGPathAddLineToPoint(route, nil, path.baseCamps[idx].x, path.baseCamps[idx].y)
     }
     
     func addTentImages() {
@@ -61,15 +60,10 @@ class GameScene: SKScene {
         }
     }
     
-    func multiplyRelativeCoordinates() {
-        let width = CGRectGetWidth(frame)
-        let height = CGRectGetHeight(frame)
-        for idx in 0...(path.baseCamps.count - 1) {
-            path.baseCamps[idx].x = path.baseCamps[idx].x*width
-            path.baseCamps[idx].y = path.baseCamps[idx].y*height
-        }
-        
-    }
+
+    
+
+  
     
 }
 

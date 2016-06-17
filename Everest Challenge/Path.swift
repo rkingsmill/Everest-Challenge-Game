@@ -11,7 +11,6 @@ import Foundation
 class Path {
     
     var baseCamps = [BaseCamp]()
-    var currentCamp = BaseCamp?()
     
     init(){
         let baseCamp0 = BaseCamp(x: 0.0033, y: 1 - 0.729)
@@ -22,9 +21,21 @@ class Path {
         let baseCamp5 = BaseCamp(x: 0.598, y: 1 - 0.219)
         
         baseCamps += [baseCamp0, baseCamp1, baseCamp2, baseCamp3, baseCamp4, baseCamp5]
-        
-        currentCamp = baseCamp0
     }
     
+    var nextCampHeight: Float?
+    
+    func currentCampForHeight(height:Float) -> Int {
+        for i in 0..<baseCamps.count {
+            let camp = self.baseCamps[i]
+            
+            if camp.getDistance() < 
+            
+            
+        }
+        
+    }
+    
+   
+    
 }
-//initializes camp objects and put them in an array. like a camp manager
