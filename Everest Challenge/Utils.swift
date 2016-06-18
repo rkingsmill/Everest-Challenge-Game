@@ -10,32 +10,26 @@ import UIKit
 
 class Utils {
     
-    static let actualMountainHeight : Float = 8848
+    static let actualMountainHeight : Double = 8848
     //need to change if top or bottom points change
-    static let simulatedMountainHeight : Float = 0.783433
-
-    
-    static func flightsOfStairsToMeters(flights: Float) -> Float {
+    static func flightsOfStairsToMeters(flights: Double) -> Double {
         return flights*4.7
     }
     
-    static func convertDistanceClimbedToScreenClimbed(distanceClimbed: Float) -> Float {
+    static func convertDistanceClimbedToScreenClimbed(totalScreenMountainHeight: Double, currentHeight: Double) -> Double {
         
-        return simulatedMountainHeight * (distanceClimbed / actualMountainHeight)
+        return totalScreenMountainHeight * (currentHeight / actualMountainHeight)
     }
     
-    static func multiplyRelativeCoordinates(point:CGPoint, frame:CGRect) ->CGPoint {
-        let width = CGRectGetWidth(frame)
-        let height = CGRectGetHeight(frame)
-        let realX = point.x*width
-        let realY = point.y*height
+    static func getScreenCoordinatesForRelativeCoordinates(relativePoint:CGPoint, size:CGSize) ->CGPoint {
+       
+        let width = size.width
+        let height = size.height
+        
+        let realX = relativePoint.x*width
+        let realY = relativePoint.y*height
         return CGPoint(x:realX, y:realY)
         
-        
-        ////        for idx in 0...(path.baseCamps.count - 1) {
-        //            path.baseCamps[idx].x = path.baseCamps[idx].x*width
-        //            path.baseCamps[idx].y = path.baseCamps[idx].y*height
-        //        }
     }
     
 }

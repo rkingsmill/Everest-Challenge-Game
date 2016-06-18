@@ -11,11 +11,12 @@ import CoreMotion
 
 class FloorTracker: NSObject {
     //mountain height is in flights
-    let mountainHeightInFlights = NSNumber(float: 8848/4.7)
+    let mountainHeightInFlights = 8848/4.7
     let pedometer = CMPedometer()
-    var currentHeight: NSNumber = NSNumber(float: 0.0) {
+    var currentHeight = 0.0 {
         didSet {
-            if currentHeight.floatValue >= mountainHeightInFlights.floatValue {
+            if currentHeight >= mountainHeightInFlights {
+                // fix this
                 pedometer.stopPedometerUpdates()
                 NSNotificationCenter.defaultCenter().postNotificationName("GameDidFinishNotification", object: nil)
             } else {
@@ -28,7 +29,7 @@ class FloorTracker: NSObject {
     
     //comment out self.pedometerDidUpdate and add startFakePedometerUpdate for demo
     
-    var lastSavedHeight: Float? {
+    var lastSavedHeight: Double? {
         didSet {
             //self.pedometerDidUpdate()
             self.startFakePedometerUpdate()
@@ -50,8 +51,8 @@ class FloorTracker: NSObject {
                 print("No data")
                 return
             }
-            let floorsAscended = data.floorsAscended
-            self.currentHeight = Float(floorsAscended!) + self.lastSavedHeight!
+            let floorsAscended = Double(data.floorsAscended!)
+            self.currentHeight = floorsAscended + self.lastSavedHeight!
             print("current height", self.currentHeight)
         }
     }
@@ -60,10 +61,10 @@ class FloorTracker: NSObject {
     
     func startFakePedometerUpdate(){
         self.update()
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(FloorTracker.update), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(FloorTracker.update), userInfo: nil, repeats: true)
     }
     
     @objc private func update(){
-        self.currentHeight = NSNumber(float: self.currentHeight.floatValue + 1.0)
+        self.currentHeight = self.currentHeight + 1.0
     }
 }

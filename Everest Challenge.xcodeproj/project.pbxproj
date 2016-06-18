@@ -21,7 +21,6 @@
 		5BADDA8E1D1331C4002BE197 /* Mount-Everest Compressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDA8D1D1331C4002BE197 /* Mount-Everest Compressed.png */; };
 		5BADDA901D13322B002BE197 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDA8F1D13322B002BE197 /* GameScene.sks */; };
 		5BADDA921D133F55002BE197 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BADDA911D133F55002BE197 /* SpriteKit.framework */; };
-		5BADDAB51D134569002BE197 /* Mountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BADDA851D133190002BE197 /* Mountain.swift */; };
 		5BADDAB91D146F81002BE197 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BADDAB81D146F81002BE197 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +35,6 @@
 		5BADDA7F1D13315D002BE197 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		5BADDA811D133171002BE197 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		5BADDA831D13317C002BE197 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		5BADDA851D133190002BE197 /* Mountain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mountain.swift; sourceTree = "<group>"; };
 		5BADDA871D133195002BE197 /* BaseCamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCamp.swift; sourceTree = "<group>"; };
 		5BADDA891D13319B002BE197 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		5BADDA8B1D1331B4002BE197 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,11 +81,10 @@
 				5BADDA7F1D13315D002BE197 /* DataManager.swift */,
 				5BADDA7D1D133156002BE197 /* FloorTracker.swift */,
 				5BADDA811D133171002BE197 /* GameViewController.swift */,
-				5BADDA831D13317C002BE197 /* GameScene.swift */,
-				5BADDA851D133190002BE197 /* Mountain.swift */,
-				5BADDA891D13319B002BE197 /* Path.swift */,
-				5BADDA871D133195002BE197 /* BaseCamp.swift */,
 				5BADDAB81D146F81002BE197 /* Utils.swift */,
+				5BADDA891D13319B002BE197 /* Path.swift */,
+				5BADDA831D13317C002BE197 /* GameScene.swift */,
+				5BADDA871D133195002BE197 /* BaseCamp.swift */,
 				5BADDA6F1D1330B2002BE197 /* Main.storyboard */,
 				5BADDA8F1D13322B002BE197 /* GameScene.sks */,
 				5BADDA8B1D1331B4002BE197 /* Assets.xcassets */,
@@ -177,7 +174,6 @@
 				5BADDAB91D146F81002BE197 /* Utils.swift in Sources */,
 				5BADDA8A1D13319B002BE197 /* Path.swift in Sources */,
 				5BADDA821D133171002BE197 /* GameViewController.swift in Sources */,
-				5BADDAB51D134569002BE197 /* Mountain.swift in Sources */,
 				5BADDA801D13315D002BE197 /* DataManager.swift in Sources */,
 				5BADDA6A1D1330B2002BE197 /* AppDelegate.swift in Sources */,
 				5BADDA7E1D133156002BE197 /* FloorTracker.swift in Sources */,

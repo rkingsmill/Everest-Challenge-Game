@@ -16,8 +16,7 @@ class BaseCamp {
     let x : CGFloat
     let y : CGFloat
 //    var distance: Float?
-    
-    
+
     var realX: CGFloat?
     var realY: CGFloat?
     
@@ -30,18 +29,22 @@ class BaseCamp {
 //        self.distance = self.getDistance()
     }
     
-    func getDistance() -> Float {
-        
-            let xDist = CGFloat(self.x - firstBaseCampPoint.x)
-            let yDist = CGFloat(self.y - firstBaseCampPoint.y)
-            let distance = Float(sqrt((xDist * xDist) + (yDist * yDist)))
-            return distance
-            //print("BaseCamp Distance (0-5): ", path.baseCamps[idx].distance)
-
-        //let totalDistance = path.baseCamps[5].distance! - path.baseCamps[0].distance!
-        //print("Total Distance: ", totalDistance)
+    var campAsRelativePoint:CGPoint {
+        return CGPoint(x: self.x, y: self.y)
     }
     
-    
+    func calculateDistanceWithPreviousCamp(previousCamp:BaseCamp, frameSize:CGSize) -> Double {
+            //convert coordinates to screen size
+            let screenSizePreviousX = previousCamp.x * frameSize.width
+            let screenSizePreviousY = previousCamp.y * frameSize.height
+            let screenSizeCurrentX = self.x * frameSize.width
+            let screenSizeCurrentY = self.y * frameSize.height
+        
+            let xDist = CGFloat(screenSizeCurrentX - screenSizePreviousX)
+            let yDist = CGFloat(screenSizeCurrentY - screenSizePreviousY)
+            let distance = Double(sqrt((xDist * xDist) + (yDist * yDist)))
+            print("Distance", distance)
+            return distance
+    }    
 }
 
