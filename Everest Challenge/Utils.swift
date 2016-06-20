@@ -17,12 +17,12 @@ class Utils {
     }
     
     static func convertDistanceClimbedToScreenClimbed(totalScreenMountainHeight: Double, currentHeight: Double) -> Double {
-        
+
         return totalScreenMountainHeight * (currentHeight / actualMountainHeight)
     }
     
-    static func getScreenCoordinatesForRelativeCoordinates(relativePoint:CGPoint, size:CGSize) ->CGPoint {
-       
+    func getScreenCoordinatesForRelativeCoordinates(relativePoint:CGPoint, size:CGSize) -> CGPoint {
+        
         let width = size.width
         let height = size.height
         
@@ -31,5 +31,4 @@ class Utils {
         return CGPoint(x:realX, y:realY)
         
     }
-    
 }

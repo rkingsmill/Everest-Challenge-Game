@@ -13,6 +13,7 @@ class FloorTracker: NSObject {
     //mountain height is in flights
     let mountainHeightInFlights = 8848/4.7
     let pedometer = CMPedometer()
+    let pedometerData = CMPedometerData()
     var currentHeight = 0.0 {
         didSet {
             if currentHeight >= mountainHeightInFlights {
@@ -54,6 +55,7 @@ class FloorTracker: NSObject {
             let floorsAscended = Double(data.floorsAscended!)
             self.currentHeight = floorsAscended + self.lastSavedHeight!
             print("current height", self.currentHeight)
+           
         }
     }
     
@@ -61,7 +63,7 @@ class FloorTracker: NSObject {
     
     func startFakePedometerUpdate(){
         self.update()
-        NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(FloorTracker.update), userInfo: nil, repeats: true)
+      //  NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(FloorTracker.update), userInfo: nil, repeats: true)
     }
     
     @objc private func update(){

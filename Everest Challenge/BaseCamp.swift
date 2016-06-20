@@ -20,8 +20,7 @@ class BaseCamp {
     var realX: CGFloat?
     var realY: CGFloat?
     
-    let firstBaseCampPoint: CGPoint = CGPoint(x: 0.0033, y: 1 - 0.729)
-    
+    let firstBaseCampPoint: CGPoint = CGPoint(x: 0.03, y: 1 - 0.729)
     
     init (x: CGFloat, y: CGFloat){
         self.x = x
