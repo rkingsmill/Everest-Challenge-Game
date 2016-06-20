@@ -19,18 +19,18 @@ class GameScene: SKScene {
     let summit = CGPoint(x: 612.4, y: 600)
     
     override func didMoveToView(view: SKView) {
-        //sprite setup
+  
         let background = SKSpriteNode(imageNamed: "Mount-Everest Compressed")
         background.zPosition = 1
         background.position = CGPoint(x:CGRectGetMidX(frame), y:CGRectGetMidY(frame))
-        
         addChild(background)
+        
         scene!.scaleMode = SKSceneScaleMode.AspectFit;
         scene?.anchorPoint = CGPointZero
         
         sprite = SKSpriteNode(imageNamed: "Spaceship")
-        sprite!.xScale = 0.2
-        sprite!.yScale = 0.2
+        sprite!.xScale = 0.4
+        sprite!.yScale = 0.4
         sprite!.zPosition = 3
         print("frame on the GameScene \(frame)")
         sprite!.position = CGPointMake(frame.width/2, frame.height/2)
@@ -39,20 +39,6 @@ class GameScene: SKScene {
         self.moveStartToFirstBaseCamp(start, firstBaseCamp: baseCamp1)
         
     }
-    
-    func animate(initialCoord: CGPoint, secondCoord: CGPoint, completion:() -> Void)  {
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, initialCoord.x, initialCoord.y)
-        CGPathAddLineToPoint(path, nil, secondCoord.x, secondCoord.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
-//        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
-        self.sprite!.runAction(SKAction.sequence([destination]))
-        {
-                        //Perhaps show some pop up
-            
-        }
-    }
-    
     
     func moveStartToFirstBaseCamp(start: CGPoint, firstBaseCamp: CGPoint) -> Void {
         
@@ -88,7 +74,7 @@ class GameScene: SKScene {
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, secondBaseCamp.x, secondBaseCamp.y)
         CGPathAddLineToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 2.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
@@ -102,7 +88,7 @@ class GameScene: SKScene {
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
         CGPathAddLineToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 2.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
@@ -116,7 +102,7 @@ class GameScene: SKScene {
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
         CGPathAddLineToPoint(path, nil, summit.x, summit.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 2.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
@@ -127,11 +113,27 @@ class GameScene: SKScene {
     
     func returnToStart(summit: CGPoint, start: CGPoint) -> Void {
         
-        self.animate(summit, secondCoord: start, completion: ({
-            print("done")
-        })
+        let path = CGPathCreateMutable()
+        CGPathMoveToPoint(path, nil, self.summit.x, self.summit.y)
+        CGPathAddLineToPoint(path, nil, self.start.x, self.start.y)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
+        //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
+        self.sprite!.runAction(SKAction.sequence([destination]))
             
-        )}
+        }
+    
+//    func animate(initialCoord: CGPoint, secondCoord: CGPoint, completion:() -> Void)  {
+//        let path = CGPathCreateMutable()
+//        CGPathMoveToPoint(path, nil, initialCoord.x, initialCoord.y)
+//        CGPathAddLineToPoint(path, nil, secondCoord.x, secondCoord.y)
+//        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
+//        //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
+//        self.sprite!.runAction(SKAction.sequence([destination]))
+//        {
+//            //Perhaps show some pop up
+//            
+//        }
+//    }
     
 //    func moveStartToFirstBaseCamp(start: CGPoint, firstBaseCamp: CGPoint) -> Void {
 //        
