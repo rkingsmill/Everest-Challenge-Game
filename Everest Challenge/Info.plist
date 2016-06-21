@@ -38,5 +38,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>LCD_Solid.ttf</string>
+	</array>
 </dict>
 </plist>

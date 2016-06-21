@@ -1,0 +1,6 @@
+framework module ScoreboardLabel {
+  umbrella header "ScoreboardLabel-umbrella.h"
+
+  export *
+  module * { export * }
+}
