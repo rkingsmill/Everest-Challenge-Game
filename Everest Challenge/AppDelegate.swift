@@ -15,16 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var dataManager:DataManager!
     
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
-        if let presentedViewController = window?.rootViewController?.presentedViewController {
-            if (presentedViewController.isKindOfClass(UIImagePickerController) && !presentedViewController.isBeingDismissed() ){
-                
-                return UIInterfaceOrientationMask.All
-            }
-        }
-        
-        return UIInterfaceOrientationMask.Landscape
-    }
+    
+//    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+//        if let presentedViewController = window?.rootViewController?.presentedViewController {
+//            if (presentedViewController.isKindOfClass(UIImagePickerController) && !presentedViewController.isBeingDismissed() ){
+//                
+//                return UIInterfaceOrientationMask.Portrait
+//            }
+//        }
+//        
+//        return UIInterfaceOrientationMask.LandscapeLeft
+//    }
+// 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
                 self.dataManager = DataManager()

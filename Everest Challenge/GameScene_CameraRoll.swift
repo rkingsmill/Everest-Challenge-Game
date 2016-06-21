@@ -18,10 +18,10 @@ extension GameScene {
         {
         
         let imagePicker = UIImagePickerController()
-        imagePicker.modalPresentationStyle = .CurrentContext
+        //imagePicker.modalPresentationStyle = .CurrentContext
         imagePicker.delegate = self
         imagePicker.sourceType = source
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
             
             if (source == .Camera) {
         imagePicker.cameraDevice = .Front
@@ -37,7 +37,7 @@ extension GameScene {
         if (picker.sourceType == UIImagePickerControllerSourceType.PhotoLibrary || picker.sourceType == UIImagePickerControllerSourceType.Camera) {
             
             //do something with image
-            if let cameraRollPicture = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            if let cameraRollPicture = info[UIImagePickerControllerEditedImage] as? UIImage {
                
                 if let deleteNode:SKNode = self.childNodeWithName("CameraRollPicture") {
                     deleteNode.removeFromParent()
@@ -50,6 +50,9 @@ extension GameScene {
                     //if we aren't going to mask it
                     
                     let tex:SKTexture = SKTexture(image: cameraRollPicture)
+                    face!.texture = tex
+                    
+                    /*
                     let newImage:SKSpriteNode = SKSpriteNode(texture: tex)
                     newImage.name = "CameraRollPicture"
                     self.addChild(newImage)
@@ -59,6 +62,7 @@ extension GameScene {
                         //newImage.size = face.size
                         newImage.position = face.position
                     }
+                     */
                     
                 } else {
                     
@@ -90,7 +94,10 @@ extension GameScene {
             let someImage: UIImage = UIImage(data:imageDataAsDefaults)!
             
             if let face = face {
-                let tex:SKTexture = SKTexture(image:someImage)
+                let texture:SKTexture = SKTexture(image:someImage)
+                
+                face.texture = texture
+                /*
                 let newImage: SKSpriteNode = SKSpriteNode(texture: tex)
                 newImage.name = "AdjustMask"
                 //newImage.size = face.size
@@ -109,6 +116,7 @@ extension GameScene {
                 face.addChild(cropNode)
                 cropNode.name = "CameraRollPicture"
                 face.alpha = 1
+                */
                 
             }
         }
