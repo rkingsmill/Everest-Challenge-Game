@@ -7,9 +7,12 @@
 //
 
 import SpriteKit
+import UIKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     var sprite: SKSpriteNode?
+    var face: SKShapeNode?
     var path: Path!
     let start = CGPoint(x: 30.72, y: 208.1)
     let baseCamp1 = CGPoint(x: 256, y: 345.6)
@@ -18,6 +21,14 @@ class GameScene: SKScene {
     let baseCamp4 = CGPoint(x: 555, y: 554.4)
     let summit = CGPoint(x: 612.4, y: 600)
     
+    var defaultss:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    var maskingCameraRollChoice:Bool = true
+    var maskOffSet:CGPoint = CGPointZero
+    
+    var button: SKNode! = nil
+    
+    var moving = false
+    
     override func didMoveToView(view: SKView) {
   
         let background = SKSpriteNode(imageNamed: "Mount-Everest Compressed")
@@ -25,9 +36,16 @@ class GameScene: SKScene {
         background.position = CGPoint(x:CGRectGetMidX(frame), y:CGRectGetMidY(frame))
         addChild(background)
         
+        button = SKSpriteNode(imageNamed: "Button")
+        // Put it in the center of the scene
+        button.position = CGPoint(x:900, y:100);
+        button.zPosition = 4
+        self.addChild(button)
+        
         scene!.scaleMode = SKSceneScaleMode.AspectFit;
         scene?.anchorPoint = CGPointZero
         
+        //add girl
         sprite = SKSpriteNode(imageNamed: "Spaceship")
         sprite!.xScale = 0.4
         sprite!.yScale = 0.4
@@ -35,12 +53,27 @@ class GameScene: SKScene {
         print("frame on the GameScene \(frame)")
         sprite!.position = CGPointMake(frame.width/2, frame.height/2)
         self.addChild(sprite!)
+      
+        //add image face
+        //make shape oval
+        face = SKShapeNode(circleOfRadius:50)
+        face!.zPosition = 4
+        face?.glowWidth = 1.0
+        face!.position = CGPoint(x:0, y:10)
         
-        self.moveStartToFirstBaseCamp(start, firstBaseCamp: baseCamp1)
         
+        //position and lock to sprite. 
+        sprite?.addChild(self.face!)
+
+        if (face != nil) {
+            if (maskingCameraRollChoice == true) {
+                revealMaskedCameraRollImage()
+            }
+        }
     }
     
     func moveStartToFirstBaseCamp(start: CGPoint, firstBaseCamp: CGPoint) -> Void {
+        moving = true
         
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, start.x, start.y)
@@ -49,14 +82,25 @@ class GameScene: SKScene {
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
-            //Perhaps show some pop up
-            self.moveFirstToSecondBaseCamp(self.baseCamp1, secondBaseCamp: self.baseCamp2)
+            self.moving = false
+            
+            //show some pop up
+            //let image = UIImage(named: "camping")
+            
+            let alert = UIAlertController(title: "First Base Camp", message: "Congrats on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.", preferredStyle: UIAlertControllerStyle.Alert)
+        
+            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
+                _ in
+                self.moveFirstToSecondBaseCamp(self.baseCamp1, secondBaseCamp: self.baseCamp2)
+            }))
+            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             
         }
+        
     }
     
     func moveFirstToSecondBaseCamp(firstBaseCamp: CGPoint, secondBaseCamp: CGPoint) -> Void {
-        
+        moving = true
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, firstBaseCamp.x, firstBaseCamp.y)
         CGPathAddLineToPoint(path, nil, secondBaseCamp.x, secondBaseCamp.y)
@@ -64,13 +108,22 @@ class GameScene: SKScene {
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
+            self.moving = false
+            
             //Perhaps show some pop up
-            self.moveSecondToThirdBaseCamp(self.baseCamp2, thirdBaseCamp: self.baseCamp3)
+            let alert = UIAlertController(title: "Second Base Camp", message: "Congrats on reaching your second Base Camp. Some motivation: The youngest person to climb Everest is American teenager Jordan Romero, who was 13 years old when he reached the summit on 22 May 2010.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
+                _ in
+                
+                self.moveSecondToThirdBaseCamp(self.baseCamp2, thirdBaseCamp: self.baseCamp3)
+            }))
+            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            
         }
     }
     
     func moveSecondToThirdBaseCamp(secondBaseCamp: CGPoint, thirdBaseCamp: CGPoint) -> Void {
-        
+        moving = true
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, secondBaseCamp.x, secondBaseCamp.y)
         CGPathAddLineToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
@@ -78,13 +131,21 @@ class GameScene: SKScene {
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
+              self.moving = false
             //Perhaps show some pop up
+            let alert = UIAlertController(title: "Third Base Camp", message: "Getting closer! Some more motivation for you: The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, who climbed the mountain at the age of 80 on 23 May  2013.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Onwards and Upwards", style: UIAlertActionStyle.Default, handler: {
+                _ in
+
             self.moveThirdToFourthBaseCamp(self.baseCamp3, fourthBaseCamp: self.baseCamp4)
+            }))
+            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+    
         }
     }
     
     func moveThirdToFourthBaseCamp(thirdBaseCamp: CGPoint, fourthBaseCamp: CGPoint) -> Void {
-        
+        moving = true
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
         CGPathAddLineToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
@@ -92,13 +153,21 @@ class GameScene: SKScene {
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
+             self.moving = false
             //Perhaps show some pop up
+            let alert = UIAlertController(title: "Fourth Base Camp", message: "Amost there! Did you know... Anything above 8,000 metres is known as the Death Zone. Climbers suffer altitude sickness and headaches and risk life-threatening oedemas due to the thin, dry air.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
+                _ in
+
             self.moveFourthBaseCampToSummit(self.baseCamp4, summit: self.summit)
+            }))
+            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+           
         }
     }
     
     func moveFourthBaseCampToSummit(fourthBaseCamp: CGPoint, summit: CGPoint) -> Void {
-        
+        moving = true
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
         CGPathAddLineToPoint(path, nil, summit.x, summit.y)
@@ -106,8 +175,15 @@ class GameScene: SKScene {
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
+            self.moving = false
             //Perhaps show some pop up
+            let alert = UIAlertController(title: "The Summit", message: "Congratulations... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ready to Slide Home", style: UIAlertActionStyle.Default, handler: {
+                _ in
+
             self.returnToStart(self.summit, start: self.start)
+            }))
+            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -117,64 +193,52 @@ class GameScene: SKScene {
         CGPathMoveToPoint(path, nil, self.summit.x, self.summit.y)
         CGPathAddLineToPoint(path, nil, self.start.x, self.start.y)
         let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
-        //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
+        {
+        
+            self.moving = false
+            //Perhaps show some pop up
+            let alert = UIAlertController(title: "Home at Last", message: "Did you know... People have skied and snowboarded down Everest!", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: {
+                _ in
+              
+            }))
+            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            let fadeIn = SKAction.fadeInWithDuration(5)
+            self.button.runAction(SKAction.sequence([fadeIn]))
+        }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        for touch in touches {
+           
+            let location = touch.locationInNode(self)
+            
+            if sprite!.containsPoint(location) {
+                getPhotoFromSource(UIImagePickerControllerSourceType.Camera)
+            }
+            
             
         }
+    }
     
-//    func animate(initialCoord: CGPoint, secondCoord: CGPoint, completion:() -> Void)  {
-//        let path = CGPathCreateMutable()
-//        CGPathMoveToPoint(path, nil, initialCoord.x, initialCoord.y)
-//        CGPathAddLineToPoint(path, nil, secondCoord.x, secondCoord.y)
-//        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
-//        //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
-//        self.sprite!.runAction(SKAction.sequence([destination]))
-//        {
-//            //Perhaps show some pop up
-//            
-//        }
-//    }
-    
-//    func moveStartToFirstBaseCamp(start: CGPoint, firstBaseCamp: CGPoint) -> Void {
-//        
-//        self.animate(start, secondCoord: firstBaseCamp, completion: ({
-//            self.moveFirstToSecondBaseCamp(self.baseCamp1, secondBaseCamp: self.baseCamp2)
-//        })
-//            
-//        )}
-//    
-//    func moveFirstToSecondBaseCamp(firstBaseCamp: CGPoint, secondBaseCamp: CGPoint) -> Void {
-//        
-//        self.animate(firstBaseCamp, secondCoord: secondBaseCamp, completion: ({
-//            self.moveSecondToThirdBaseCamp(self.baseCamp2, thirdBaseCamp: self.baseCamp3)
-//        })
-//        )}
-    
-//    func moveSecondToThirdBaseCamp(secondBaseCamp: CGPoint, thirdBaseCamp: CGPoint) -> Void {
-//        
-//        self.animate(secondBaseCamp, secondCoord: thirdBaseCamp, completion: ({
-//            self.moveThirdToFourthBaseCamp(self.baseCamp3, fourthBaseCamp: self.baseCamp4)
-//            
-//        })
-//        )}
-    
-//    func moveThirdToFourthBaseCamp(thirdBaseCamp: CGPoint, fourthBaseCamp: CGPoint) -> Void {
-//        
-//        self.animate(thirdBaseCamp, secondCoord: fourthBaseCamp, completion: ({
-//            
-//            self.moveFourthBaseCampToSummit(self.baseCamp4, summit: self.summit)
-//        })
-//        )}
-    
-//    func moveFourthBaseCampToSummit(fourthBaseCamp: CGPoint, summit: CGPoint) -> Void {
-//        
-//        self.animate(fourthBaseCamp, secondCoord: summit, completion: ({
-//            
-//            self.returnToStart(self.summit, start: self.start)
-//        })
-//        )}
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // Loop over all the touches in this event
+        for touch: AnyObject in touches {
+            // Get the location of the touch in this scene
+            let location = touch.locationInNode(self)
+            // Check if the location of the touch is within the button's bounds
+            if button.containsPoint(location) {
+                self.moveStartToFirstBaseCamp(start, firstBaseCamp: baseCamp1)
+                //fade button off screen
+                let fadeAway = SKAction.fadeOutWithDuration(1)
+                self.button.runAction(SKAction.sequence([fadeAway]))
+          
+            }
+        }
+    }
 
-   
     func addTentImages(){
         
         let startingSign = SKSpriteNode(imageNamed: "start")
@@ -211,21 +275,15 @@ class GameScene: SKScene {
         //        CGPathMoveToPoint(route, nil, path.baseCamps[0].x, path.baseCamps[0].y)
 
     }
-
-//    func tapped(sender: UITapGestureRecognizer){
-        //        if isReadyToPress == true {
-                   // self.createPath()
-                    //make paths for each current base camp
-//                    let followLine = SKAction.followPath(route, asOffset: false, orientToPath: false, duration: 10.0)
-//                    sprite!.runAction(SKAction.sequence([followLine]))
-//                    //reset current base camp and save in NSDefaults
-//                    dataManager.resetCurrentBaseCamp()
-//                    print("tapped")
-//                }
-//    }
     
-//}
+    //get data from y position for labels
+    override func update(currentTime: NSTimeInterval) {
+        if (moving) {
+            // get label text
+            print("we are at: ", self.sprite?.position.y)
+            
+        }
+    }
     
-
 
 }
