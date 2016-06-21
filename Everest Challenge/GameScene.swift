@@ -12,7 +12,7 @@ import UIKit
 class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var sprite: SKSpriteNode?
-    var face: SKShapeNode?
+    var face: SKSpriteNode?
     var path: Path!
     let start = CGPoint(x: 30.72, y: 208.1)
     let baseCamp1 = CGPoint(x: 256, y: 345.6)
@@ -20,6 +20,8 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     let baseCamp3 = CGPoint(x: 504.8, y: 516.1)
     let baseCamp4 = CGPoint(x: 555, y: 554.4)
     let summit = CGPoint(x: 612.4, y: 600)
+    //pop-up stuff
+    let popUp = PopUp(frame: CGRect(x:60, y:60, width: 300, height: 600))
     
     var defaultss:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     var maskingCameraRollChoice:Bool = true
@@ -55,21 +57,35 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.addChild(sprite!)
       
         //add image face
-        //make shape oval
-        face = SKShapeNode(circleOfRadius:50)
-        face!.zPosition = 4
-        face?.glowWidth = 1.0
-        face!.position = CGPoint(x:0, y:10)
+        let cropNode:SKCropNode = SKCropNode()
+        let actualMask: SKShapeNode = SKShapeNode(circleOfRadius: 50)
+        actualMask.fillColor = UIColor.whiteColor()
+        cropNode.maskNode = actualMask
+        cropNode.zPosition = 4
+        cropNode.position = CGPoint(x:0, y:10)
+        sprite?.addChild(cropNode)
         
+        //make shape oval
+        face = SKSpriteNode(color: UIColor .redColor(), size: CGSize(width: 100, height: 100))
+        face!.zPosition = 4
+        
+        //face!.position = CGPoint(x:0, y:10)
         
         //position and lock to sprite. 
-        sprite?.addChild(self.face!)
+        cropNode.addChild(self.face!)
 
+        
         if (face != nil) {
             if (maskingCameraRollChoice == true) {
                 revealMaskedCameraRollImage()
+                
             }
         }
+        
+        //add stuff to popup view
+       
+     
+         
     }
     
     func moveStartToFirstBaseCamp(start: CGPoint, firstBaseCamp: CGPoint) -> Void {
@@ -84,17 +100,17 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         {
             self.moving = false
             
+            self.view!.addSubview(self.popUp)
             //show some pop up
-            //let image = UIImage(named: "camping")
             
-            let alert = UIAlertController(title: "First Base Camp", message: "Congrats on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.", preferredStyle: UIAlertControllerStyle.Alert)
-        
-            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
-                _ in
-                self.moveFirstToSecondBaseCamp(self.baseCamp1, secondBaseCamp: self.baseCamp2)
-            }))
-            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-            
+//            let alert = UIAlertController(title: "First Base Camp", message: "Congrats on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.", preferredStyle: UIAlertControllerStyle.Alert)
+//        
+//            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
+//                _ in
+//                self.moveFirstToSecondBaseCamp(self.baseCamp1, secondBaseCamp: self.baseCamp2)
+//            }))
+//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+//            
         }
         
     }
