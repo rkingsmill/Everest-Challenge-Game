@@ -8,6 +8,6 @@ target 'Everest Challenge' do
   # Pods for Everest Challenge
   pod 'ScoreboardLabel', '~> 0.2'
 
+  pod 'NMPopUpViewSwift'
+
 end
-
-

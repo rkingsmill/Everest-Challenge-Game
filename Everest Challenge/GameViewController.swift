@@ -16,6 +16,7 @@
     var path:Path?
     var scene: GameScene?
     var size: CGSize?
+    var imagePicker: UIImagePickerController!
     
     //    var reachNextBaseCamp = Bool(false)
     
@@ -57,7 +58,7 @@
     override func viewDidLoad() {
         super.viewDidLoad()
         //        self.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
-        
+     
         
         // set current camp based on current height
         
@@ -93,6 +94,12 @@
         //        view.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    override func viewDidAppear(animated: Bool) {
+//        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+//        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+
+    }
+    
     private func showWinningState() {
         // show some confetti
         print(#function)
@@ -115,7 +122,17 @@
     //        }
     //    }
     
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .LandscapeLeft
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return .LandscapeLeft
+    }
     override func viewDidLayoutSubviews() {
         print("=====>>>>> view frame definitely set \(self.view.frame)")
     }

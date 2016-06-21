@@ -16,7 +16,47 @@
                     <view key="view" contentMode="scaleToFill" id="4Y4-eU-fCA" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xJ-jd-rCd" customClass="PopUp" customModule="Everest_Challenge" customModuleProvider="target">
+                                <rect key="frame" x="129" y="103" width="343" height="348"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TY1-TZ-aGW">
+                                        <rect key="frame" x="51" y="56" width="240" height="128"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEj-OS-BSg" userLabel="Title">
+                                        <rect key="frame" x="150" y="15" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7i-Q5-8Qf" userLabel="OK">
+                                        <rect key="frame" x="51" y="310" width="240" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="TY1-TZ-aGW" firstAttribute="top" secondItem="qEj-OS-BSg" secondAttribute="bottom" constant="20" id="Hpv-r9-NL7"/>
+                                    <constraint firstItem="e7i-Q5-8Qf" firstAttribute="leading" secondItem="8xJ-jd-rCd" secondAttribute="leading" constant="50" id="QWR-AA-TJW"/>
+                                    <constraint firstAttribute="trailing" secondItem="TY1-TZ-aGW" secondAttribute="trailing" constant="50" id="RYj-Fg-bc2"/>
+                                    <constraint firstItem="qEj-OS-BSg" firstAttribute="top" secondItem="8xJ-jd-rCd" secondAttribute="top" constant="15" id="WRJ-hC-xhh"/>
+                                    <constraint firstAttribute="trailing" secondItem="e7i-Q5-8Qf" secondAttribute="trailing" constant="50" id="afk-Un-b67"/>
+                                    <constraint firstItem="qEj-OS-BSg" firstAttribute="leading" secondItem="8xJ-jd-rCd" secondAttribute="leading" constant="150" id="dPV-OO-nHM"/>
+                                    <constraint firstItem="TY1-TZ-aGW" firstAttribute="leading" secondItem="8xJ-jd-rCd" secondAttribute="leading" constant="50" id="fol-ms-s5h"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="del-Iu-keM" userLabel="Fact">
+                                <rect key="frame" x="180" y="303" width="240" height="106"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8xJ-jd-rCd" firstAttribute="centerY" secondItem="4Y4-eU-fCA" secondAttribute="centerY" id="dAv-yF-Zln"/>
+                            <constraint firstItem="8xJ-jd-rCd" firstAttribute="centerX" secondItem="4Y4-eU-fCA" secondAttribute="centerX" id="qkj-u0-lho"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V7o-hS-Ysu" userLabel="First Responder" sceneMemberID="firstResponder"/>
