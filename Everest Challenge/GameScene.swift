@@ -7,11 +7,17 @@
 //
 
 import SpriteKit
+import ScoreboardLabel
 import UIKit
 
 class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var sprite: SKSpriteNode?
+    var sunSprite: SKSpriteNode?
+    var flagSprite: SKSpriteNode?
+    var playerScore: ScoreSpriteNode!
+    var scoreLabels: [SKLabelNode] = [SKLabelNode]()
+    var label: ScoreboardLabel!
     var face: SKSpriteNode?
     var path: Path!
     let start = CGPoint(x: 30.72, y: 208.1)
@@ -22,6 +28,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     let summit = CGPoint(x: 612.4, y: 600)
     //pop-up stuff
     var popUp: PopUp!
+
     
     var defaultss:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     var maskingCameraRollChoice:Bool = true
@@ -48,10 +55,69 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         scene!.scaleMode = SKSceneScaleMode.AspectFit;
         scene?.anchorPoint = CGPointZero
         
-        //add girl
-        sprite = SKSpriteNode(imageNamed: "Spaceship")
-        sprite!.xScale = 0.4
-        sprite!.yScale = 0.4
+        //CURRENT SCORE BOARD
+        playerScore = ScoreSpriteNode()
+        playerScore.position = CGPointMake(220,640)
+        playerScore!.zPosition = 2
+        addChild(playerScore)
+        
+        
+        let font = UIFont(name: "LCD Solid", size: 12)
+        let image = UIImage(named: "WhiteBackground.png")
+        let color = UIColor.blackColor()
+       
+        label = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: " ", font:font!, textColor:color)
+        label.interval = Double(0.2) //each letter flip time
+        label.completionHandler = { (finished:Bool) in
+            if finished == true {
+                //label as finished animating
+         
+        let labelDistance = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "1,000", font:font!, textColor:color)
+                labelDistance.center = CGPoint(x: 265, y: 18)
+                view.addSubview(labelDistance)
+                labelDistance.flip(true)
+                labelDistance.stopFlipping()
+                
+                
+        let labelCamp = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "2,000", font:font!, textColor:color)
+                labelCamp.center = CGPoint(x: 197, y: 36)
+                view.addSubview(labelCamp)
+                labelCamp.flip(true)
+                labelCamp.stopFlipping()
+                
+        let labelSteps = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "3,000", font:font!, textColor:color)
+                labelSteps.center = CGPoint(x: 212, y: 54)
+                view.addSubview(labelSteps)
+                labelSteps.flip(true)
+                labelSteps.stopFlipping()
+                
+                
+        let labelCalories = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "4,000", font:font!, textColor:color)
+                labelCalories.center = CGPoint(x: 190, y: 74)
+                view.addSubview(labelCalories)
+                labelCalories.flip(true)
+                labelCalories.stopFlipping()
+                
+        let labelStart = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "JUNE 21", font:font!, textColor:color)
+                labelStart.center = CGPoint(x: 217, y: 95)
+                view.addSubview(labelStart)
+                labelStart.flip(true)
+                //labelStart.stopFlipping()
+            }
+            
+        }
+        
+        
+        
+        
+        label.center = CGPoint(x: 0, y: 0)
+        //view.addSubview(label)
+        label.flip(true)
+        label.stopFlipping()
+        
+        sprite = PlayerSpriteNode()
+        sprite!.xScale = 2
+        sprite!.yScale = 2
         sprite!.zPosition = 3
         print("frame on the GameScene \(frame)")
         sprite!.position = CGPointMake(frame.width/2, frame.height/2)
@@ -60,15 +126,33 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         //add image face
         let cropNode:SKCropNode = SKCropNode()
         let actualMask: SKShapeNode = SKShapeNode(circleOfRadius: 50)
-        actualMask.fillColor = UIColor.whiteColor()
+        actualMask.fillColor = UIColor.clearColor()
         cropNode.maskNode = actualMask
         cropNode.zPosition = 4
         cropNode.position = CGPoint(x:0, y:10)
         sprite?.addChild(cropNode)
         
         //make shape oval
-        face = SKSpriteNode(color: UIColor .redColor(), size: CGSize(width: 100, height: 100))
+        face = SKSpriteNode(color: UIColor .clearColor(), size: CGSize(width: 100, height: 100))
         face!.zPosition = 4
+        
+        self.moveStartToFirstBaseCamp(start, firstBaseCamp: baseCamp1)
+
+        
+        sunSprite = SunSpriteNode()
+        sunSprite!.xScale = 1.25
+        sunSprite!.yScale = 1.25
+        sunSprite!.zPosition = 3
+        sunSprite!.position = CGPointMake(902, 680)
+        self.addChild(sunSprite!)
+        
+        flagSprite = FlagSpriteNode()
+        flagSprite!.xScale = 1
+        flagSprite!.yScale = 1
+        flagSprite!.zPosition = 3
+        flagSprite!.position = CGPointMake(660, 670)
+        self.addChild(flagSprite!)
+        
         
         //face!.position = CGPoint(x:0, y:10)
         
@@ -100,6 +184,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeFact("CONGRATS on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.")
             self.popUp.customizeButton("Keep Climbing")
             self.popUp.hidden = false
+
             //show some pop up
             
 //            let alert = UIAlertController(title: "First Base Camp", message: "Congrats on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -285,17 +370,18 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         addChild(startingSign)
         
         for idx in 1..<path!.baseCamps.count {
-            let tent = SKSpriteNode(imageNamed: "tentfilled")
-            tent.xScale = 0.4
-            tent.yScale = 0.4
-            tent.zPosition = 2
+            //let tent = SKSpriteNode(imageNamed: "Tent.png")
+            let markerSprite = MarkerSpriteNode()
+            markerSprite.xScale = 0.3
+            markerSprite.yScale = 0.3
+            markerSprite.zPosition = 2
             //TODO convert to new distances
             let xValue = path.baseCamps[idx].x
             let yValue = path.baseCamps[idx].y
             let point = CGPoint(x: xValue, y: yValue)
             let position = Utils().getScreenCoordinatesForRelativeCoordinates(point, size: path.frameSize)
-            tent.position = position
-            addChild(tent)
+            markerSprite.position = position
+            addChild(markerSprite)
         }
     }
     
@@ -308,6 +394,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
 
     }
     
+
     //get data from y position for labels
     override func update(currentTime: NSTimeInterval) {
         if (moving) {
