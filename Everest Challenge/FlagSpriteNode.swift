@@ -27,9 +27,9 @@ class FlagSpriteNode: SKSpriteNode {
         let atlas1 = SKTextureAtlas(named: "FlagSprite")
         
         let animation1 = SKAction.animateWithTextures([
-            atlas1.textureNamed("RedFlag1"),
-            atlas1.textureNamed("RedFlag2"),
-            atlas1.textureNamed("RedFlag3")], timePerFrame: 0.5)
+            atlas1.textureNamed("PurpleFlag1"),
+            atlas1.textureNamed("PurpleFlag2"),
+            atlas1.textureNamed("PurpleFlag3")], timePerFrame: 0.5)
         
         waveFlag = SKAction.repeatActionForever(animation1)
         
