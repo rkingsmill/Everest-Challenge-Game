@@ -17,6 +17,7 @@
     var scene: GameScene?
     var size: CGSize?
     var imagePicker: UIImagePickerController!
+    @IBOutlet var popup: PopUp!
     
     //    var reachNextBaseCamp = Bool(false)
     
@@ -67,6 +68,10 @@
         if let scene = GameScene(fileNamed:"GameScene") {
             // Configure the view.
             self.scene = scene
+            self.popup.setupPopUp()
+
+            scene.popUp = popup
+            
             self.size = self.scene?.size
             guard let size = self.size else {
                 return
@@ -140,6 +145,35 @@
         return true
     }
     
+    @IBAction func keepMoving(sender: AnyObject) {
+        if CGRectContainsPoint(scene!.sprite!.frame, scene!.baseCamp1) {
+            scene!.popUp.hidden = true
+            scene!.moveFirstToSecondBaseCamp(scene!.baseCamp1, secondBaseCamp: scene!.baseCamp2)
+        }
+        if CGRectContainsPoint(scene!.sprite!.frame, scene!.baseCamp2) {
+            scene!.popUp.hidden = true
+            scene!.moveSecondToThirdBaseCamp(scene!.baseCamp2, thirdBaseCamp: scene!.baseCamp3)
+        }
+        if CGRectContainsPoint(scene!.sprite!.frame, scene!.baseCamp3) {
+            scene!.popUp.hidden = true
+            scene!.moveThirdToFourthBaseCamp(scene!.baseCamp3, fourthBaseCamp: scene!.baseCamp4)
+        }
+        if CGRectContainsPoint(scene!.sprite!.frame, scene!.baseCamp4) {
+            scene!.popUp.hidden = true
+            scene!.moveFourthBaseCampToSummit(scene!.baseCamp4, summit: scene!.summit)
+        }
+        if CGRectContainsPoint(scene!.sprite!.frame, scene!.summit) {
+            scene!.popUp.hidden = true
+            scene!.returnToStart(scene!.summit, start: scene!.start)
+        }
+        if CGRectContainsPoint(scene!.sprite!.frame, scene!.start) {
+            scene!.popUp.hidden = true
+            
+            let fadeIn = SKAction.fadeInWithDuration(5)
+            scene!.button.runAction(SKAction.sequence([fadeIn]))
+        }
+        
+    }
     //remove observers when view controller doesnt exist. good practise
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)

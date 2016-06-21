@@ -10,32 +10,39 @@ import UIKit
 
 class PopUp: UIView {
     
-    let campImageView = UIImageView (frame: CGRect(x:70, y: 70, width: 300, height: 300))
-    let titleLabel = UILabel(frame: CGRect(x: 100, y: 200, width: 100, height: 10))
-    let factLabel = UILabel(frame: CGRect(x: 100, y: 215, width: 100, height: 75))
-    let okButton = UIButton(frame: CGRect(x: 200, y: 400, width: 50, height: 20))
+    @IBOutlet var campImageView: UIImageView!
+    @IBOutlet var titleLabel : UILabel!
+    @IBOutlet var factLabel : UILabel!
+    @IBOutlet var okButton : UIButton!
+    
     
 //    override init(frame:CGRect) {
-//        
+//        super.init(frame: frame)
 //        //set up self
 //        self.frame = frame
-//        self.backgroundColor = UIColor.whiteColor()
-//        //set up image
-//        self.addSubview(campImageView)
-//        campImageView.image = UIImage(named: "camping")
-//        //set up label
-//        self.addSubview(titleLabel)
-//        self.addSubview(factLabel)
-//        self.addSubview(okButton)
-//        
-//        customizeButton("Keep Climbing")
-//        customizeFact("Congrats on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.")
-//        customizeTitle("First Base Camp")
 //        
 //    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
+    func setupPopUp() {
+        
+        self.backgroundColor = UIColor.clearColor()
+  
+        campImageView.image = UIImage(named: "camping")
+        
+        self.layer.shadowColor = UIColor.whiteColor().CGColor
+        self.layer.shadowOpacity = 1
+        self.layer.shadowOffset = CGSizeZero
+        self.layer.shadowRadius = 10
+    }
     
     func customizeButton(text:String) {
-        okButton.titleLabel?.text = text
+        //okButton.titleLabel?.text = text
+        //self.layoutIfNeeded()
+        okButton.setTitle(text, forState: UIControlState.Normal)
     }
     
     func customizeTitle(text:String) {

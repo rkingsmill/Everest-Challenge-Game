@@ -27,7 +27,8 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     let baseCamp4 = CGPoint(x: 555, y: 554.4)
     let summit = CGPoint(x: 612.4, y: 600)
     //pop-up stuff
-    //let popUp = PopUp(frame: CGRect(x:60, y:60, width: 300, height: 600))
+    var popUp: PopUp!
+
     
     var defaultss:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     var maskingCameraRollChoice:Bool = true
@@ -38,7 +39,8 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     var moving = false
     
     override func didMoveToView(view: SKView) {
-  
+        self.popUp.hidden = true
+        
         let background = SKSpriteNode(imageNamed: "Mount-Everest Compressed")
         background.zPosition = 1
         background.position = CGPoint(x:CGRectGetMidX(frame), y:CGRectGetMidY(frame))
@@ -157,17 +159,13 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         //position and lock to sprite. 
         cropNode.addChild(self.face!)
 
-        
         if (face != nil) {
             if (maskingCameraRollChoice == true) {
                 revealMaskedCameraRollImage()
-                
             }
         }
         
         //add stuff to popup view
-       
-     
          
     }
     
@@ -182,8 +180,11 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
             self.moving = false
-            
-            //self.view!.addSubview(self.popUp)
+            self.popUp.customizeTitle("First Base Camp")
+            self.popUp.customizeFact("CONGRATS on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.")
+            self.popUp.customizeButton("Keep Climbing")
+            self.popUp.hidden = false
+
             //show some pop up
             
 //            let alert = UIAlertController(title: "First Base Camp", message: "Congrats on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -208,15 +209,19 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
             self.moving = false
+            self.popUp.customizeTitle("Second Base Camp")
+            self.popUp.customizeFact("CONGRATS on reaching your second Base Camp. Some motivation: The youngest person to climb Everest is American teenager Jordan Romero, who was 13 years old when he reached the summit on 22 May, 2010.")
+            self.popUp.customizeButton("Keep Climbing")
+            self.popUp.hidden = false
             
             //Perhaps show some pop up
-            let alert = UIAlertController(title: "Second Base Camp", message: "Congrats on reaching your second Base Camp. Some motivation: The youngest person to climb Everest is American teenager Jordan Romero, who was 13 years old when he reached the summit on 22 May 2010.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
-                _ in
-                
-                self.moveSecondToThirdBaseCamp(self.baseCamp2, thirdBaseCamp: self.baseCamp3)
-            }))
-            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            //            let alert = UIAlertController(title: "Second Base Camp", message: "Congrats on reaching your second Base Camp. Some motivation: The youngest person to climb Everest is American teenager Jordan Romero, who was 13 years old when he reached the summit on 22 May 2010.", preferredStyle: UIAlertControllerStyle.Alert)
+            //            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
+            //                _ in
+            //
+            //                self.moveSecondToThirdBaseCamp(self.baseCamp2, thirdBaseCamp: self.baseCamp3)
+            //            }))
+            //            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             
         }
     }
@@ -230,16 +235,20 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
-              self.moving = false
+            self.moving = false
+            self.popUp.customizeTitle("Third Base Camp")
+            self.popUp.customizeFact("GETTING CLOSER! Some more motivation for you: The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, who climbed the mountain at the age of 80 on 23 May, 2013.")
+            self.popUp.customizeButton("Onwards and Upwards")
+            self.popUp.hidden = false
             //Perhaps show some pop up
-            let alert = UIAlertController(title: "Third Base Camp", message: "Getting closer! Some more motivation for you: The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, who climbed the mountain at the age of 80 on 23 May  2013.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Onwards and Upwards", style: UIAlertActionStyle.Default, handler: {
-                _ in
-
-            self.moveThirdToFourthBaseCamp(self.baseCamp3, fourthBaseCamp: self.baseCamp4)
-            }))
-            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-    
+//            let alert = UIAlertController(title: "Third Base Camp", message: "Getting closer! Some more motivation for you: The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, who climbed the mountain at the age of 80 on 23 May  2013.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "Onwards and Upwards", style: UIAlertActionStyle.Default, handler: {
+//                _ in
+//
+//            self.moveThirdToFourthBaseCamp(self.baseCamp3, fourthBaseCamp: self.baseCamp4)
+//            }))
+//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+//    
         }
     }
     
@@ -253,14 +262,18 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
              self.moving = false
+            self.popUp.customizeTitle("Fourth Base Camp")
+            self.popUp.customizeFact("ALMOST THERE! Did you know... Anything above 8,000 metres is known as the Death Zone. Climbers suffer altitude sickness and headaches and risk life-threatening oedemas due to the thin, dry air.")
+            self.popUp.customizeButton("Keep Climbing")
+             self.popUp.hidden = false
             //Perhaps show some pop up
-            let alert = UIAlertController(title: "Fourth Base Camp", message: "Amost there! Did you know... Anything above 8,000 metres is known as the Death Zone. Climbers suffer altitude sickness and headaches and risk life-threatening oedemas due to the thin, dry air.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
-                _ in
-
-            self.moveFourthBaseCampToSummit(self.baseCamp4, summit: self.summit)
-            }))
-            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: "Fourth Base Camp", message: "Amost there! Did you know... Anything above 8,000 metres is known as the Death Zone. Climbers suffer altitude sickness and headaches and risk life-threatening oedemas due to the thin, dry air.", preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
+//                _ in
+//
+//            self.moveFourthBaseCampToSummit(self.baseCamp4, summit: self.summit)
+//            }))
+//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
            
         }
     }
@@ -275,14 +288,18 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
             self.moving = false
+            self.popUp.customizeTitle("The Summit")
+            self.popUp.customizeFact("CONGRATULATIONS... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!")
+            self.popUp.customizeButton("Enjoy the view")
+             self.popUp.hidden = false
             //Perhaps show some pop up
-            let alert = UIAlertController(title: "The Summit", message: "Congratulations... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ready to Slide Home", style: UIAlertActionStyle.Default, handler: {
-                _ in
-
-            self.returnToStart(self.summit, start: self.start)
-            }))
-            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: "The Summit", message: "Congratulations... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!", preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "Ready to Slide Home", style: UIAlertActionStyle.Default, handler: {
+//                _ in
+//
+//            self.returnToStart(self.summit, start: self.start)
+//            }))
+//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -294,30 +311,31 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
-        
             self.moving = false
+             self.popUp.hidden = false
+            self.popUp.customizeTitle("Home at Last")
+            self.popUp.customizeFact("Did you know... People have skied and snowboarded down Everest!")
+            self.popUp.customizeButton("Done")
             //Perhaps show some pop up
-            let alert = UIAlertController(title: "Home at Last", message: "Did you know... People have skied and snowboarded down Everest!", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: {
-                _ in
-              
-            }))
-            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-            let fadeIn = SKAction.fadeInWithDuration(5)
-            self.button.runAction(SKAction.sequence([fadeIn]))
+//            let alert = UIAlertController(title: "Home at Last", message: "Did you know... People have skied and snowboarded down Everest!", preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: {
+//                _ in
+//              
+//            }))
+//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+
         }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         for touch in touches {
-           
+            
             let location = touch.locationInNode(self)
             
             if sprite!.containsPoint(location) {
                 getPhotoFromSource(UIImagePickerControllerSourceType.Camera)
             }
-            
             
         }
     }
