@@ -7,9 +7,15 @@
 //
 
 import SpriteKit
+import ScoreboardLabel
 
 class GameScene: SKScene {
     var sprite: SKSpriteNode?
+    var sunSprite: SKSpriteNode?
+    var flagSprite: SKSpriteNode?
+    var playerScore: ScoreSpriteNode!
+    var scoreLabels: [SKLabelNode] = [SKLabelNode]()
+    var label: ScoreboardLabel!
     var path: Path!
     let start = CGPoint(x: 30.72, y: 208.1)
     let baseCamp1 = CGPoint(x: 256, y: 345.6)
@@ -28,15 +34,96 @@ class GameScene: SKScene {
         scene!.scaleMode = SKSceneScaleMode.AspectFit;
         scene?.anchorPoint = CGPointZero
         
-        sprite = SKSpriteNode(imageNamed: "Spaceship")
-        sprite!.xScale = 0.4
-        sprite!.yScale = 0.4
+        //CURRENT SCORE BOARD
+        playerScore = ScoreSpriteNode()
+        playerScore.position = CGPointMake(220,640)
+        playerScore!.zPosition = 2
+        addChild(playerScore)
+        
+        
+        let font = UIFont(name: "LCD Solid", size: 12)
+        let image = UIImage(named: "WhiteBackground.png")
+        let color = UIColor.blackColor()
+       
+        label = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: " ", font:font!, textColor:color)
+        label.interval = Double(0.2) //each letter flip time
+        label.completionHandler = { (finished:Bool) in
+            if finished == true {
+                //label as finished animating
+         
+        let labelDistance = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "1,000", font:font!, textColor:color)
+                labelDistance.center = CGPoint(x: 265, y: 18)
+                view.addSubview(labelDistance)
+                labelDistance.flip(true)
+                labelDistance.stopFlipping()
+                
+                
+        let labelCamp = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "2,000", font:font!, textColor:color)
+                labelCamp.center = CGPoint(x: 197, y: 36)
+                view.addSubview(labelCamp)
+                labelCamp.flip(true)
+                labelCamp.stopFlipping()
+                
+        let labelSteps = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "3,000", font:font!, textColor:color)
+                labelSteps.center = CGPoint(x: 212, y: 54)
+                view.addSubview(labelSteps)
+                labelSteps.flip(true)
+                labelSteps.stopFlipping()
+                
+                
+        let labelCalories = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "4,000", font:font!, textColor:color)
+                labelCalories.center = CGPoint(x: 190, y: 74)
+                view.addSubview(labelCalories)
+                labelCalories.flip(true)
+                labelCalories.stopFlipping()
+                
+        let labelStart = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "JUNE 21", font:font!, textColor:color)
+                labelStart.center = CGPoint(x: 217, y: 95)
+                view.addSubview(labelStart)
+                labelStart.flip(true)
+                //labelStart.stopFlipping()
+            }
+            
+        }
+        
+        
+        
+        
+        label.center = CGPoint(x: 0, y: 0)
+        //view.addSubview(label)
+        label.flip(true)
+        label.stopFlipping()
+        
+        
+
+        
+        sprite = PlayerSpriteNode()
+        sprite!.xScale = 2
+        sprite!.yScale = 2
         sprite!.zPosition = 3
         print("frame on the GameScene \(frame)")
         sprite!.position = CGPointMake(frame.width/2, frame.height/2)
         self.addChild(sprite!)
         
         self.moveStartToFirstBaseCamp(start, firstBaseCamp: baseCamp1)
+
+        
+        sunSprite = SunSpriteNode()
+        sunSprite!.xScale = 1.25
+        sunSprite!.yScale = 1.25
+        sunSprite!.zPosition = 3
+        sunSprite!.position = CGPointMake(902, 680)
+        self.addChild(sunSprite!)
+        
+        flagSprite = FlagSpriteNode()
+        flagSprite!.xScale = 1
+        flagSprite!.yScale = 1
+        flagSprite!.zPosition = 3
+        flagSprite!.position = CGPointMake(660, 670)
+        self.addChild(flagSprite!)
+        
+        
+        
         
     }
     
@@ -189,7 +276,7 @@ class GameScene: SKScene {
         addChild(startingSign)
         
         for idx in 1..<path!.baseCamps.count {
-            let tent = SKSpriteNode(imageNamed: "tentfilled")
+            let tent = SKSpriteNode(imageNamed: "Tent.png")
             tent.xScale = 0.4
             tent.yScale = 0.4
             tent.zPosition = 2
@@ -227,5 +314,9 @@ class GameScene: SKScene {
 //}
     
 
+    
+    
+    //ADD SCOREBOARD AS A VIEW
+    
 
 }
