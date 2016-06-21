@@ -16,6 +16,7 @@
     var path:Path?
     var scene: GameScene?
     var size: CGSize?
+    var imagePicker: UIImagePickerController!
     
     //    var reachNextBaseCamp = Bool(false)
     

@@ -22,9 +22,12 @@
 		5BADDA901D13322B002BE197 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDA8F1D13322B002BE197 /* GameScene.sks */; };
 		5BADDA921D133F55002BE197 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BADDA911D133F55002BE197 /* SpriteKit.framework */; };
 		5BADDAB91D146F81002BE197 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BADDAB81D146F81002BE197 /* Utils.swift */; };
+		5BCA510D1D18774F007AAEA9 /* GameScene_CameraRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCA510C1D18774F007AAEA9 /* GameScene_CameraRoll.swift */; };
+		8D6AB7FB4D95851D5ABDD249 /* Pods_Everest_Challenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6A47006AB83DC436356022 /* Pods_Everest_Challenge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3744EE7C866EB1E43B7A596A /* Pods-Everest Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest Challenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Everest Challenge/Pods-Everest Challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		5BADDA661D1330B2002BE197 /* Everest Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Everest Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BADDA691D1330B2002BE197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BADDA6B1D1330B2002BE197 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = art.scnassets; path = "Everest Challenge/art.scnassets"; sourceTree = "<group>"; };
@@ -42,6 +45,9 @@
 		5BADDA8F1D13322B002BE197 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		5BADDA911D133F55002BE197 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		5BADDAB81D146F81002BE197 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		5BCA510C1D18774F007AAEA9 /* GameScene_CameraRoll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene_CameraRoll.swift; sourceTree = "<group>"; };
+		8F20577E6ABF425D86BB4289 /* Pods-Everest Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest Challenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest Challenge/Pods-Everest Challenge.release.xcconfig"; sourceTree = "<group>"; };
+		FC6A47006AB83DC436356022 /* Pods_Everest_Challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Everest_Challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,12 +56,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BADDA921D133F55002BE197 /* SpriteKit.framework in Frameworks */,
+				8D6AB7FB4D95851D5ABDD249 /* Pods_Everest_Challenge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13213A3EEF12C5C07007177B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3744EE7C866EB1E43B7A596A /* Pods-Everest Challenge.debug.xcconfig */,
+				8F20577E6ABF425D86BB4289 /* Pods-Everest Challenge.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5BADDA5D1D1330B2002BE197 = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +79,8 @@
 				5BADDA681D1330B2002BE197 /* Everest Challenge */,
 				5BADDA671D1330B2002BE197 /* Products */,
 				5BADDA6B1D1330B2002BE197 /* art.scnassets */,
+				13213A3EEF12C5C07007177B /* Pods */,
+				7C5A8603499E40D9367731DB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,6 +102,7 @@
 				5BADDAB81D146F81002BE197 /* Utils.swift */,
 				5BADDA891D13319B002BE197 /* Path.swift */,
 				5BADDA831D13317C002BE197 /* GameScene.swift */,
+				5BCA510C1D18774F007AAEA9 /* GameScene_CameraRoll.swift */,
 				5BADDA871D133195002BE197 /* BaseCamp.swift */,
 				5BADDA6F1D1330B2002BE197 /* Main.storyboard */,
 				5BADDA8F1D13322B002BE197 /* GameScene.sks */,
@@ -95,6 +114,14 @@
 			path = "Everest Challenge";
 			sourceTree = "<group>";
 		};
+		7C5A8603499E40D9367731DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC6A47006AB83DC436356022 /* Pods_Everest_Challenge.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -102,9 +129,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BADDA7A1D1330B2002BE197 /* Build configuration list for PBXNativeTarget "Everest Challenge" */;
 			buildPhases = (
+				216A42BC27165572B9B51814 /* 📦 Check Pods Manifest.lock */,
 				5BADDA621D1330B2002BE197 /* Sources */,
 				5BADDA631D1330B2002BE197 /* Frameworks */,
 				5BADDA641D1330B2002BE197 /* Resources */,
+				B01619BAEF59A01F6AAF2627 /* 📦 Embed Pods Frameworks */,
+				EEF723FDADA1AB073F6E7DFD /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -127,6 +157,7 @@
 				TargetAttributes = {
 					5BADDA651D1330B2002BE197 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 34LN5HWMST;
 					};
 				};
 			};
@@ -164,6 +195,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		216A42BC27165572B9B51814 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B01619BAEF59A01F6AAF2627 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Everest Challenge/Pods-Everest Challenge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEF723FDADA1AB073F6E7DFD /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Everest Challenge/Pods-Everest Challenge-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5BADDA621D1330B2002BE197 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -176,6 +255,7 @@
 				5BADDA821D133171002BE197 /* GameViewController.swift in Sources */,
 				5BADDA801D13315D002BE197 /* DataManager.swift in Sources */,
 				5BADDA6A1D1330B2002BE197 /* AppDelegate.swift in Sources */,
+				5BCA510D1D18774F007AAEA9 /* GameScene_CameraRoll.swift in Sources */,
 				5BADDA7E1D133156002BE197 /* FloorTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,23 +367,33 @@
 		};
 		5BADDA7B1D1330B2002BE197 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3744EE7C866EB1E43B7A596A /* Pods-Everest Challenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Everest Challenge/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Lighthouse-Labs.Everest-Challenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		5BADDA7C1D1330B2002BE197 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F20577E6ABF425D86BB4289 /* Pods-Everest Challenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Everest Challenge/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Lighthouse-Labs.Everest-Challenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
