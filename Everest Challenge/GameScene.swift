@@ -88,19 +88,19 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
                 //label as finished animating
          
         self.labelDistance = ScoreboardLabel(backgroundImage: self.image!, text:" ", flipToText:"0", font:self.font!, textColor:self.color)
-                self.labelDistance!.center = CGPoint(x: 265, y: 18)
+                self.labelDistance!.center = CGPoint(x: 190, y: 18)
                 view.addSubview(self.labelDistance!)
                 self.labelDistance!.flip(false)
                 self.labelDistance!.stopFlipping()
                 
         self.labelCamp = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText:"0", font:self.font!, textColor:self.color)
-                self.labelCamp!.center = CGPoint(x: 197, y: 36)
+                self.labelCamp!.center = CGPoint(x: 190, y: 36)
                 view.addSubview(self.labelCamp!)
                 self.labelCamp!.flip(true)
                 self.labelCamp!.stopFlipping()
                 
         self.labelSteps = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText:"0", font:self.font!, textColor:self.color)
-                self.labelSteps!.center = CGPoint(x: 212, y: 54)
+                self.labelSteps!.center = CGPoint(x: 190, y: 54)
                 view.addSubview(self.labelSteps!)
                 self.labelSteps!.flip(false)
                 self.labelSteps!.stopFlipping()
@@ -111,8 +111,8 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
                 self.labelCalories!.flip(false)
                 self.labelCalories!.stopFlipping()
                 
-        let labelStart = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText: "JUNE 23", font:self.font!, textColor:self.color)
-                labelStart.center = CGPoint(x: 217, y: 95)
+        let labelStart = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText: "06/23", font:self.font!, textColor:self.color)
+                labelStart.center = CGPoint(x: 190, y: 95)
                 view.addSubview(labelStart)
                 labelStart.flip(false)
                 //labelStart.stopFlipping()
@@ -135,15 +135,15 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
       
         //add image face
         let cropNode:SKCropNode = SKCropNode()
-        let actualMask: SKShapeNode = SKShapeNode(circleOfRadius: 50)
-        actualMask.fillColor = UIColor.clearColor()
+        let actualMask: SKShapeNode = SKShapeNode(circleOfRadius: 15)
+        actualMask.fillColor = UIColor.whiteColor()
         cropNode.maskNode = actualMask
         cropNode.zPosition = 4
-        cropNode.position = CGPoint(x:0, y:10)
+        cropNode.position = CGPoint(x:0, y:20)
         sprite?.addChild(cropNode)
         
         //make shape oval
-        face = SKSpriteNode(color: UIColor .clearColor(), size: CGSize(width: 100, height: 100))
+        face = SKSpriteNode(color: UIColor .clearColor(), size: CGSize(width: 30, height: 30))
         face!.zPosition = 4
         
         sunSprite = SunSpriteNode()
@@ -192,16 +192,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeButton("Keep Climbing")
             self.popUp.hidden = false
 
-            //show some pop up
-            
-//            let alert = UIAlertController(title: "First Base Camp", message: "Congrats on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.", preferredStyle: UIAlertControllerStyle.Alert)
-//        
-//            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
-//                _ in
-//                self.moveFirstToSecondBaseCamp(self.baseCamp1, secondBaseCamp: self.baseCamp2)
-//            }))
-//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-//            
         }
         
     }
@@ -365,7 +355,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             
             //distance
             self.previousDistanceTotal = self.distanceTotal
-            let a = Double(self.sprite!.position.y - 208)  * 14.8
+            let a = Double(self.sprite!.position.y - 208)*22.62
             self.distanceTotal = Int(a)
 
             setDistance(self.previousDistanceTotal.description, distanceTotal: self.distanceTotal.description)
@@ -373,7 +363,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             //steps
             self.previousSteps = self.totalSteps
             //steps to mount everest
-            let b = Double(self.sprite!.position.y - 208) * 97.1
+            let b = Double(self.sprite!.position.y - 208)*148.897
             self.totalSteps = Int(b)
             
             setSteps(self.previousSteps.description, totalSteps: self.totalSteps.description)
@@ -381,7 +371,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             //calories
             self.previousCalories = self.calories
             //calories to mount everest
-            let c = Double(self.sprite!.position.y - 208) * 97.1 * 0.17
+            let c = Double(self.sprite!.position.y - 208) * 148.897 * 0.17
             self.calories = Int(c)
             // get label text
             setCalories(self.previousCalories.description, totalCalories: self.calories.description)
@@ -398,7 +388,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     func setDistance(previousDistanceTotal: String, distanceTotal: String) {
         self.labelDistance!.removeFromSuperview()
         self.labelDistance = ScoreboardLabel(backgroundImage: self.image!, text:previousDistanceTotal, flipToText: distanceTotal, font:self.font!, textColor:self.color)
-        self.labelDistance!.center = CGPoint(x: 265, y: 18)
+        self.labelDistance!.center = CGPoint(x: 190, y: 18)
         view!.addSubview(self.labelDistance!)
         self.labelDistance!.flip(true)
         self.labelDistance!.stopFlipping()
@@ -408,7 +398,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     func setSteps(previousSteps: String, totalSteps: String) {
         self.labelSteps!.removeFromSuperview()
         self.labelSteps = ScoreboardLabel(backgroundImage: self.image! ,text:previousSteps, flipToText:totalSteps, font:self.font!, textColor:self.color)
-        self.labelSteps!.center = CGPoint(x: 212, y: 54)
+        self.labelSteps!.center = CGPoint(x: 190, y: 54)
         view!.addSubview(self.labelSteps!)
         self.labelSteps!.flip(true)
         self.labelSteps!.stopFlipping()
