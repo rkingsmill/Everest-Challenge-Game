@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E48E4911D1A0E5A00846C17 /* StartSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48E4901D1A0E5900846C17 /* StartSpriteNode.swift */; };
+		0E6456501D1A07E0003A2B13 /* OrangeBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E64564F1D1A07E0003A2B13 /* OrangeBackground.png */; };
 		0ED409321D19B80900E7AFCD /* Tent.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED4092B1D19B80900E7AFCD /* Tent.png */; };
 		0ED409331D19B80900E7AFCD /* WhiteBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED4092C1D19B80900E7AFCD /* WhiteBackground.png */; };
 		0ED409341D19B80A00E7AFCD /* FlagSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED4092D1D19B80900E7AFCD /* FlagSpriteNode.swift */; };
@@ -16,6 +18,8 @@
 		0ED409381D19B80A00E7AFCD /* SunSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED409311D19B80900E7AFCD /* SunSpriteNode.swift */; };
 		0ED4093A1D19CEFC00E7AFCD /* MarkerSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED409391D19CEFC00E7AFCD /* MarkerSpriteNode.swift */; };
 		0ED4093C1D19D6BE00E7AFCD /* CloudBackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED4093B1D19D6BE00E7AFCD /* CloudBackgroundNode.swift */; };
+		0ED409431D1A02D400E7AFCD /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0ED409411D1A02D400E7AFCD /* MyParticle.sks */; };
+		0ED409441D1A02D400E7AFCD /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED409421D1A02D400E7AFCD /* bokeh.png */; };
 		5BADDA6A1D1330B2002BE197 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BADDA691D1330B2002BE197 /* AppDelegate.swift */; };
 		5BADDA6C1D1330B2002BE197 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDA6B1D1330B2002BE197 /* art.scnassets */; };
 		5BADDA711D1330B2002BE197 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDA6F1D1330B2002BE197 /* Main.storyboard */; };
@@ -37,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E48E4901D1A0E5900846C17 /* StartSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartSpriteNode.swift; sourceTree = "<group>"; };
+		0E64564F1D1A07E0003A2B13 /* OrangeBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrangeBackground.png; sourceTree = "<group>"; };
 		0ED4092B1D19B80900E7AFCD /* Tent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tent.png; sourceTree = "<group>"; };
 		0ED4092C1D19B80900E7AFCD /* WhiteBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteBackground.png; sourceTree = "<group>"; };
 		0ED4092D1D19B80900E7AFCD /* FlagSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagSpriteNode.swift; sourceTree = "<group>"; };
@@ -46,6 +52,8 @@
 		0ED409311D19B80900E7AFCD /* SunSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunSpriteNode.swift; sourceTree = "<group>"; };
 		0ED409391D19CEFC00E7AFCD /* MarkerSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerSpriteNode.swift; sourceTree = "<group>"; };
 		0ED4093B1D19D6BE00E7AFCD /* CloudBackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudBackgroundNode.swift; sourceTree = "<group>"; };
+		0ED409411D1A02D400E7AFCD /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
+		0ED409421D1A02D400E7AFCD /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
 		3744EE7C866EB1E43B7A596A /* Pods-Everest Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest Challenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Everest Challenge/Pods-Everest Challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		5BADDA661D1330B2002BE197 /* Everest Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Everest Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BADDA691D1330B2002BE197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +126,7 @@
 				0ED4092D1D19B80900E7AFCD /* FlagSpriteNode.swift */,
 				0ED4092F1D19B80900E7AFCD /* PlayerSpriteNode.swift */,
 				0ED409301D19B80900E7AFCD /* ScoreSpriteNode.swift */,
+				0E48E4901D1A0E5900846C17 /* StartSpriteNode.swift */,
 				0ED409311D19B80900E7AFCD /* SunSpriteNode.swift */,
 				0ED409391D19CEFC00E7AFCD /* MarkerSpriteNode.swift */,
 				0ED4093B1D19D6BE00E7AFCD /* CloudBackgroundNode.swift */,
@@ -128,12 +137,15 @@
 				5BADDAB81D146F81002BE197 /* Utils.swift */,
 				5BADDA891D13319B002BE197 /* Path.swift */,
 				5BADDA831D13317C002BE197 /* GameScene.swift */,
+				0ED409411D1A02D400E7AFCD /* MyParticle.sks */,
+				0ED409421D1A02D400E7AFCD /* bokeh.png */,
 				5BCA510C1D18774F007AAEA9 /* GameScene_CameraRoll.swift */,
 				5BCA510E1D19A4A9007AAEA9 /* PopUp.swift */,
 				5BADDA871D133195002BE197 /* BaseCamp.swift */,
 				5BADDA6F1D1330B2002BE197 /* Main.storyboard */,
 				5BADDA8F1D13322B002BE197 /* GameScene.sks */,
 				5BADDA8B1D1331B4002BE197 /* Assets.xcassets */,
+				0E64564F1D1A07E0003A2B13 /* OrangeBackground.png */,
 				0ED4092E1D19B80900E7AFCD /* LCD_Solid.ttf */,
 				0ED4092B1D19B80900E7AFCD /* Tent.png */,
 				0ED4092C1D19B80900E7AFCD /* WhiteBackground.png */,
@@ -223,6 +235,9 @@
 				5BADDA711D1330B2002BE197 /* Main.storyboard in Resources */,
 				0ED409351D19B80A00E7AFCD /* LCD_Solid.ttf in Resources */,
 				0ED409331D19B80900E7AFCD /* WhiteBackground.png in Resources */,
+				0ED409431D1A02D400E7AFCD /* MyParticle.sks in Resources */,
+				0ED409441D1A02D400E7AFCD /* bokeh.png in Resources */,
+				0E6456501D1A07E0003A2B13 /* OrangeBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +307,7 @@
 				0ED409371D19B80A00E7AFCD /* ScoreSpriteNode.swift in Sources */,
 				5BADDA821D133171002BE197 /* GameViewController.swift in Sources */,
 				5BADDA801D13315D002BE197 /* DataManager.swift in Sources */,
+				0E48E4911D1A0E5A00846C17 /* StartSpriteNode.swift in Sources */,
 				5BCA510F1D19A4A9007AAEA9 /* PopUp.swift in Sources */,
 				5BADDA6A1D1330B2002BE197 /* AppDelegate.swift in Sources */,
 				5BCA510D1D18774F007AAEA9 /* GameScene_CameraRoll.swift in Sources */,

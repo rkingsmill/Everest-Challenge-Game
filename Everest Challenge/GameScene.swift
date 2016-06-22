@@ -16,6 +16,9 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     var sunSprite: SKSpriteNode?
     var flagSprite: SKSpriteNode?
     var playerScore: ScoreSpriteNode!
+    var cloudSprite: SKNode?
+    var startSprite: SKSpriteNode?
+    var restartSprite: SKSpriteNode?
     var scoreLabels: [SKLabelNode] = [SKLabelNode]()
     var label: ScoreboardLabel!
     var face: SKSpriteNode?
@@ -44,11 +47,12 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         background.position = CGPoint(x:CGRectGetMidX(frame), y:CGRectGetMidY(frame))
         addChild(background)
         
-        button = SKSpriteNode(imageNamed: "Button")
-        // Put it in the center of the scene
-        button.position = CGPoint(x:900, y:100);
-        button.zPosition = 4
-        self.addChild(button)
+//        button = SKSpriteNode(imageNamed: "Button")
+//        // Put it in the center of the scene
+//        button.position = CGPoint(x:900, y:100);
+//        button.zPosition = 4
+//        self.addChild(button)
+        
         
         scene!.scaleMode = SKSceneScaleMode.AspectFit;
         scene?.anchorPoint = CGPointZero
@@ -58,6 +62,15 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         playerScore.position = CGPointMake(220,640)
         playerScore!.zPosition = 2
         addChild(playerScore)
+        
+        
+        
+        cloudSprite = CloudBackgroundNode()
+        cloudSprite!.xScale = 0.8
+        cloudSprite!.yScale = 0.8
+        addChild(cloudSprite!)
+        
+        
         
         
         let font = UIFont(name: "LCD Solid", size: 12)
@@ -150,6 +163,18 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         flagSprite!.zPosition = 3
         flagSprite!.position = CGPointMake(660, 670)
         self.addChild(flagSprite!)
+        
+        startSprite = StartSpriteNode()
+        startSprite?.position = CGPointMake(900, 100)
+        startSprite?.zPosition = 99
+        button = startSprite
+        self.addChild(startSprite!)
+        
+        restartSprite = StartSpriteNode()
+        restartSprite?.position = CGPointMake(800, 100)
+        restartSprite?.zPosition = 99
+        button = restartSprite
+        self.addChild(restartSprite!)
         
         
         //face!.position = CGPoint(x:0, y:10)

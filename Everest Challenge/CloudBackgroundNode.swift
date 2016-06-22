@@ -12,50 +12,61 @@ import SpriteKit
 class CloudBackgroundNode: SKNode {
     
     var moveCloud: SKAction!
-    var cloudSprite1: SKNode!
+    var moveCloud2: SKAction!
+    var moveCloud3: SKAction!
+    var resetCloud: SKAction!
+    var resetCloud2: SKAction!
+    var resetCloud3: SKAction!
+    var cloudSprite1: SKSpriteNode!
+    var cloudSprite2: SKSpriteNode!
+    var cloudSprite3: SKSpriteNode!
     
-    convenience override init(){
-        self.init(fileNamed:"Cloud1")!
-//        self.init(imageNamed:"Cloud2")
-//        self.init(imageNamed:"Cloud3")
+    
+    override init(){
+        super.init()
         
         setUpCloud()
-        runAction(moveCloud)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setUpCloud() {
-        cloudSprite1 = SKNode(fileNamed: "Cloud1")
-        //cloudSprite2 = SKNode(fileNamed: "Cloud2")
-        //cloudSprite3 = SKNode(fileNamed: "Cloud3")
+        cloudSprite1 = SKSpriteNode(imageNamed: "Cloud1")
+        cloudSprite2 = SKSpriteNode(imageNamed: "Cloud2")
+        cloudSprite3 = SKSpriteNode(imageNamed: "Cloud3")
         
-        cloudSprite1.position = CGPointMake (self.frame.size.width/2, self.frame.size.height/2)
-        cloudSprite1.zPosition = 3
-        cloudSprite1.physicsBody!.affectedByGravity = false
+        cloudSprite1.position = CGPointMake(900, 600)
+        cloudSprite2.position = CGPointMake(600, 650)
+        cloudSprite3.position = CGPointMake(300, 700)
+        
+        cloudSprite1.zPosition = 1
+        cloudSprite2.zPosition = 1
+        cloudSprite3.zPosition = 1
 
-        let moveCloud = SKAction.moveToX(self.frame.size.width, duration: 1.0)
-        cloudSprite1.runAction(moveCloud)
+        moveCloud = SKAction.moveToX(-cloudSprite1.size.width/2, duration: 15.0)
+        resetCloud = SKAction.moveToX(1000, duration: 0.0)
+        
+        moveCloud2 = SKAction.moveToX(-cloudSprite2.size.width/2, duration: 25.0)
+        resetCloud2 = SKAction.moveToX(1000, duration: 0.0)
+        
+        moveCloud3 = SKAction.moveToX(-cloudSprite3.size.width/2, duration: 30.0)
+        resetCloud3 = SKAction.moveToX(1000, duration: 0.0)
+
+        let sequence = SKAction.sequence([moveCloud, resetCloud])
+        let sequence2 = SKAction.sequence([moveCloud2, resetCloud2])
+        let sequence3 = SKAction.sequence([moveCloud3, resetCloud3])
+        cloudSprite1.runAction(SKAction.repeatActionForever(sequence))
+        cloudSprite2.runAction(SKAction.repeatActionForever(sequence2))
+        cloudSprite3.runAction(SKAction.repeatActionForever(sequence3))
         
         self.addChild(cloudSprite1)
-        
+        self.addChild(cloudSprite2)
+        self.addChild(cloudSprite3)
+  
         
     }
-    
-    
-    
-    //    func setUpSun(){
-    //        sunSprite = SKSpriteNode(imageNamed: "sunSprite1.png")
-    //
-    //        let atlas1 = SKTextureAtlas(named: "SunSprite")
-    //
-    //        let animation1 = SKAction.animateWithTextures([
-    //            atlas1.textureNamed("Sun1"),
-    //            atlas1.textureNamed("Sun2")], timePerFrame: 0.8)
-    //
-    //        sunShine = SKAction.repeatActionForever(animation1)
-    //
-    //
-    //
-    //
-    //    }
     
 }
