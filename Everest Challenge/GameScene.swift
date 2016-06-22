@@ -28,7 +28,27 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     let summit = CGPoint(x: 612.4, y: 600)
     //pop-up stuff
     var popUp: PopUp!
-
+    var time: Int = 0
+    //label variables
+    var distanceTotal: Int = 0
+    var previousDistanceTotal: Int = 0
+    
+    var distanceToCamp: Int?
+    
+    var totalSteps: Int = 0
+    var previousSteps: Int = 0
+    
+    var calories: Int = 0
+    var previousCalories: Int = 0
+    
+    var labelDistance : ScoreboardLabel?
+    var labelCamp : ScoreboardLabel?
+    var labelCalories : ScoreboardLabel?
+    var labelSteps : ScoreboardLabel?
+    
+    let font = UIFont(name: "LCD Solid", size: 12)
+    let image = UIImage(named: "WhiteBackground.png")
+    let color = UIColor.blackColor()
     
     var defaultss:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     var maskingCameraRollChoice:Bool = true
@@ -61,54 +81,44 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         playerScore!.zPosition = 2
         addChild(playerScore)
         
-        
-        let font = UIFont(name: "LCD Solid", size: 12)
-        let image = UIImage(named: "WhiteBackground.png")
-        let color = UIColor.blackColor()
-       
-        label = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: " ", font:font!, textColor:color)
+        label = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText:" ", font:font!, textColor:color)
         label.interval = Double(0.2) //each letter flip time
         label.completionHandler = { (finished:Bool) in
             if finished == true {
                 //label as finished animating
          
-        let labelDistance = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "1,000", font:font!, textColor:color)
-                labelDistance.center = CGPoint(x: 265, y: 18)
-                view.addSubview(labelDistance)
-                labelDistance.flip(true)
-                labelDistance.stopFlipping()
+        self.labelDistance = ScoreboardLabel(backgroundImage: self.image!, text:" ", flipToText:"0", font:self.font!, textColor:self.color)
+                self.labelDistance!.center = CGPoint(x: 265, y: 18)
+                view.addSubview(self.labelDistance!)
+                self.labelDistance!.flip(false)
+                self.labelDistance!.stopFlipping()
                 
+        self.labelCamp = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText:"0", font:self.font!, textColor:self.color)
+                self.labelCamp!.center = CGPoint(x: 197, y: 36)
+                view.addSubview(self.labelCamp!)
+                self.labelCamp!.flip(true)
+                self.labelCamp!.stopFlipping()
                 
-        let labelCamp = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "2,000", font:font!, textColor:color)
-                labelCamp.center = CGPoint(x: 197, y: 36)
-                view.addSubview(labelCamp)
-                labelCamp.flip(true)
-                labelCamp.stopFlipping()
+        self.labelSteps = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText:"0", font:self.font!, textColor:self.color)
+                self.labelSteps!.center = CGPoint(x: 212, y: 54)
+                view.addSubview(self.labelSteps!)
+                self.labelSteps!.flip(false)
+                self.labelSteps!.stopFlipping()
                 
-        let labelSteps = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "3,000", font:font!, textColor:color)
-                labelSteps.center = CGPoint(x: 212, y: 54)
-                view.addSubview(labelSteps)
-                labelSteps.flip(true)
-                labelSteps.stopFlipping()
+        self.labelCalories = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText:"0", font:self.font!, textColor:self.color)
+                self.labelCalories!.center = CGPoint(x: 190, y: 74)
+                view.addSubview(self.labelCalories!)
+                self.labelCalories!.flip(false)
+                self.labelCalories!.stopFlipping()
                 
-                
-        let labelCalories = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "4,000", font:font!, textColor:color)
-                labelCalories.center = CGPoint(x: 190, y: 74)
-                view.addSubview(labelCalories)
-                labelCalories.flip(true)
-                labelCalories.stopFlipping()
-                
-        let labelStart = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: "JUNE 21", font:font!, textColor:color)
+        let labelStart = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText: "JUNE 23", font:self.font!, textColor:self.color)
                 labelStart.center = CGPoint(x: 217, y: 95)
                 view.addSubview(labelStart)
-                labelStart.flip(true)
+                labelStart.flip(false)
                 //labelStart.stopFlipping()
             }
             
         }
-        
-        
-        
         
         label.center = CGPoint(x: 0, y: 0)
         //view.addSubview(label)
@@ -135,9 +145,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         //make shape oval
         face = SKSpriteNode(color: UIColor .clearColor(), size: CGSize(width: 100, height: 100))
         face!.zPosition = 4
-        
-        self.moveStartToFirstBaseCamp(start, firstBaseCamp: baseCamp1)
-
         
         sunSprite = SunSpriteNode()
         sunSprite!.xScale = 1.25
@@ -213,16 +220,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeFact("CONGRATS on reaching your second Base Camp. Some motivation: The youngest person to climb Everest is American teenager Jordan Romero, who was 13 years old when he reached the summit on 22 May, 2010.")
             self.popUp.customizeButton("Keep Climbing")
             self.popUp.hidden = false
-            
-            //Perhaps show some pop up
-            //            let alert = UIAlertController(title: "Second Base Camp", message: "Congrats on reaching your second Base Camp. Some motivation: The youngest person to climb Everest is American teenager Jordan Romero, who was 13 years old when he reached the summit on 22 May 2010.", preferredStyle: UIAlertControllerStyle.Alert)
-            //            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
-            //                _ in
-            //
-            //                self.moveSecondToThirdBaseCamp(self.baseCamp2, thirdBaseCamp: self.baseCamp3)
-            //            }))
-            //            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-            
         }
     }
     
@@ -240,15 +237,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeFact("GETTING CLOSER! Some more motivation for you: The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, who climbed the mountain at the age of 80 on 23 May, 2013.")
             self.popUp.customizeButton("Onwards and Upwards")
             self.popUp.hidden = false
-            //Perhaps show some pop up
-//            let alert = UIAlertController(title: "Third Base Camp", message: "Getting closer! Some more motivation for you: The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, who climbed the mountain at the age of 80 on 23 May  2013.", preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "Onwards and Upwards", style: UIAlertActionStyle.Default, handler: {
-//                _ in
-//
-//            self.moveThirdToFourthBaseCamp(self.baseCamp3, fourthBaseCamp: self.baseCamp4)
-//            }))
-//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-//    
+
         }
     }
     
@@ -266,15 +255,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeFact("ALMOST THERE! Did you know... Anything above 8,000 metres is known as the Death Zone. Climbers suffer altitude sickness and headaches and risk life-threatening oedemas due to the thin, dry air.")
             self.popUp.customizeButton("Keep Climbing")
              self.popUp.hidden = false
-            //Perhaps show some pop up
-//            let alert = UIAlertController(title: "Fourth Base Camp", message: "Amost there! Did you know... Anything above 8,000 metres is known as the Death Zone. Climbers suffer altitude sickness and headaches and risk life-threatening oedemas due to the thin, dry air.", preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "Keep Climbing", style: UIAlertActionStyle.Default, handler: {
-//                _ in
-//
-//            self.moveFourthBaseCampToSummit(self.baseCamp4, summit: self.summit)
-//            }))
-//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-           
         }
     }
     
@@ -292,14 +272,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeFact("CONGRATULATIONS... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!")
             self.popUp.customizeButton("Enjoy the view")
              self.popUp.hidden = false
-            //Perhaps show some pop up
-//            let alert = UIAlertController(title: "The Summit", message: "Congratulations... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!", preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "Ready to Slide Home", style: UIAlertActionStyle.Default, handler: {
-//                _ in
-//
-//            self.returnToStart(self.summit, start: self.start)
-//            }))
-//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -316,14 +288,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeTitle("Home at Last")
             self.popUp.customizeFact("Did you know... People have skied and snowboarded down Everest!")
             self.popUp.customizeButton("Done")
-            //Perhaps show some pop up
-//            let alert = UIAlertController(title: "Home at Last", message: "Did you know... People have skied and snowboarded down Everest!", preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: {
-//                _ in
-//              
-//            }))
-//            self.view?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-
         }
     }
     
@@ -351,7 +315,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
                 //fade button off screen
                 let fadeAway = SKAction.fadeOutWithDuration(1)
                 self.button.runAction(SKAction.sequence([fadeAway]))
-          
             }
         }
     }
@@ -369,7 +332,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         startingSign.position = position
         addChild(startingSign)
         
-        for idx in 1..<path!.baseCamps.count {
+        for idx in 1...(path!.baseCamps.count-2) {
             //let tent = SKSpriteNode(imageNamed: "Tent.png")
             let markerSprite = MarkerSpriteNode()
             markerSprite.xScale = 0.3
@@ -398,11 +361,66 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     //get data from y position for labels
     override func update(currentTime: NSTimeInterval) {
         if (moving) {
+//            NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
+            
+            //distance
+            self.previousDistanceTotal = self.distanceTotal
+            let a = Double(self.sprite!.position.y - 208)  * 14.8
+            self.distanceTotal = Int(a)
+
+            setDistance(self.previousDistanceTotal.description, distanceTotal: self.distanceTotal.description)
+            
+            //steps
+            self.previousSteps = self.totalSteps
+            //steps to mount everest
+            let b = Double(self.sprite!.position.y - 208) * 97.1
+            self.totalSteps = Int(b)
+            
+            setSteps(self.previousSteps.description, totalSteps: self.totalSteps.description)
+            
+            //calories
+            self.previousCalories = self.calories
+            //calories to mount everest
+            let c = Double(self.sprite!.position.y - 208) * 97.1 * 0.17
+            self.calories = Int(c)
             // get label text
+            setCalories(self.previousCalories.description, totalCalories: self.calories.description)
+            
             print("we are at: ", self.sprite?.position.y)
             
         }
     }
     
+//    @objc private func updateData(){
+//        self.time = self.time + 1
+//    }
+    
+    func setDistance(previousDistanceTotal: String, distanceTotal: String) {
+        self.labelDistance!.removeFromSuperview()
+        self.labelDistance = ScoreboardLabel(backgroundImage: self.image!, text:previousDistanceTotal, flipToText: distanceTotal, font:self.font!, textColor:self.color)
+        self.labelDistance!.center = CGPoint(x: 265, y: 18)
+        view!.addSubview(self.labelDistance!)
+        self.labelDistance!.flip(true)
+        self.labelDistance!.stopFlipping()
+    
+    }
+    
+    func setSteps(previousSteps: String, totalSteps: String) {
+        self.labelSteps!.removeFromSuperview()
+        self.labelSteps = ScoreboardLabel(backgroundImage: self.image! ,text:previousSteps, flipToText:totalSteps, font:self.font!, textColor:self.color)
+        self.labelSteps!.center = CGPoint(x: 212, y: 54)
+        view!.addSubview(self.labelSteps!)
+        self.labelSteps!.flip(true)
+        self.labelSteps!.stopFlipping()
 
+    }
+    
+    func setCalories(previousCalories: String, totalCalories: String) {
+        self.labelCalories!.removeFromSuperview()
+        self.labelCalories = ScoreboardLabel(backgroundImage: self.image! ,text:previousCalories, flipToText:totalCalories, font:self.font!, textColor:self.color)
+        self.labelCalories!.center = CGPoint(x: 190, y: 74)
+        view!.addSubview(self.labelCalories!)
+        self.labelCalories!.flip(true)
+        self.labelCalories!.stopFlipping()
+    }
 }

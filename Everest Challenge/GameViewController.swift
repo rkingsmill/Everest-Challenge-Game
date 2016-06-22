@@ -69,8 +69,9 @@
             // Configure the view.
             self.scene = scene
             self.popup.setupPopUp()
-
+            self.view.bringSubviewToFront(popup)
             scene.popUp = popup
+            
             
             self.size = self.scene?.size
             guard let size = self.size else {

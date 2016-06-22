@@ -37,6 +37,7 @@ class PopUp: UIView {
         self.layer.shadowOpacity = 1
         self.layer.shadowOffset = CGSizeZero
         self.layer.shadowRadius = 10
+        
     }
     
     func customizeButton(text:String) {
