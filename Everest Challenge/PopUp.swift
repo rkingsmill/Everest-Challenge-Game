@@ -44,14 +44,17 @@ class PopUp: UIView {
         //okButton.titleLabel?.text = text
         //self.layoutIfNeeded()
         okButton.setTitle(text, forState: UIControlState.Normal)
+        okButton.titleLabel?.font = UIFont(name: "LCD Solid", size: 14)
     }
     
     func customizeTitle(text:String) {
         titleLabel.text = text
+        titleLabel.font = UIFont(name: "LCD Solid", size: 14)
     }
     
     func customizeFact(text:String) {
         factLabel.text = text
+        factLabel.font = UIFont(name: "LCD Solid", size: 10)
     }
     
  }
