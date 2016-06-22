@@ -30,13 +30,22 @@ class PopUp: UIView {
     func setupPopUp() {
         
         self.backgroundColor = UIColor.clearColor()
-  
+        //set image
         campImageView.image = UIImage(named: "camping")
-        
+        //round image corners
+        campImageView.layer.cornerRadius = 8.0
+        campImageView.clipsToBounds = true
+        //round pop up corners
+//        self.layer.cornerRadius = 2.0
+//        self.clipsToBounds = true
+        //set shadow and round it
         self.layer.shadowColor = UIColor.whiteColor().CGColor
         self.layer.shadowOpacity = 1
         self.layer.shadowOffset = CGSizeZero
-        self.layer.shadowRadius = 10
+        self.layer.shadowRadius = 15
+        self.layer.masksToBounds = false
+        
+
         
     }
     

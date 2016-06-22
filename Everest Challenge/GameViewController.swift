@@ -69,7 +69,7 @@
             // Configure the view.
             self.scene = scene
             self.popup.setupPopUp()
-            self.view.bringSubviewToFront(popup)
+            self.popup.layer.zPosition = 1
             scene.popUp = popup
             
             
@@ -165,6 +165,7 @@
         }
         if CGRectContainsPoint(scene!.sprite!.frame, scene!.summit) {
             scene!.popUp.hidden = true
+            //move this call when press restart button
             scene!.returnToStart(scene!.summit, start: scene!.start)
         }
         if CGRectContainsPoint(scene!.sprite!.frame, scene!.start) {
@@ -179,5 +180,7 @@
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+    
+   
     
   }
