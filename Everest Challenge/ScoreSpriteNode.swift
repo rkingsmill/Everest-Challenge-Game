@@ -20,6 +20,7 @@ class ScoreSpriteNode: SKNode {
     override init() {
         
         scoreBoard = SKShapeNode(rectOfSize: CGSize(width: 500, height: 220))
+        //scoreBoard = SKShapeNode!(fileNamed: "OrangeBackground.png")
         scoreBoard.strokeColor = UIColor.clearColor()
         scoreBoard.fillColor = UIColor.clearColor()
         
