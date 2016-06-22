@@ -35,8 +35,12 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     
     var distanceToCamp: Int?
     
+    var previousPosition: Double = 0
     var totalSteps: Int = 0
     var previousSteps: Int = 0
+    
+    var remainingSteps: Int = 0
+    var previousRemainingSteps: Int = 0
     
     var calories: Int = 0
     var previousCalories: Int = 0
@@ -190,7 +194,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeTitle("First Base Camp")
             self.popUp.customizeFact("CONGRATS on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.")
             self.popUp.customizeButton("Keep Climbing")
-            self.popUp.hidden = false
+            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
 
         }
         
@@ -209,7 +213,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeTitle("Second Base Camp")
             self.popUp.customizeFact("CONGRATS on reaching your second Base Camp. Some motivation: The youngest person to climb Everest is American teenager Jordan Romero, who was 13 years old when he reached the summit on 22 May, 2010.")
             self.popUp.customizeButton("Keep Climbing")
-            self.popUp.hidden = false
+            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
         }
     }
     
@@ -226,7 +230,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeTitle("Third Base Camp")
             self.popUp.customizeFact("GETTING CLOSER! Some more motivation for you: The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, who climbed the mountain at the age of 80 on 23 May, 2013.")
             self.popUp.customizeButton("Onwards and Upwards")
-            self.popUp.hidden = false
+            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
 
         }
     }
@@ -244,7 +248,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeTitle("Fourth Base Camp")
             self.popUp.customizeFact("ALMOST THERE! Did you know... Anything above 8,000 metres is known as the Death Zone. Climbers suffer altitude sickness and headaches and risk life-threatening oedemas due to the thin, dry air.")
             self.popUp.customizeButton("Keep Climbing")
-             self.popUp.hidden = false
+             self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
         }
     }
     
@@ -261,10 +265,11 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeTitle("The Summit")
             self.popUp.customizeFact("CONGRATULATIONS... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!")
             self.popUp.customizeButton("Enjoy the view")
-             self.popUp.hidden = false
+            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 2)
+             //self.popUp.hidden = false
         }
     }
-    
+
     func returnToStart(summit: CGPoint, start: CGPoint) -> Void {
         
         let path = CGPathCreateMutable()
@@ -274,10 +279,10 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
             self.moving = false
-             self.popUp.hidden = false
             self.popUp.customizeTitle("Home at Last")
             self.popUp.customizeFact("Did you know... People have skied and snowboarded down Everest!")
             self.popUp.customizeButton("Done")
+            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
         }
     }
     
@@ -360,6 +365,15 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
 
             setDistance(self.previousDistanceTotal.description, distanceTotal: self.distanceTotal.description)
             
+            //steps to next camp
+            self.previousRemainingSteps = self.remainingSteps
+            let distanceToNextBaseCamp = getNextBaseCampPoint()
+            //change to go down
+            let steps = distanceToNextBaseCamp - Double(sprite!.position.y * 0.2)
+            self.remainingSteps = Int(steps)
+            self.setStepsToNextCamp()
+            
+            self.previousPosition = Double(sprite!.position.y)
             //steps
             self.previousSteps = self.totalSteps
             //steps to mount everest
@@ -395,6 +409,15 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     
     }
     
+    func setStepsToNextCamp() {
+        self.labelCamp!.removeFromSuperview()
+        self.labelCamp = ScoreboardLabel(backgroundImage: self.image! ,text:self.previousRemainingSteps.description, flipToText:self.remainingSteps.description, font:self.font!, textColor:self.color)
+        self.labelCamp!.center = CGPoint(x: 190, y: 36)
+        view!.addSubview(self.labelCamp!)
+        self.labelCamp!.flip(true)
+        self.labelCamp!.stopFlipping()
+    }
+    
     func setSteps(previousSteps: String, totalSteps: String) {
         self.labelSteps!.removeFromSuperview()
         self.labelSteps = ScoreboardLabel(backgroundImage: self.image! ,text:previousSteps, flipToText:totalSteps, font:self.font!, textColor:self.color)
@@ -413,4 +436,66 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.labelCalories!.flip(true)
         self.labelCalories!.stopFlipping()
     }
+    
+    func getNextBaseCampPoint()-> Double {
+        
+        var minX = CGFloat(30.72)
+        var maxX = CGFloat(256)
+        
+        if (self.sprite!.position.x > minX && self.sprite!.position.x < maxX) {
+            let distance = getCampDistance(start, nextCamp: baseCamp1)
+            return distance
+        }
+        
+        
+        minX = CGFloat(256)
+        maxX = CGFloat(422.9)
+        
+        if (self.sprite!.position.x > minX && self.sprite!.position.x < maxX) {
+            let distance = getCampDistance(baseCamp1, nextCamp: baseCamp2)
+            return distance
+        }
+
+        minX = CGFloat(422.9)
+        maxX = CGFloat(504.8)
+        
+        if (self.sprite!.position.x > minX && self.sprite!.position.x < maxX) {
+            let distance = getCampDistance(baseCamp2, nextCamp: baseCamp3)
+            return distance
+        }
+        
+        minX = CGFloat(504.8)
+        maxX = CGFloat(555)
+        
+        if (self.sprite!.position.x > minX && self.sprite!.position.x < maxX) {
+            let distance = getCampDistance(baseCamp3, nextCamp: baseCamp4)
+            return distance
+            
+        }
+        
+        minX = CGFloat(555)
+        maxX = CGFloat(612.4)
+        
+        if (self.sprite!.position.x > minX && self.sprite!.position.x < maxX) {
+            let distance = getCampDistance(baseCamp4, nextCamp: summit)
+            return distance
+        }
+        return 0.0
+    }
+    
+    func getCampDistance(previousCamp:(CGPoint), nextCamp:(CGPoint)) -> Double {
+        //convert coordinates to screen size
+        
+        let xDist = CGFloat(nextCamp.x - previousCamp.x)
+        let yDist = CGFloat(nextCamp.y - previousCamp.y)
+        let distance = Double(sqrt((xDist * xDist) + (yDist * yDist)))
+        //print("Distance", distance)
+        return Double(yDist)
+    }
+    
+    func showPopUp() {
+        self.popUp.hidden = false
+    }
+    
+    
 }
