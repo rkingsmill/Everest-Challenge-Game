@@ -72,7 +72,6 @@
             self.popup.layer.zPosition = 1
             scene.popUp = popup
             
-            
             self.size = self.scene?.size
             guard let size = self.size else {
                 return
@@ -140,7 +139,6 @@
         return .LandscapeLeft
     }
     override func viewDidLayoutSubviews() {
-        print("=====>>>>> view frame definitely set \(self.view.frame)")
     }
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -165,16 +163,15 @@
         }
         if CGRectContainsPoint(scene!.sprite!.frame, scene!.summit) {
             scene!.popUp.hidden = true
-            //move this call when press restart button
-            scene!.returnToStart(scene!.summit, start: scene!.start)
+            let fadeIn = SKAction.fadeInWithDuration(5)
+            scene!.startSprite!.runAction(SKAction.sequence([fadeIn]))
         }
         if CGRectContainsPoint(scene!.sprite!.frame, scene!.start) {
             scene!.popUp.hidden = true
             
             let fadeIn = SKAction.fadeInWithDuration(5)
-            scene!.button.runAction(SKAction.sequence([fadeIn]))
+            scene!.startSprite!.runAction(SKAction.sequence([fadeIn]))
         }
-        
     }
     //remove observers when view controller doesnt exist. good practise
     deinit {

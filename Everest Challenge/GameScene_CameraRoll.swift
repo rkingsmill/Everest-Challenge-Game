@@ -30,7 +30,6 @@ extension GameScene {
         let vc:UIViewController = self.view!.window!.rootViewController!
         vc.presentViewController(imagePicker, animated: true, completion: nil)
     }
-        
 }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {

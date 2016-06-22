@@ -26,8 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
 //        return UIInterfaceOrientationMask.LandscapeLeft
 //    }
-// 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
                 self.dataManager = DataManager()
                 self.dataManager.getStartDate()

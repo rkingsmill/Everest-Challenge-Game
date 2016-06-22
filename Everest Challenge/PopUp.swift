@@ -14,7 +14,8 @@ class PopUp: UIView {
     @IBOutlet var titleLabel : UILabel!
     @IBOutlet var factLabel : UILabel!
     @IBOutlet var okButton : UIButton!
-    
+    @IBOutlet var fireImageView: UIImageView!
+    @IBOutlet var personImageView: UIImageView!
     
 //    override init(frame:CGRect) {
 //        super.init(frame: frame)
@@ -30,11 +31,7 @@ class PopUp: UIView {
     func setupPopUp() {
         
         self.backgroundColor = UIColor.clearColor()
-        //set image
-        campImageView.image = UIImage(named: "camping")
-        //round image corners
-        campImageView.layer.cornerRadius = 8.0
-        campImageView.clipsToBounds = true
+
         //round pop up corners
 //        self.layer.cornerRadius = 2.0
 //        self.clipsToBounds = true
@@ -44,8 +41,7 @@ class PopUp: UIView {
         self.layer.shadowOffset = CGSizeZero
         self.layer.shadowRadius = 15
         self.layer.masksToBounds = false
-        
-
+        self.customizeImages()
         
     }
     
@@ -66,4 +62,13 @@ class PopUp: UIView {
         factLabel.font = UIFont(name: "LCD Solid", size: 10)
     }
     
+    func customizeImages() {
+        //set image
+        campImageView.image = UIImage(named: "PixelatedTent")
+        //round image corners
+//        campImageView.layer.cornerRadius = 8.0
+//        campImageView.clipsToBounds = true
+        fireImageView.image = UIImage(named: "PixelatedFire")
+        
+    }
  }

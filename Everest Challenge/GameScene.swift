@@ -18,7 +18,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     var playerScore: ScoreSpriteNode!
     var cloudSprite: SKNode?
     var startSprite: SKSpriteNode?
-    var restartSprite: SKSpriteNode?
+//    var restartSprite: SKSpriteNode?
     var scoreLabels: [SKLabelNode] = [SKLabelNode]()
     var label: ScoreboardLabel!
     var face: SKSpriteNode?
@@ -89,15 +89,10 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         playerScore!.zPosition = 2
         addChild(playerScore)
 
-        
-        
         cloudSprite = CloudBackgroundNode()
         cloudSprite!.xScale = 0.8
         cloudSprite!.yScale = 0.8
         addChild(cloudSprite!)
-        
-        
-        
         
         let font = UIFont(name: "LCD Solid", size: 12)
         let image = UIImage(named: "WhiteBackground.png")
@@ -139,7 +134,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
                 labelStart.flip(false)
                 //labelStart.stopFlipping()
             }
-            
         }
         
         label.center = CGPoint(x: 0, y: 0)
@@ -148,8 +142,8 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         label.stopFlipping()
         
         sprite = PlayerSpriteNode()
-        sprite!.xScale = 2
-        sprite!.yScale = 2
+        sprite!.xScale = 2.5
+        sprite!.yScale = 2.5
         sprite!.zPosition = 3
         print("frame on the GameScene \(frame)")
         sprite!.position = CGPointMake(frame.width/2, frame.height/2)
@@ -158,15 +152,26 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         //add image face
         let cropNode:SKCropNode = SKCropNode()
         let actualMask: SKShapeNode = SKShapeNode(circleOfRadius: 15)
-        actualMask.fillColor = UIColor.whiteColor()
+        //actualMask.fillColor = UIColor.whiteColor()
         cropNode.maskNode = actualMask
         cropNode.zPosition = 4
         cropNode.position = CGPoint(x:0, y:20)
         sprite?.addChild(cropNode)
         
         //make shape oval
-        face = SKSpriteNode(color: UIColor .clearColor(), size: CGSize(width: 30, height: 30))
+        face = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: 30, height: 30))
         face!.zPosition = 4
+        
+        //face!.position = CGPoint(x:0, y:10)
+        
+        //position and lock to sprite. 
+        cropNode.addChild(self.face!)
+
+        if (face != nil) {
+            if (maskingCameraRollChoice == true) {
+                revealMaskedCameraRollImage()
+            }
+        }
         
         sunSprite = SunSpriteNode()
         sunSprite!.xScale = 1.25
@@ -185,29 +190,15 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         startSprite = StartSpriteNode()
         startSprite?.position = CGPointMake(900, 100)
         startSprite?.zPosition = 99
-        button = startSprite
+        //button = startSprite
         self.addChild(startSprite!)
         
-        restartSprite = StartSpriteNode()
-        restartSprite?.position = CGPointMake(800, 100)
-        restartSprite?.zPosition = 99
-        button = restartSprite
-        self.addChild(restartSprite!)
+//        restartSprite = StartSpriteNode()
+//        restartSprite?.position = CGPointMake(800, 100)
+//        restartSprite?.zPosition = 99
+//        //button = restartSprite
+//        //add stuff to popup view
         
-        
-        //face!.position = CGPoint(x:0, y:10)
-        
-        //position and lock to sprite. 
-        cropNode.addChild(self.face!)
-
-        if (face != nil) {
-            if (maskingCameraRollChoice == true) {
-                revealMaskedCameraRollImage()
-            }
-        }
-        
-        //add stuff to popup view
-         
     }
     
     func moveStartToFirstBaseCamp(start: CGPoint, firstBaseCamp: CGPoint) -> Void {
@@ -225,9 +216,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeFact("CONGRATS on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.")
             self.popUp.customizeButton("Keep Climbing")
             self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
-
         }
-        
     }
     
     func moveFirstToSecondBaseCamp(firstBaseCamp: CGPoint, secondBaseCamp: CGPoint) -> Void {
@@ -261,7 +250,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeFact("GETTING CLOSER! Some more motivation for you: The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, who climbed the mountain at the age of 80 on 23 May, 2013.")
             self.popUp.customizeButton("Onwards and Upwards")
             self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
-
         }
     }
     
@@ -274,7 +262,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
-             self.moving = false
+            self.moving = false
             self.popUp.customizeTitle("Fourth Base Camp")
             self.popUp.customizeFact("ALMOST THERE! Did you know... Anything above 8,000 metres is known as the Death Zone. Climbers suffer altitude sickness and headaches and risk life-threatening oedemas due to the thin, dry air.")
             self.popUp.customizeButton("Keep Climbing")
@@ -301,7 +289,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     }
 
     func returnToStart(summit: CGPoint, start: CGPoint) -> Void {
-        
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, self.summit.x, self.summit.y)
         CGPathAddLineToPoint(path, nil, self.start.x, self.start.y)
@@ -325,7 +312,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             if sprite!.containsPoint(location) {
                 getPhotoFromSource(UIImagePickerControllerSourceType.Camera)
             }
-            
         }
     }
     
@@ -335,11 +321,18 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             // Get the location of the touch in this scene
             let location = touch.locationInNode(self)
             // Check if the location of the touch is within the button's bounds
-            if button.containsPoint(location) {
-                self.moveStartToFirstBaseCamp(start, firstBaseCamp: baseCamp1)
-                //fade button off screen
-                let fadeAway = SKAction.fadeOutWithDuration(1)
-                self.button.runAction(SKAction.sequence([fadeAway]))
+            if startSprite!.containsPoint(location) {
+                if self.sprite!.containsPoint(start) {
+                    self.moveStartToFirstBaseCamp(start, firstBaseCamp: baseCamp1)
+                    //fade button off screen
+                    let fadeAway = SKAction.fadeOutWithDuration(1)
+                    self.startSprite!.runAction(SKAction.sequence([fadeAway]))
+                }
+                if self.sprite!.containsPoint(summit) {
+                    self.returnToStart(summit, start: start)
+                    let fadeAway = SKAction.fadeOutWithDuration(1)
+                    self.startSprite!.runAction(SKAction.sequence([fadeAway]))
+                }
             }
         }
     }
@@ -379,14 +372,13 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         //        CGPathMoveToPoint(route, nil, dataManager.currentBaseCamp.x, dataManager.currentBaseCamp.y)
         //        CGPathAddLineToPoint(route, nil, dataManager.[idx].x, path.baseCamps[idx].y)
         //        CGPathMoveToPoint(route, nil, path.baseCamps[0].x, path.baseCamps[0].y)
-
     }
     
 
     //get data from y position for labels
     override func update(currentTime: NSTimeInterval) {
         if (moving) {
-//            NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
+//    NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
             
             //distance
             self.previousDistanceTotal = self.distanceTotal
@@ -399,7 +391,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.previousRemainingSteps = self.remainingSteps
             let distanceToNextBaseCamp = getNextBaseCampPoint()
             //change to go down
-            let steps = distanceToNextBaseCamp - Double(sprite!.position.y * 0.2)
+            let steps = distanceToNextBaseCamp - Double(sprite!.position.y)
             self.remainingSteps = Int(steps)
             self.setStepsToNextCamp()
             
@@ -477,7 +469,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             return distance
         }
         
-        
         minX = CGFloat(256)
         maxX = CGFloat(422.9)
         
@@ -500,7 +491,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         if (self.sprite!.position.x > minX && self.sprite!.position.x < maxX) {
             let distance = getCampDistance(baseCamp3, nextCamp: baseCamp4)
             return distance
-            
         }
         
         minX = CGFloat(555)
@@ -516,11 +506,10 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     func getCampDistance(previousCamp:(CGPoint), nextCamp:(CGPoint)) -> Double {
         //convert coordinates to screen size
         
-        let xDist = CGFloat(nextCamp.x - previousCamp.x)
-        let yDist = CGFloat(nextCamp.y - previousCamp.y)
-        let distance = Double(sqrt((xDist * xDist) + (yDist * yDist)))
+        //let xDist = CGFloat(nextCamp.x - previousCamp.x)
+        //let yDist = CGFloat(nextCamp.y - previousCamp.y)
         //print("Distance", distance)
-        return Double(yDist)
+        return Double(nextCamp.y)
     }
     
     func showPopUp() {

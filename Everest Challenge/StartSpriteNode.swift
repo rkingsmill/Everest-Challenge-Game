@@ -15,9 +15,9 @@ class StartSpriteNode: SKSpriteNode {
     var startButton : SKSpriteNode = SKSpriteNode(imageNamed: "StartButton1")
     var startLabel : SKLabelNode = SKLabelNode()
     var buttonFlash: SKAction!
-    var restartButton: SKSpriteNode = SKSpriteNode(imageNamed: "StartButton1")
-    var restartLabel: SKLabelNode = SKLabelNode()
-    var restartFlash: SKAction!
+//    var restartButton: SKSpriteNode = SKSpriteNode(imageNamed: "StartButton2")
+//    var restartLabel: SKLabelNode = SKLabelNode()
+//    var restartFlash: SKAction!
     
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -25,8 +25,12 @@ class StartSpriteNode: SKSpriteNode {
         self.setUpButton()
         startButton.runAction(buttonFlash)
         
-        self.setUpRestart()
-        restartButton.runAction(restartFlash)
+//        self.setUpRestart()
+//        restartButton.runAction(restartFlash)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setUpButton(){
@@ -43,43 +47,40 @@ class StartSpriteNode: SKSpriteNode {
         startButton.yScale = 1
         addChild(startButton)
         
-        startLabel.text = "START"
-        startLabel.fontColor = UIColor.blackColor()
+        startLabel.text = ""
+        startLabel.fontColor = UIColor.greenColor()
         startLabel.fontName = "LCD Solid"
-        startLabel.fontSize = 18
+        startLabel.fontSize = 20
         startLabel.position = CGPointMake(self.frame.width/2, self.frame.height/2)
         startButton.addChild(startLabel)
-        
     }
     
-    
-    func setUpRestart(){
-        
-        let atlas = SKTextureAtlas(named: "StartButtonSprite")
-        
-        let animationRestart = SKAction.animateWithTextures([
-            atlas.textureNamed("StartButton1"),
-            atlas.textureNamed("StartButton2")], timePerFrame: 0.6)
-        
-        restartFlash = SKAction.repeatActionForever(animationRestart)
-        
-        restartButton.xScale = 1
-        restartButton.yScale = 1
-        addChild(restartButton)
-        
-        restartLabel.text = "RESTART"
-        restartLabel.fontColor = UIColor.blackColor()
-        restartLabel.fontName = "LCD Solid"
-        restartLabel.fontSize = 18
-        restartLabel.position = CGPointMake(self.frame.width/2, self.frame.height/2)
-        restartButton.addChild(restartLabel)
-        
-    }
-
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    func setUpRestart(){
+//        
+//        let atlas = SKTextureAtlas(named: "StartButtonSprite")
+//        
+//        let animationRestart = SKAction.animateWithTextures([
+//            atlas.textureNamed("StartButton1"),
+//            atlas.textureNamed("StartButton2")], timePerFrame: 0.6)
+//        
+//        restartFlash = SKAction.repeatActionForever(animationRestart)
+//        
+//        restartButton.xScale = 1
+//        restartButton.yScale = 1
+//        addChild(restartButton)
+//        
+//        restartLabel.text = ""
+//        restartLabel.fontColor = UIColor.greenColor()
+//        restartLabel.fontName = "LCD Solid"
+//        restartLabel.fontSize = 20
+//        restartLabel.position = CGPointMake(self.frame.width/2, self.frame.height/2)
+//        restartButton.addChild(restartLabel)
+//        
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
 }
 
