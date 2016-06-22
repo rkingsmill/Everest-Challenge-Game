@@ -76,8 +76,8 @@ public class ScoreboardLabelLetter: UIView {
         imageview.contentMode = UIViewContentMode.ScaleAspectFit
         imageview.image = backgroundImage
         imageview.clipsToBounds = true
-        imageview.layer.borderColor = UIColor.clearColor().CGColor
-        imageview.layer.borderWidth = 0.05
+        imageview.layer.borderColor = UIColor.blackColor().CGColor
+        imageview.layer.borderWidth = 0.1
         
         imageview.addSubview(label)
         
@@ -129,7 +129,7 @@ public class ScoreboardLabelLetter: UIView {
         
         //top Shadow
         topShadowLayer.frame = imageViewUpperHalf.bounds
-        topShadowLayer.colors = [UIColor.whiteColor().CGColor, UIColor.whiteColor().CGColor]
+        topShadowLayer.colors = [UIColor.clearColor().CGColor, UIColor.blackColor().CGColor]
         topShadowLayer.opacity = 0
         
         imageViewUpperHalf.layer.addSublayer(topShadowLayer)
@@ -148,7 +148,7 @@ public class ScoreboardLabelLetter: UIView {
         
         //bottom Shadow
         bottomShadowLayer.frame = imageViewLowerHalf.bounds
-        bottomShadowLayer.colors = [UIColor.whiteColor().CGColor, UIColor.whiteColor().CGColor]
+        bottomShadowLayer.colors = [UIColor.blackColor().CGColor, UIColor.clearColor().CGColor]
         bottomShadowLayer.opacity = 0
         
         imageViewLowerHalf.layer.addSublayer(bottomShadowLayer)
