@@ -18,8 +18,8 @@
 		0ED409381D19B80A00E7AFCD /* SunSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED409311D19B80900E7AFCD /* SunSpriteNode.swift */; };
 		0ED4093A1D19CEFC00E7AFCD /* MarkerSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED409391D19CEFC00E7AFCD /* MarkerSpriteNode.swift */; };
 		0ED4093C1D19D6BE00E7AFCD /* CloudBackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED4093B1D19D6BE00E7AFCD /* CloudBackgroundNode.swift */; };
-		0ED409431D1A02D400E7AFCD /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0ED409411D1A02D400E7AFCD /* MyParticle.sks */; };
-		0ED409441D1A02D400E7AFCD /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ED409421D1A02D400E7AFCD /* bokeh.png */; };
+		5B1C46161D1B5DF800B9DD1A /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C46141D1B5DF800B9DD1A /* Spark.sks */; };
+		5B1C46171D1B5DF800B9DD1A /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C46151D1B5DF800B9DD1A /* spark.png */; };
 		5BADDA6A1D1330B2002BE197 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BADDA691D1330B2002BE197 /* AppDelegate.swift */; };
 		5BADDA6C1D1330B2002BE197 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDA6B1D1330B2002BE197 /* art.scnassets */; };
 		5BADDA711D1330B2002BE197 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDA6F1D1330B2002BE197 /* Main.storyboard */; };
@@ -52,9 +52,9 @@
 		0ED409311D19B80900E7AFCD /* SunSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunSpriteNode.swift; sourceTree = "<group>"; };
 		0ED409391D19CEFC00E7AFCD /* MarkerSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerSpriteNode.swift; sourceTree = "<group>"; };
 		0ED4093B1D19D6BE00E7AFCD /* CloudBackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudBackgroundNode.swift; sourceTree = "<group>"; };
-		0ED409411D1A02D400E7AFCD /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
-		0ED409421D1A02D400E7AFCD /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
 		3744EE7C866EB1E43B7A596A /* Pods-Everest Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest Challenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Everest Challenge/Pods-Everest Challenge.debug.xcconfig"; sourceTree = "<group>"; };
+		5B1C46141D1B5DF800B9DD1A /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
+		5B1C46151D1B5DF800B9DD1A /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		5BADDA661D1330B2002BE197 /* Everest Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Everest Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BADDA691D1330B2002BE197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BADDA6B1D1330B2002BE197 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = art.scnassets; path = "Everest Challenge/art.scnassets"; sourceTree = "<group>"; };
@@ -137,11 +137,11 @@
 				5BADDAB81D146F81002BE197 /* Utils.swift */,
 				5BADDA891D13319B002BE197 /* Path.swift */,
 				5BADDA831D13317C002BE197 /* GameScene.swift */,
-				0ED409411D1A02D400E7AFCD /* MyParticle.sks */,
-				0ED409421D1A02D400E7AFCD /* bokeh.png */,
 				5BCA510C1D18774F007AAEA9 /* GameScene_CameraRoll.swift */,
 				5BCA510E1D19A4A9007AAEA9 /* PopUp.swift */,
 				5BADDA871D133195002BE197 /* BaseCamp.swift */,
+				5B1C46141D1B5DF800B9DD1A /* Spark.sks */,
+				5B1C46151D1B5DF800B9DD1A /* spark.png */,
 				5BADDA6F1D1330B2002BE197 /* Main.storyboard */,
 				5BADDA8F1D13322B002BE197 /* GameScene.sks */,
 				5BADDA8B1D1331B4002BE197 /* Assets.xcassets */,
@@ -227,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BADDA6C1D1330B2002BE197 /* art.scnassets in Resources */,
+				5B1C46171D1B5DF800B9DD1A /* spark.png in Resources */,
 				5BADDA761D1330B2002BE197 /* LaunchScreen.storyboard in Resources */,
 				5BADDA8E1D1331C4002BE197 /* Mount-Everest Compressed.png in Resources */,
 				5BADDA8C1D1331B4002BE197 /* Assets.xcassets in Resources */,
@@ -234,9 +235,8 @@
 				5BADDA901D13322B002BE197 /* GameScene.sks in Resources */,
 				5BADDA711D1330B2002BE197 /* Main.storyboard in Resources */,
 				0ED409351D19B80A00E7AFCD /* LCD_Solid.ttf in Resources */,
+				5B1C46161D1B5DF800B9DD1A /* Spark.sks in Resources */,
 				0ED409331D19B80900E7AFCD /* WhiteBackground.png in Resources */,
-				0ED409431D1A02D400E7AFCD /* MyParticle.sks in Resources */,
-				0ED409441D1A02D400E7AFCD /* bokeh.png in Resources */,
 				0E6456501D1A07E0003A2B13 /* OrangeBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

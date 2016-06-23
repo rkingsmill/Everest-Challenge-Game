@@ -13,12 +13,12 @@ import UIKit
 class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var sprite: SKSpriteNode?
+    var slidingSprite = SKSpriteNode(imageNamed: "SnowboardSprite")
     var sunSprite: SKSpriteNode?
     var flagSprite: SKSpriteNode?
     var playerScore: ScoreSpriteNode!
     var cloudSprite: SKNode?
     var startSprite: SKSpriteNode?
-//    var restartSprite: SKSpriteNode?
     var scoreLabels: [SKLabelNode] = [SKLabelNode]()
     var label: ScoreboardLabel!
     var face: SKSpriteNode?
@@ -64,21 +64,17 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     var button: SKNode! = nil
     
     var moving = false
+    var background : SKSpriteNode?
+    var burstNode : SKEmitterNode?
+    var burstNode2 : SKEmitterNode?
     
     override func didMoveToView(view: SKView) {
         self.popUp.hidden = true
         
-        let background = SKSpriteNode(imageNamed: "Mount-Everest Compressed")
-        background.zPosition = 1
-        background.position = CGPoint(x:CGRectGetMidX(frame), y:CGRectGetMidY(frame))
-        addChild(background)
-        
-//        button = SKSpriteNode(imageNamed: "Button")
-//        // Put it in the center of the scene
-//        button.position = CGPoint(x:900, y:100);
-//        button.zPosition = 4
-//        self.addChild(button)
-        
+        self.background = SKSpriteNode(imageNamed: "Mount-Everest Compressed")
+        background!.zPosition = 1
+        background!.position = CGPoint(x:CGRectGetMidX(frame), y:CGRectGetMidY(frame))
+        addChild(background!)
         
         scene!.scaleMode = SKSceneScaleMode.AspectFit;
         scene?.anchorPoint = CGPointZero
@@ -136,43 +132,55 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             }
         }
         
+        
         label.center = CGPoint(x: 0, y: 0)
         //view.addSubview(label)
         label.flip(true)
         label.stopFlipping()
         
         sprite = PlayerSpriteNode()
-        sprite!.xScale = 2.5
-        sprite!.yScale = 2.5
+        sprite!.xScale = 1.5
+        sprite!.yScale = 1.5
         sprite!.zPosition = 3
         print("frame on the GameScene \(frame)")
-        sprite!.position = CGPointMake(frame.width/2, frame.height/2)
+        //sprite!.position = CGPointMake(frame.width/2, frame.height/2)
         self.addChild(sprite!)
-      
+        
+        face = SKSpriteNode(imageNamed: "face")
+        face!.zPosition = 4
+        face!.xScale = 0.3
+        face!.yScale = 0.3
+        face!.zPosition = 4
+        face!.position = CGPoint(x:6, y:35)
+        sprite!.addChild(face!)
         //add image face
         let cropNode:SKCropNode = SKCropNode()
-        let actualMask: SKShapeNode = SKShapeNode(circleOfRadius: 15)
+    
+        let actualMask = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: 30, height: 30))
+        actualMask.xScale = 1
+        actualMask.yScale = 1
+        actualMask.zPosition = 4
+        actualMask.position = CGPoint(x:0, y:0)
+        face!.addChild(actualMask)
+        //let actualMask: SKShapeNode = SKShapeNode(circleOfRadius: 15)
         //actualMask.fillColor = UIColor.whiteColor()
         cropNode.maskNode = actualMask
         cropNode.zPosition = 4
-        cropNode.position = CGPoint(x:0, y:20)
-        sprite?.addChild(cropNode)
+        cropNode.position = CGPoint(x:0, y:0)
+        //actualMask.addChild(cropNode)
         
         //make shape oval
-        face = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: 30, height: 30))
-        face!.zPosition = 4
-        
+     
         //face!.position = CGPoint(x:0, y:10)
         
         //position and lock to sprite. 
-        cropNode.addChild(self.face!)
+        //cropNode.addChild(self.face!)
 
         if (face != nil) {
             if (maskingCameraRollChoice == true) {
                 revealMaskedCameraRollImage()
             }
         }
-        
         sunSprite = SunSpriteNode()
         sunSprite!.xScale = 1.25
         sunSprite!.yScale = 1.25
@@ -192,13 +200,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         startSprite?.zPosition = 99
         //button = startSprite
         self.addChild(startSprite!)
-        
-//        restartSprite = StartSpriteNode()
-//        restartSprite?.position = CGPointMake(800, 100)
-//        restartSprite?.zPosition = 99
-//        //button = restartSprite
-//        //add stuff to popup view
-        
     }
     
     func moveStartToFirstBaseCamp(start: CGPoint, firstBaseCamp: CGPoint) -> Void {
@@ -284,17 +285,57 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeFact("CONGRATULATIONS... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!")
             self.popUp.customizeButton("Enjoy the view")
             self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 2)
+            
+            //baby im a firework
+            let burstPath = NSBundle.mainBundle().pathForResource("Spark",
+                                                                  ofType: "sks")
+            self.burstNode = NSKeyedUnarchiver.unarchiveObjectWithFile(burstPath!)
+                as? SKEmitterNode
+            self.burstNode!.position = CGPointMake(200, 400)
+            self.burstNode!.zPosition = 6
+            self.burstNode!.name = "firework"
+            self.burstNode!.targetNode = self.scene
+            self.background!.addChild(self.burstNode!)
+            
+            self.burstNode2 = NSKeyedUnarchiver.unarchiveObjectWithFile(burstPath!)
+                as? SKEmitterNode
+            self.burstNode2!.position = CGPointMake(100, 400)
+            self.burstNode2!.zPosition = 6
+            self.burstNode2!.name = "firework"
+            self.burstNode2!.targetNode = self.scene
+            self.background!.addChild(self.burstNode2!)
+            //burstNode2.removeFromParent()
+            
+            
              //self.popUp.hidden = false
         }
     }
 
     func returnToStart(summit: CGPoint, start: CGPoint) -> Void {
+        //REMOVE NORMAL SPRITE AND ADD SLIDING SPRITE 
+        
+        self.sprite!.removeFromParent()
+        self.slidingSprite.xScale = 1.5
+        self.slidingSprite.yScale = 1.5
+        self.slidingSprite.zPosition = 3
+        self.slidingSprite.position = summit
+        self.addChild(self.slidingSprite)
+        
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, self.summit.x, self.summit.y)
         CGPathAddLineToPoint(path, nil, self.start.x, self.start.y)
         let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
-        self.sprite!.runAction(SKAction.sequence([destination]))
+        //CHANGE TO SLIDING SPRITE
+        self.slidingSprite.runAction(SKAction.sequence([destination]))
         {
+            //REMOVE SLIDING SPRITE AND ADD NORMAL SPRITE. might have to move just above curly bracket
+            self.slidingSprite.removeFromParent()
+            self.addChild(self.sprite!)
+            self.sprite!.xScale = 1.5
+            self.sprite!.yScale = 1.5
+            self.sprite!.zPosition = 3
+            self.sprite!.position = start
+            
             self.moving = false
             self.popUp.customizeTitle("Home at Last")
             self.popUp.customizeFact("Did you know... People have skied and snowboarded down Everest!")

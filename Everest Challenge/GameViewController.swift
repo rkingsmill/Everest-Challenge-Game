@@ -163,14 +163,16 @@
         }
         if CGRectContainsPoint(scene!.sprite!.frame, scene!.summit) {
             scene!.popUp.hidden = true
+            scene!.burstNode!.removeFromParent()
+            scene!.burstNode2?.removeFromParent()
             let fadeIn = SKAction.fadeInWithDuration(5)
             scene!.startSprite!.runAction(SKAction.sequence([fadeIn]))
         }
         if CGRectContainsPoint(scene!.sprite!.frame, scene!.start) {
             scene!.popUp.hidden = true
-            
             let fadeIn = SKAction.fadeInWithDuration(5)
             scene!.startSprite!.runAction(SKAction.sequence([fadeIn]))
+        
         }
     }
     //remove observers when view controller doesnt exist. good practise

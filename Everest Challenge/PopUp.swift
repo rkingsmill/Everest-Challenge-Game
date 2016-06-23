@@ -42,7 +42,6 @@ class PopUp: UIView {
         self.layer.shadowRadius = 15
         self.layer.masksToBounds = false
         self.customizeImages()
-        
     }
     
     func customizeButton(text:String) {
@@ -69,6 +68,7 @@ class PopUp: UIView {
 //        campImageView.layer.cornerRadius = 8.0
 //        campImageView.clipsToBounds = true
         fireImageView.image = UIImage(named: "PixelatedFire")
+        personImageView.image = UIImage(named: "newwalkingsprite")
         
     }
  }
