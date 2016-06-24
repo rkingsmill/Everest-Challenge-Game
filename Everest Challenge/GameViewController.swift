@@ -16,6 +16,7 @@
     var path:Path?
     var scene: GameScene?
     var size: CGSize?
+    var currentCamp: Int = 0
     var imagePicker: UIImagePickerController!
     @IBOutlet var popup: PopUp!
     
@@ -145,34 +146,36 @@
     }
     
     @IBAction func keepMoving(sender: AnyObject) {
-        if CGRectContainsPoint(scene!.sprite!.frame, scene!.baseCamp1) {
+        if currentCamp == 0 {
             scene!.popUp.hidden = true
+            currentCamp += 1
             scene!.moveFirstToSecondBaseCamp(scene!.baseCamp1, secondBaseCamp: scene!.baseCamp2)
-        }
-        if CGRectContainsPoint(scene!.sprite!.frame, scene!.baseCamp2) {
+        } else if currentCamp == 1 {
             scene!.popUp.hidden = true
+            currentCamp += 1
             scene!.moveSecondToThirdBaseCamp(scene!.baseCamp2, thirdBaseCamp: scene!.baseCamp3)
-        }
-        if CGRectContainsPoint(scene!.sprite!.frame, scene!.baseCamp3) {
+        } else if currentCamp == 2 {
             scene!.popUp.hidden = true
+            currentCamp += 1
             scene!.moveThirdToFourthBaseCamp(scene!.baseCamp3, fourthBaseCamp: scene!.baseCamp4)
-        }
-        if CGRectContainsPoint(scene!.sprite!.frame, scene!.baseCamp4) {
+        } else if currentCamp == 3 {
             scene!.popUp.hidden = true
+            currentCamp += 1
             scene!.moveFourthBaseCampToSummit(scene!.baseCamp4, summit: scene!.summit)
-        }
-        if CGRectContainsPoint(scene!.sprite!.frame, scene!.summit) {
+        } else if currentCamp == 4 {
             scene!.popUp.hidden = true
+            currentCamp += 1
+            scene!.burstNode!.resetSimulation()
             scene!.burstNode!.removeFromParent()
+            scene!.burstNode2!.resetSimulation()
             scene!.burstNode2?.removeFromParent()
             let fadeIn = SKAction.fadeInWithDuration(5)
             scene!.startSprite!.runAction(SKAction.sequence([fadeIn]))
-        }
-        if CGRectContainsPoint(scene!.sprite!.frame, scene!.start) {
+        } else if currentCamp == 5 {
             scene!.popUp.hidden = true
             let fadeIn = SKAction.fadeInWithDuration(5)
             scene!.startSprite!.runAction(SKAction.sequence([fadeIn]))
-        
+            currentCamp = 0
         }
     }
     //remove observers when view controller doesnt exist. good practise

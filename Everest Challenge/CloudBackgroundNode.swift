@@ -46,13 +46,13 @@ class CloudBackgroundNode: SKNode {
         cloudSprite2.zPosition = 1
         cloudSprite3.zPosition = 1
 
-        moveCloud = SKAction.moveToX(-cloudSprite1.size.width/2, duration: 15.0)
+        moveCloud = SKAction.moveToX(-cloudSprite1.size.width/2, duration: 30.0)
         resetCloud = SKAction.moveToX(1000, duration: 0.0)
         
         moveCloud2 = SKAction.moveToX(-cloudSprite2.size.width/2, duration: 25.0)
         resetCloud2 = SKAction.moveToX(1000, duration: 0.0)
         
-        moveCloud3 = SKAction.moveToX(-cloudSprite3.size.width/2, duration: 30.0)
+        moveCloud3 = SKAction.moveToX(-cloudSprite3.size.width/2, duration: 40.0)
         resetCloud3 = SKAction.moveToX(1000, duration: 0.0)
 
         let sequence = SKAction.sequence([moveCloud, resetCloud])

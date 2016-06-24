@@ -139,36 +139,37 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         label.stopFlipping()
         
         sprite = PlayerSpriteNode()
-        sprite!.xScale = 1.5
-        sprite!.yScale = 1.5
+        sprite!.xScale = 6
+        sprite!.yScale = 3
         sprite!.zPosition = 3
         print("frame on the GameScene \(frame)")
         //sprite!.position = CGPointMake(frame.width/2, frame.height/2)
         self.addChild(sprite!)
         
-        face = SKSpriteNode(imageNamed: "face")
-        face!.zPosition = 4
-        face!.xScale = 0.3
-        face!.yScale = 0.3
-        face!.zPosition = 4
-        face!.position = CGPoint(x:6, y:35)
-        sprite!.addChild(face!)
+     
         //add image face
         let cropNode:SKCropNode = SKCropNode()
     
-        let actualMask = SKSpriteNode(color: UIColor.clearColor(), size: CGSize(width: 30, height: 30))
-        actualMask.xScale = 1
-        actualMask.yScale = 1
+        let actualMask = SKShapeNode(circleOfRadius: 5 )
+        actualMask.xScale = 0.5
+        actualMask.yScale = 1.2
         actualMask.zPosition = 4
+        actualMask.lineWidth = 0
         actualMask.position = CGPoint(x:0, y:0)
-        face!.addChild(actualMask)
-        //let actualMask: SKShapeNode = SKShapeNode(circleOfRadius: 15)
-        //actualMask.fillColor = UIColor.whiteColor()
+        actualMask.fillColor = UIColor(red: 240.0/255.0, green: 184.0/255.0, blue: 160.0/255.0, alpha: 1)
         cropNode.maskNode = actualMask
         cropNode.zPosition = 4
-        cropNode.position = CGPoint(x:0, y:0)
-        //actualMask.addChild(cropNode)
+        cropNode.position = CGPoint(x:1, y:18)
+        sprite!.addChild(cropNode)
+        //cropNode.hidden = true
         
+        face = SKSpriteNode(imageNamed: "testface")
+        face!.zPosition = 5
+        face!.xScale = 0.2
+        face!.yScale = 0.4
+        face!.position = CGPoint(x:0, y:0)
+        cropNode.addChild(face!)
+        //face?.hidden = true
         //make shape oval
      
         //face!.position = CGPoint(x:0, y:10)
@@ -195,9 +196,11 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         flagSprite!.position = CGPointMake(660, 670)
         self.addChild(flagSprite!)
         
-        startSprite = StartSpriteNode()
+        startSprite = SKSpriteNode(imageNamed: "sign")
         startSprite?.position = CGPointMake(900, 100)
-        startSprite?.zPosition = 99
+        startSprite?.zPosition = 6
+        startSprite!.xScale = 0.35
+        startSprite!.yScale = 0.35
         //button = startSprite
         self.addChild(startSprite!)
     }
@@ -208,13 +211,13 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, start.x, start.y)
         CGPathAddLineToPoint(path, nil, firstBaseCamp.x, firstBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 25.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
             self.moving = false
             self.popUp.customizeTitle("First Base Camp")
-            self.popUp.customizeFact("CONGRATS on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. The temperature at the summit never rises above freezing, averaging -36˚C in winter and -19˚C in summer. Brrrr.")
+            self.popUp.customizeFact("CONGRATS on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. Some of the benefits of climbing include exercising bones and muscles, improving strength, bone density and muscle tone. Good job. ")
             self.popUp.customizeButton("Keep Climbing")
             self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
         }
@@ -225,7 +228,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, firstBaseCamp.x, firstBaseCamp.y)
         CGPathAddLineToPoint(path, nil, secondBaseCamp.x, secondBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
@@ -242,13 +245,13 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, secondBaseCamp.x, secondBaseCamp.y)
         CGPathAddLineToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 2.0)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
             self.moving = false
             self.popUp.customizeTitle("Third Base Camp")
-            self.popUp.customizeFact("GETTING CLOSER! Some more motivation for you: The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, who climbed the mountain at the age of 80 on 23 May, 2013.")
+            self.popUp.customizeFact("GETTING CLOSER! The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, at the age of 80 years old. Good thing climbing gets you into shape without putting too much pressure on your knees and feet!")
             self.popUp.customizeButton("Onwards and Upwards")
             self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
         }
@@ -259,7 +262,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
         CGPathAddLineToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 2.0)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
@@ -276,7 +279,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
         CGPathAddLineToPoint(path, nil, summit.x, summit.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 2.0)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
         self.sprite!.runAction(SKAction.sequence([destination]))
         {
@@ -284,7 +287,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeTitle("The Summit")
             self.popUp.customizeFact("CONGRATULATIONS... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!")
             self.popUp.customizeButton("Enjoy the view")
-            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 2)
+            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 4)
             
             //baby im a firework
             let burstPath = NSBundle.mainBundle().pathForResource("Spark",
@@ -305,8 +308,6 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.burstNode2!.targetNode = self.scene
             self.background!.addChild(self.burstNode2!)
             //burstNode2.removeFromParent()
-            
-            
              //self.popUp.hidden = false
         }
     }
@@ -324,21 +325,21 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         let path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, self.summit.x, self.summit.y)
         CGPathAddLineToPoint(path, nil, self.start.x, self.start.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
+        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 6.0)
         //CHANGE TO SLIDING SPRITE
         self.slidingSprite.runAction(SKAction.sequence([destination]))
         {
             //REMOVE SLIDING SPRITE AND ADD NORMAL SPRITE. might have to move just above curly bracket
             self.slidingSprite.removeFromParent()
             self.addChild(self.sprite!)
-            self.sprite!.xScale = 1.5
-            self.sprite!.yScale = 1.5
+            self.sprite!.xScale = 6
+            self.sprite!.yScale = 3
             self.sprite!.zPosition = 3
             self.sprite!.position = start
             
             self.moving = false
             self.popUp.customizeTitle("Home at Last")
-            self.popUp.customizeFact("Did you know... People have skied and snowboarded down Everest!")
+            self.popUp.customizeFact("You have now joined a group of over 4000 people that have climbed Mount Everest")
             self.popUp.customizeButton("Done")
             self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
         }
@@ -380,18 +381,18 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
 
     func addTentImages(){
         
-        let startingSign = SKSpriteNode(imageNamed: "start")
-        startingSign.xScale = 0.3
-        startingSign.yScale = 0.3
-        startingSign.zPosition = 2
-        let xValue = path.baseCamps[0].x
-        let yValue = path.baseCamps[0].y
-        let point = CGPoint(x: xValue, y: yValue)
-        let position = Utils().getScreenCoordinatesForRelativeCoordinates(point, size: path.frameSize)
-        startingSign.position = position
-        addChild(startingSign)
+//        let startingSign = SKSpriteNode(imageNamed: "sign")
+//        startingSign.xScale = 0.2
+//        startingSign.yScale = 0.2
+//        startingSign.zPosition = 2
+//        let xValue = path.baseCamps[0].x
+//        let yValue = path.baseCamps[0].y
+//        let point = CGPoint(x: xValue, y: yValue)
+//        let position = Utils().getScreenCoordinatesForRelativeCoordinates(point, size: path.frameSize)
+//        startingSign.position = position
+//        addChild(startingSign)
         
-        for idx in 1...(path!.baseCamps.count-2) {
+        for idx in 0...(path!.baseCamps.count-2) {
             //let tent = SKSpriteNode(imageNamed: "Tent.png")
             let markerSprite = MarkerSpriteNode()
             markerSprite.xScale = 0.3
@@ -434,7 +435,10 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             //change to go down
             let steps = distanceToNextBaseCamp - Double(sprite!.position.y)
             self.remainingSteps = Int(steps)
+            
+            if self.remainingSteps >= 0 {
             self.setStepsToNextCamp()
+            }
             
             self.previousPosition = Double(sprite!.position.y)
             //steps

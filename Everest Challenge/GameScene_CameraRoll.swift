@@ -76,7 +76,6 @@ extension GameScene {
                     self.runAction(seq)
                 }
             }
-            
         }
         
         picker.dismissViewControllerAnimated(true, completion: nil)
@@ -94,6 +93,8 @@ extension GameScene {
             
             if let face = face {
                 let texture:SKTexture = SKTexture(image:someImage)
+                //face.hidden = false
+                
                 
                 face.texture = texture
                 /*

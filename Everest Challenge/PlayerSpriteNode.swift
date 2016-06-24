@@ -14,7 +14,7 @@ class PlayerSpriteNode: SKSpriteNode {
     var spriteWalk: SKAction!
     
     convenience init(){
-        self.init(imageNamed: "NewSprite1.png")
+        self.init(imageNamed: "test1.png")
         
         setUpSprite()
         runAction(spriteWalk)
@@ -25,14 +25,13 @@ class PlayerSpriteNode: SKSpriteNode {
         let atlas = SKTextureAtlas(named: "PlayerSprite")
         
         let animation = SKAction.animateWithTextures([
-            atlas.textureNamed("NewSprite1.png"),
-            atlas.textureNamed("NewSprite2.png"),
-            atlas.textureNamed("NewSprite3.png"),
-            atlas.textureNamed("NewSprite4.png"),
-            atlas.textureNamed("NewSprite5.png"),
-            atlas.textureNamed("NewSprite6.png"),
-            atlas.textureNamed("NewSprite7.png"),
-            atlas.textureNamed("NewSprite8.png")], timePerFrame: 0.2)
+            atlas.textureNamed("test1.png"),
+            atlas.textureNamed("test2.png"),
+            atlas.textureNamed("test3.png"),
+            atlas.textureNamed("test4.png"),
+            atlas.textureNamed("test5.png"),
+            atlas.textureNamed("test6.png"),
+            atlas.textureNamed("test7.png")], timePerFrame: 0.2)
         
         spriteWalk = SKAction.repeatActionForever(animation)
         

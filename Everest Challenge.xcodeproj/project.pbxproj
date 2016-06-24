@@ -20,6 +20,7 @@
 		0ED4093C1D19D6BE00E7AFCD /* CloudBackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED4093B1D19D6BE00E7AFCD /* CloudBackgroundNode.swift */; };
 		5B1C46161D1B5DF800B9DD1A /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C46141D1B5DF800B9DD1A /* Spark.sks */; };
 		5B1C46171D1B5DF800B9DD1A /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C46151D1B5DF800B9DD1A /* spark.png */; };
+		5B1C46191D1C653000B9DD1A /* PixelSplitter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C46181D1C64FF00B9DD1A /* PixelSplitter-Bold.ttf */; };
 		5BADDA6A1D1330B2002BE197 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BADDA691D1330B2002BE197 /* AppDelegate.swift */; };
 		5BADDA6C1D1330B2002BE197 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDA6B1D1330B2002BE197 /* art.scnassets */; };
 		5BADDA711D1330B2002BE197 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BADDA6F1D1330B2002BE197 /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 		3744EE7C866EB1E43B7A596A /* Pods-Everest Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest Challenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Everest Challenge/Pods-Everest Challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		5B1C46141D1B5DF800B9DD1A /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
 		5B1C46151D1B5DF800B9DD1A /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		5B1C46181D1C64FF00B9DD1A /* PixelSplitter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PixelSplitter-Bold.ttf"; sourceTree = "<group>"; };
 		5BADDA661D1330B2002BE197 /* Everest Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Everest Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BADDA691D1330B2002BE197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BADDA6B1D1330B2002BE197 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = art.scnassets; path = "Everest Challenge/art.scnassets"; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				5BADDA8F1D13322B002BE197 /* GameScene.sks */,
 				5BADDA8B1D1331B4002BE197 /* Assets.xcassets */,
 				0E64564F1D1A07E0003A2B13 /* OrangeBackground.png */,
+				5B1C46181D1C64FF00B9DD1A /* PixelSplitter-Bold.ttf */,
 				0ED4092E1D19B80900E7AFCD /* LCD_Solid.ttf */,
 				0ED4092B1D19B80900E7AFCD /* Tent.png */,
 				0ED4092C1D19B80900E7AFCD /* WhiteBackground.png */,
@@ -226,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B1C46191D1C653000B9DD1A /* PixelSplitter-Bold.ttf in Resources */,
 				5BADDA6C1D1330B2002BE197 /* art.scnassets in Resources */,
 				5B1C46171D1B5DF800B9DD1A /* spark.png in Resources */,
 				5BADDA761D1330B2002BE197 /* LaunchScreen.storyboard in Resources */,

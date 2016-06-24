@@ -12,9 +12,9 @@ import SpriteKit
 
 class StartSpriteNode: SKSpriteNode {
     
-    var startButton : SKSpriteNode = SKSpriteNode(imageNamed: "StartButton1")
-    var startLabel : SKLabelNode = SKLabelNode()
-    var buttonFlash: SKAction!
+    var startButton : SKSpriteNode = SKSpriteNode(imageNamed: "sign")
+    //var startLabel : SKLabelNode = SKLabelNode()
+    //var buttonFlash: SKAction!
 //    var restartButton: SKSpriteNode = SKSpriteNode(imageNamed: "StartButton2")
 //    var restartLabel: SKLabelNode = SKLabelNode()
 //    var restartFlash: SKAction!
@@ -23,7 +23,7 @@ class StartSpriteNode: SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.setUpButton()
-        startButton.runAction(buttonFlash)
+        //startButton.runAction(buttonFlash)
         
 //        self.setUpRestart()
 //        restartButton.runAction(restartFlash)
@@ -35,24 +35,24 @@ class StartSpriteNode: SKSpriteNode {
     
     func setUpButton(){
         
-        let atlas = SKTextureAtlas(named: "StartButtonSprite")
+        //let atlas = SKTextureAtlas(named: "StartButtonSprite")
         
-        let animation = SKAction.animateWithTextures([
-            atlas.textureNamed("StartButton1"),
-            atlas.textureNamed("StartButton2")], timePerFrame: 0.6)
-        
-        buttonFlash = SKAction.repeatActionForever(animation)
+//        let animation = SKAction.animateWithTextures([
+//            atlas.textureNamed("sign"),
+//            atlas.textureNamed("sign")], timePerFrame: 0.6)
+//        
+//        buttonFlash = SKAction.repeatActionForever(animation)
         
         startButton.xScale = 1
         startButton.yScale = 1
         addChild(startButton)
         
-        startLabel.text = ""
-        startLabel.fontColor = UIColor.greenColor()
-        startLabel.fontName = "LCD Solid"
-        startLabel.fontSize = 20
-        startLabel.position = CGPointMake(self.frame.width/2, self.frame.height/2)
-        startButton.addChild(startLabel)
+//        startLabel.text = ""
+//        startLabel.fontColor = UIColor.greenColor()
+//        startLabel.fontName = "LCD Solid"
+//        startLabel.fontSize = 20
+        //startLabel.position = CGPointMake(self.frame.width/2, self.frame.height/2)
+        //startButton.addChild(startLabel)
     }
     
 //    func setUpRestart(){

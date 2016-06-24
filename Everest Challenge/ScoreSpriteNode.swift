@@ -9,8 +9,6 @@
 import Foundation
 import SpriteKit
 
-
-
 class ScoreSpriteNode: SKNode {
 
     var scoreBoard : SKShapeNode
@@ -28,42 +26,42 @@ class ScoreSpriteNode: SKNode {
 
         addChild(scoreBoard)
         
-        scoreLabels.append(SKLabelNode(fontNamed: "LCD Solid"))
+        scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
         scoreLabels[0].text = "DISTANCE:"
         scoreLabels[0].fontColor = UIColor.whiteColor()
-        scoreLabels[0].fontSize = 25
+        scoreLabels[0].fontSize = 30
         scoreLabels[0].position = CGPoint(x: -205, y: 75)
         scoreLabels[0].horizontalAlignmentMode = .Left
         scoreBoard.addChild(scoreLabels[0])
         
-        scoreLabels.append(SKLabelNode(fontNamed: "LCD Solid"))
+        scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
         scoreLabels[1].text = "NEXT CAMP:"
         scoreLabels[1].fontColor = UIColor.whiteColor()
-        scoreLabels[1].fontSize = 25
+        scoreLabels[1].fontSize = 30
         scoreLabels[1].position = CGPoint(x: -205, y: 30)
         scoreLabels[1].horizontalAlignmentMode = .Left
         scoreBoard.addChild(scoreLabels[1])
         
-        scoreLabels.append(SKLabelNode(fontNamed: "LCD Solid"))
-        scoreLabels[2].text = "TOTAL STEPS:"
+        scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
+        scoreLabels[2].text = "STEPS:"
         scoreLabels[2].fontColor = UIColor.whiteColor()
-        scoreLabels[2].fontSize = 25
+        scoreLabels[2].fontSize = 30
         scoreLabels[2].position = CGPoint(x: -205, y: -15)
         scoreLabels[2].horizontalAlignmentMode = .Left
         scoreBoard.addChild(scoreLabels[2])
         
-        scoreLabels.append(SKLabelNode(fontNamed: "LCD Solid"))
+        scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
         scoreLabels[3].text = "CALORIES:"
         scoreLabels[3].fontColor = UIColor.whiteColor()
-        scoreLabels[3].fontSize = 25
+        scoreLabels[3].fontSize = 30
         scoreLabels[3].position = CGPoint(x: -205, y: -65)
         scoreLabels[3].horizontalAlignmentMode = .Left
         scoreBoard.addChild(scoreLabels[3])
         
-        scoreLabels.append(SKLabelNode(fontNamed: "LCD Solid"))
-        scoreLabels[4].text = "START DATE:"
+        scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
+        scoreLabels[4].text = "START:"
         scoreLabels[4].fontColor = UIColor.whiteColor()
-        scoreLabels[4].fontSize = 25
+        scoreLabels[4].fontSize = 30
         scoreLabels[4].position = CGPoint(x: -205, y: -115)
         scoreLabels[4].horizontalAlignmentMode = .Left
         scoreBoard.addChild(scoreLabels[4])
