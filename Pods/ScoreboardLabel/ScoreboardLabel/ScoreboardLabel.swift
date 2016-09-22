@@ -10,23 +10,23 @@ import Foundation
 import UIKit
 
 
-public class ScoreboardLabel: UIView, ScoreboardLabelLetterProtocol {
+open class ScoreboardLabel: UIView, ScoreboardLabelLetterProtocol {
     
-    public var firstText = ""
-    public var secondText = ""
-    public var textFont : UIFont!
-    public var textColor: UIColor!
-    public var interval = CFTimeInterval(0.3)
-    public var isRepeating = true
+    open var firstText = ""
+    open var secondText = ""
+    open var textFont : UIFont!
+    open var textColor: UIColor!
+    open var interval = CFTimeInterval(0.3)
+    open var isRepeating = true
     
     var firstWordLetters = Array<String>()
     var secondWordLetters = Array<String>()
     
     var flippingLetters = Array<ScoreboardLabelLetter>()
 
-    public var completionHandler:((Bool)->Void)!
+    open var completionHandler:((Bool)->Void)!
     
-    private var showingFirstWord = true
+    fileprivate var showingFirstWord = true
     
     override init(frame:CGRect) {
         
@@ -41,7 +41,7 @@ public class ScoreboardLabel: UIView, ScoreboardLabelLetterProtocol {
     convenience public init(backgroundImage:UIImage ,text:String, flipToText:String, font:UIFont, textColor:UIColor) {
         
         let maxChars = max(text.Letterize().count, flipToText.Letterize().count)
-        let rect = CGRectMake(0, 0, CGFloat(maxChars) * CGFloat(font.pointSize), CGFloat(font.pointSize) * CGFloat(1.5))
+        let rect = CGRect(x: 0, y: 0, width: CGFloat(maxChars) * CGFloat(font.pointSize), height: CGFloat(font.pointSize) * CGFloat(1.5))
         
         self.init (frame:rect)
         
@@ -60,7 +60,7 @@ public class ScoreboardLabel: UIView, ScoreboardLabelLetterProtocol {
         //build flipping letters
         for index in 1...maxChars {
             
-            let frameForLetter = CGRectMake(lastOriginX, 0, width, height)
+            let frameForLetter = CGRect(x: lastOriginX, y: 0, width: width, height: height)
             let flipLetter = ScoreboardLabelLetter(frame: frameForLetter)
             flipLetter.font = textFont
             flipLetter.letterIndex = index
@@ -88,18 +88,18 @@ public class ScoreboardLabel: UIView, ScoreboardLabelLetterProtocol {
     }
     
     
-    public func flip(continuosly: Bool) {
+    open func flip(_ continuosly: Bool) {
         
         isRepeating = continuosly
         flipLetterAtIndex(0)
     }
     
-    public func stopFlipping() {
+    open func stopFlipping() {
         
         isRepeating = false
     }
     
-    func flipLetterAtIndex(index:Int) {
+    func flipLetterAtIndex(_ index:Int) {
         
         if (index > flippingLetters.count - 1) {
             showingFirstWord = !showingFirstWord
@@ -116,7 +116,7 @@ public class ScoreboardLabel: UIView, ScoreboardLabelLetterProtocol {
         flipLetterAtIndex(index + 1)
     }
     
-    func didFinishAnimatingLetter(letter: ScoreboardLabelLetter) {
+    func didFinishAnimatingLetter(_ letter: ScoreboardLabelLetter) {
         
         if (letter.letterIndex == flippingLetters.count && isRepeating == true) { //it was the last letter and we need to repeat
             performThisAfter(0.8, closure: { () -> () in

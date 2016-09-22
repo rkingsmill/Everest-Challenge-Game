@@ -17,10 +17,10 @@ class ScoreSpriteNode: SKNode {
     
     override init() {
         
-        scoreBoard = SKShapeNode(rectOfSize: CGSize(width: 500, height: 220))
+        scoreBoard = SKShapeNode(rectOf: CGSize(width: 500, height: 220))
         //scoreBoard = SKShapeNode!(fileNamed: "OrangeBackground.png")
-        scoreBoard.strokeColor = UIColor.clearColor()
-        scoreBoard.fillColor = UIColor.clearColor()
+        scoreBoard.strokeColor = UIColor.clear
+        scoreBoard.fillColor = UIColor.clear
         
         super.init()
 
@@ -28,42 +28,42 @@ class ScoreSpriteNode: SKNode {
         
         scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
         scoreLabels[0].text = "DISTANCE:"
-        scoreLabels[0].fontColor = UIColor.whiteColor()
+        scoreLabels[0].fontColor = UIColor.white
         scoreLabels[0].fontSize = 30
         scoreLabels[0].position = CGPoint(x: -205, y: 75)
-        scoreLabels[0].horizontalAlignmentMode = .Left
+        scoreLabels[0].horizontalAlignmentMode = .left
         scoreBoard.addChild(scoreLabels[0])
         
         scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
         scoreLabels[1].text = "NEXT CAMP:"
-        scoreLabels[1].fontColor = UIColor.whiteColor()
+        scoreLabels[1].fontColor = UIColor.white
         scoreLabels[1].fontSize = 30
         scoreLabels[1].position = CGPoint(x: -205, y: 30)
-        scoreLabels[1].horizontalAlignmentMode = .Left
+        scoreLabels[1].horizontalAlignmentMode = .left
         scoreBoard.addChild(scoreLabels[1])
         
         scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
         scoreLabels[2].text = "STEPS:"
-        scoreLabels[2].fontColor = UIColor.whiteColor()
+        scoreLabels[2].fontColor = UIColor.white
         scoreLabels[2].fontSize = 30
         scoreLabels[2].position = CGPoint(x: -205, y: -15)
-        scoreLabels[2].horizontalAlignmentMode = .Left
+        scoreLabels[2].horizontalAlignmentMode = .left
         scoreBoard.addChild(scoreLabels[2])
         
         scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
         scoreLabels[3].text = "CALORIES:"
-        scoreLabels[3].fontColor = UIColor.whiteColor()
+        scoreLabels[3].fontColor = UIColor.white
         scoreLabels[3].fontSize = 30
         scoreLabels[3].position = CGPoint(x: -205, y: -65)
-        scoreLabels[3].horizontalAlignmentMode = .Left
+        scoreLabels[3].horizontalAlignmentMode = .left
         scoreBoard.addChild(scoreLabels[3])
         
         scoreLabels.append(SKLabelNode(fontNamed: "PixelSplitter-Bold"))
         scoreLabels[4].text = "START:"
-        scoreLabels[4].fontColor = UIColor.whiteColor()
+        scoreLabels[4].fontColor = UIColor.white
         scoreLabels[4].fontSize = 30
         scoreLabels[4].position = CGPoint(x: -205, y: -115)
-        scoreLabels[4].horizontalAlignmentMode = .Left
+        scoreLabels[4].horizontalAlignmentMode = .left
         scoreBoard.addChild(scoreLabels[4])
         
         //        scoreLabels.append(SKLabelNode(fontNamed: "LCD Solid"))

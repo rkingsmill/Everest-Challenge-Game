@@ -12,16 +12,16 @@ class Utils {
     
     static let actualMountainHeight : Double = 8848
     //need to change if top or bottom points change
-    static func flightsOfStairsToMeters(flights: Double) -> Double {
+    static func flightsOfStairsToMeters(_ flights: Double) -> Double {
         return flights*4.7
     }
     
-    static func convertDistanceClimbedToScreenClimbed(totalScreenMountainHeight: Double, currentHeight: Double) -> Double {
+    static func convertDistanceClimbedToScreenClimbed(_ totalScreenMountainHeight: Double, currentHeight: Double) -> Double {
 
         return totalScreenMountainHeight * (currentHeight / actualMountainHeight)
     }
     
-    func getScreenCoordinatesForRelativeCoordinates(relativePoint:CGPoint, size:CGSize) -> CGPoint {
+    func getScreenCoordinatesForRelativeCoordinates(_ relativePoint:CGPoint, size:CGSize) -> CGPoint {
         
         let width = size.width
         let height = size.height

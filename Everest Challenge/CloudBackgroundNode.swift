@@ -38,29 +38,29 @@ class CloudBackgroundNode: SKNode {
         cloudSprite2 = SKSpriteNode(imageNamed: "Cloud2")
         cloudSprite3 = SKSpriteNode(imageNamed: "Cloud3")
         
-        cloudSprite1.position = CGPointMake(900, 600)
-        cloudSprite2.position = CGPointMake(600, 650)
-        cloudSprite3.position = CGPointMake(300, 700)
+        cloudSprite1.position = CGPoint(x: 900, y: 600)
+        cloudSprite2.position = CGPoint(x: 600, y: 650)
+        cloudSprite3.position = CGPoint(x: 300, y: 700)
         
         cloudSprite1.zPosition = 1
         cloudSprite2.zPosition = 1
         cloudSprite3.zPosition = 1
 
-        moveCloud = SKAction.moveToX(-cloudSprite1.size.width/2, duration: 30.0)
-        resetCloud = SKAction.moveToX(1000, duration: 0.0)
+        moveCloud = SKAction.moveTo(x: -cloudSprite1.size.width/2, duration: 30.0)
+        resetCloud = SKAction.moveTo(x: 1000, duration: 0.0)
         
-        moveCloud2 = SKAction.moveToX(-cloudSprite2.size.width/2, duration: 25.0)
-        resetCloud2 = SKAction.moveToX(1000, duration: 0.0)
+        moveCloud2 = SKAction.moveTo(x: -cloudSprite2.size.width/2, duration: 25.0)
+        resetCloud2 = SKAction.moveTo(x: 1000, duration: 0.0)
         
-        moveCloud3 = SKAction.moveToX(-cloudSprite3.size.width/2, duration: 40.0)
-        resetCloud3 = SKAction.moveToX(1000, duration: 0.0)
+        moveCloud3 = SKAction.moveTo(x: -cloudSprite3.size.width/2, duration: 40.0)
+        resetCloud3 = SKAction.moveTo(x: 1000, duration: 0.0)
 
         let sequence = SKAction.sequence([moveCloud, resetCloud])
         let sequence2 = SKAction.sequence([moveCloud2, resetCloud2])
         let sequence3 = SKAction.sequence([moveCloud3, resetCloud3])
-        cloudSprite1.runAction(SKAction.repeatActionForever(sequence))
-        cloudSprite2.runAction(SKAction.repeatActionForever(sequence2))
-        cloudSprite3.runAction(SKAction.repeatActionForever(sequence3))
+        cloudSprite1.run(SKAction.repeatForever(sequence))
+        cloudSprite2.run(SKAction.repeatForever(sequence2))
+        cloudSprite3.run(SKAction.repeatForever(sequence3))
         
         self.addChild(cloudSprite1)
         self.addChild(cloudSprite2)

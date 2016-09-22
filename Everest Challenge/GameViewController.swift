@@ -24,13 +24,13 @@
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.didFinishGame), name: "GameDidFinishNotification", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.pedometerDidUpdate), name: "PedometerDidUpdateNotification", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.moveToCamp), name: "MoveToCampNotification", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.didFinishGame), name: NSNotification.Name(rawValue: "GameDidFinishNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.pedometerDidUpdate), name: NSNotification.Name(rawValue: "PedometerDidUpdateNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.moveToCamp), name: NSNotification.Name(rawValue: "MoveToCampNotification"), object: nil)
     }
     
-    @objc func moveToCamp(notification:NSNotification) {
-        let info = notification.userInfo
+    @objc func moveToCamp(_ notification:Notification) {
+        let info = (notification as NSNotification).userInfo
         
         let indexPathOfCurrentCamp = info!["indexOfCurrentCamp"] as! Int
         print("==>> change to current camp \(indexPathOfCurrentCamp)")
@@ -48,11 +48,11 @@
         scene.moveGirlToNextCampAtPoint(point)
     }
     
-    @objc private func didFinishGame() {
+    @objc fileprivate func didFinishGame() {
         self.showWinningState()
     }
     
-    @objc private func pedometerDidUpdate() {
+    @objc fileprivate func pedometerDidUpdate() {
         print("current height", dataManager.floorTracker.currentHeight)
         path?.currentCampForHeight(self.dataManager.floorTracker.currentHeight)
     }
@@ -90,7 +90,7 @@
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .aspectFill
             
             skView.presentScene(scene)
             
@@ -100,19 +100,19 @@
         //        view.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
 //        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
 //        UIDevice.currentDevice().setValue(value, forKey: "orientation")
 
     }
     
-    private func showWinningState() {
+    fileprivate func showWinningState() {
         // show some confetti
         print(#function)
         self.restartGame()
     }
     
-    private func restartGame() {
+    fileprivate func restartGame() {
         // call this after a delay
         dataManager.restartGame()
     }
@@ -128,59 +128,59 @@
     //        }
     //    }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .LandscapeLeft
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .landscapeLeft
     }
     
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return .LandscapeLeft
+    override var preferredInterfaceOrientationForPresentation : UIInterfaceOrientation {
+        return .landscapeLeft
     }
     override func viewDidLayoutSubviews() {
     }
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
-    
-    @IBAction func keepMoving(sender: AnyObject) {
+    //for demo day
+    @IBAction func keepMoving(_ sender: AnyObject) {
         if currentCamp == 0 {
-            scene!.popUp.hidden = true
+            scene!.popUp.isHidden = true
             currentCamp += 1
             scene!.moveFirstToSecondBaseCamp(scene!.baseCamp1, secondBaseCamp: scene!.baseCamp2)
         } else if currentCamp == 1 {
-            scene!.popUp.hidden = true
+            scene!.popUp.isHidden = true
             currentCamp += 1
             scene!.moveSecondToThirdBaseCamp(scene!.baseCamp2, thirdBaseCamp: scene!.baseCamp3)
         } else if currentCamp == 2 {
-            scene!.popUp.hidden = true
+            scene!.popUp.isHidden = true
             currentCamp += 1
             scene!.moveThirdToFourthBaseCamp(scene!.baseCamp3, fourthBaseCamp: scene!.baseCamp4)
         } else if currentCamp == 3 {
-            scene!.popUp.hidden = true
+            scene!.popUp.isHidden = true
             currentCamp += 1
             scene!.moveFourthBaseCampToSummit(scene!.baseCamp4, summit: scene!.summit)
         } else if currentCamp == 4 {
-            scene!.popUp.hidden = true
+            scene!.popUp.isHidden = true
             currentCamp += 1
             scene!.burstNode!.resetSimulation()
             scene!.burstNode!.removeFromParent()
             scene!.burstNode2!.resetSimulation()
             scene!.burstNode2?.removeFromParent()
-            let fadeIn = SKAction.fadeInWithDuration(5)
-            scene!.startSprite!.runAction(SKAction.sequence([fadeIn]))
+            let fadeIn = SKAction.fadeIn(withDuration: 5)
+            scene!.startSprite!.run(SKAction.sequence([fadeIn]))
         } else if currentCamp == 5 {
-            scene!.popUp.hidden = true
-            let fadeIn = SKAction.fadeInWithDuration(5)
-            scene!.startSprite!.runAction(SKAction.sequence([fadeIn]))
+            scene!.popUp.isHidden = true
+            let fadeIn = SKAction.fadeIn(withDuration: 5)
+            scene!.startSprite!.run(SKAction.sequence([fadeIn]))
             currentCamp = 0
         }
     }
     //remove observers when view controller doesnt exist. good practise
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
    

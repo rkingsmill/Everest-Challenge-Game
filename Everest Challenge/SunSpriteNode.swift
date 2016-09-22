@@ -18,7 +18,7 @@ class SunSpriteNode: SKSpriteNode {
         self.init(imageNamed: "sunSprite1.png")
         
         setUpSun()
-        runAction(sunShine)
+        run(sunShine)
     }
     
     func setUpSun(){
@@ -26,11 +26,11 @@ class SunSpriteNode: SKSpriteNode {
         
         let atlas1 = SKTextureAtlas(named: "SunSprite")
         
-        let animation1 = SKAction.animateWithTextures([
+        let animation1 = SKAction.animate(with: [
             atlas1.textureNamed("Sun1"),
             atlas1.textureNamed("Sun2")], timePerFrame: 0.8)
         
-        sunShine = SKAction.repeatActionForever(animation1)
+        sunShine = SKAction.repeatForever(animation1)
         
         
         

@@ -17,14 +17,14 @@ class PlayerSpriteNode: SKSpriteNode {
         self.init(imageNamed: "test1.png")
         
         setUpSprite()
-        runAction(spriteWalk)
+        run(spriteWalk)
     }
     
     func setUpSprite(){
         
         let atlas = SKTextureAtlas(named: "PlayerSprite")
         
-        let animation = SKAction.animateWithTextures([
+        let animation = SKAction.animate(with: [
             atlas.textureNamed("test1.png"),
             atlas.textureNamed("test2.png"),
             atlas.textureNamed("test3.png"),
@@ -33,7 +33,7 @@ class PlayerSpriteNode: SKSpriteNode {
             atlas.textureNamed("test6.png"),
             atlas.textureNamed("test7.png")], timePerFrame: 0.2)
         
-        spriteWalk = SKAction.repeatActionForever(animation)
+        spriteWalk = SKAction.repeatForever(animation)
         
     }
     

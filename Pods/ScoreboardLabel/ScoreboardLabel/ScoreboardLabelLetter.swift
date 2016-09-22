@@ -11,38 +11,38 @@ import UIKit
 import pop
 
 enum Section {
-    case Upper
-    case Lower
+    case upper
+    case lower
 }
 
 protocol ScoreboardLabelLetterProtocol {
     
-    func didFinishAnimatingLetter(letter: ScoreboardLabelLetter)
+    func didFinishAnimatingLetter(_ letter: ScoreboardLabelLetter)
 }
 
-public class ScoreboardLabelLetter: UIView {
+open class ScoreboardLabelLetter: UIView {
     
     var theNextLetter = ""
     var font : UIFont!
     var letterIndex = 0
     var delegate : ScoreboardLabelLetterProtocol?
     
-    private var theFirstLetter = ""
-    private var imageViewUpperHalf = UIImageView()
-    private var imageViewLowerHalf = UIImageView()
-    private var imageViewUpperHalfNextLetter = UIImageView()
-    private var imageViewLowerHalfNextLetter = UIImageView()
-    private var bottomShadowLayer = CAGradientLayer()
-    private var topShadowLayer = CAGradientLayer()
+    fileprivate var theFirstLetter = ""
+    fileprivate var imageViewUpperHalf = UIImageView()
+    fileprivate var imageViewLowerHalf = UIImageView()
+    fileprivate var imageViewUpperHalfNextLetter = UIImageView()
+    fileprivate var imageViewLowerHalfNextLetter = UIImageView()
+    fileprivate var bottomShadowLayer = CAGradientLayer()
+    fileprivate var topShadowLayer = CAGradientLayer()
     
-    private var label = UILabel()
-    private var imageview = UIImageView()
+    fileprivate var label = UILabel()
+    fileprivate var imageview = UIImageView()
     
     //frames
-    private var rectUpperHalf = CGRectZero
-    private var rectLowerHalf = CGRectZero
-    private var originUpperHalf = CGPointZero
-    private var originLowerHalf = CGPointZero
+    fileprivate var rectUpperHalf = CGRect.zero
+    fileprivate var rectLowerHalf = CGRect.zero
+    fileprivate var originUpperHalf = CGPoint.zero
+    fileprivate var originLowerHalf = CGPoint.zero
     
     
     override init(frame:CGRect) {
@@ -50,33 +50,33 @@ public class ScoreboardLabelLetter: UIView {
         super.init(frame: frame)
         
         //frames
-        rectUpperHalf = CGRectMake(0, 0, bounds.size.width, bounds.size.height * 0.5)
-        rectLowerHalf = CGRectMake(0, frame.size.height * 0.5, frame.size.width, frame.size.height * 0.5)
+        rectUpperHalf = CGRect(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height * 0.5)
+        rectLowerHalf = CGRect(x: 0, y: frame.size.height * 0.5, width: frame.size.width, height: frame.size.height * 0.5)
         
-        originUpperHalf = CGPointMake(0, frame.size.height * -0.01)
-        originLowerHalf = CGPointMake(0, frame.size.height * 0.51)
+        originUpperHalf = CGPoint(x: 0, y: frame.size.height * -0.01)
+        originLowerHalf = CGPoint(x: 0, y: frame.size.height * 0.51)
     }
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func renderScoreboardLabelLetters(backgroundImage:UIImage, textColor:UIColor, letter:String, nextLetter:String) {
+    func renderScoreboardLabelLetters(_ backgroundImage:UIImage, textColor:UIColor, letter:String, nextLetter:String) {
         
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
         
         label.frame = bounds
         label.font = font
-        label.textAlignment = NSTextAlignment.Center
+        label.textAlignment = NSTextAlignment.center
         label.textColor = textColor
         
         label.text = letter
         
         imageview.frame = label.frame
-        imageview.contentMode = UIViewContentMode.ScaleAspectFit
+        imageview.contentMode = UIViewContentMode.scaleAspectFit
         imageview.image = backgroundImage
         imageview.clipsToBounds = true
-        imageview.layer.borderColor = UIColor.blackColor().CGColor
+        imageview.layer.borderColor = UIColor.black.cgColor
         imageview.layer.borderWidth = 0.1
         
         imageview.addSubview(label)
@@ -113,23 +113,23 @@ public class ScoreboardLabelLetter: UIView {
     func renderCurrentLetterImages() {
         
         imageViewUpperHalf = UIImageView(frame: rectUpperHalf)
-        imageViewUpperHalf.layer.anchorPoint = CGPointMake(0.5, 1.02);
-        imageViewUpperHalf.layer.position = CGPointMake(imageViewUpperHalf.frame.width * 0.5, imageViewUpperHalf.frame.height * 0.5)
-        imageViewUpperHalf.layer.mask = maskForRectInSection(Section.Upper, rect: imageViewUpperHalf.bounds)
+        imageViewUpperHalf.layer.anchorPoint = CGPoint(x: 0.5, y: 1.02);
+        imageViewUpperHalf.layer.position = CGPoint(x: imageViewUpperHalf.frame.width * 0.5, y: imageViewUpperHalf.frame.height * 0.5)
+        imageViewUpperHalf.layer.mask = maskForRectInSection(Section.upper, rect: imageViewUpperHalf.bounds)
         imageViewUpperHalf.frame.origin = originUpperHalf
         
-        imageViewUpperHalf.contentMode = UIViewContentMode.Center
-        imageViewUpperHalf.backgroundColor = UIColor.whiteColor()
+        imageViewUpperHalf.contentMode = UIViewContentMode.center
+        imageViewUpperHalf.backgroundColor = UIColor.white
 
         imageViewUpperHalf.layer.transform = transform3D()
         
-        let imageTop = imageHalfForSection(Section.Upper, theView:imageview)
+        let imageTop = imageHalfForSection(Section.upper, theView:imageview)
         imageViewUpperHalf.image = imageTop
         
         
         //top Shadow
         topShadowLayer.frame = imageViewUpperHalf.bounds
-        topShadowLayer.colors = [UIColor.clearColor().CGColor, UIColor.blackColor().CGColor]
+        topShadowLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         topShadowLayer.opacity = 0
         
         imageViewUpperHalf.layer.addSublayer(topShadowLayer)
@@ -138,17 +138,17 @@ public class ScoreboardLabelLetter: UIView {
         
         imageViewLowerHalf = UIImageView(frame: rectLowerHalf)
         imageViewLowerHalf.frame.origin = originLowerHalf
-        imageViewLowerHalf.layer.mask = maskForRectInSection(Section.Lower, rect: imageViewLowerHalf.bounds)
+        imageViewLowerHalf.layer.mask = maskForRectInSection(Section.lower, rect: imageViewLowerHalf.bounds)
         
-        imageViewLowerHalf.contentMode = UIViewContentMode.Center
-        imageViewLowerHalf.backgroundColor = UIColor.whiteColor()
+        imageViewLowerHalf.contentMode = UIViewContentMode.center
+        imageViewLowerHalf.backgroundColor = UIColor.white
 
-        let imageBottom = imageHalfForSection(Section.Lower, theView:imageview)
+        let imageBottom = imageHalfForSection(Section.lower, theView:imageview)
         imageViewLowerHalf.image = imageBottom
         
         //bottom Shadow
         bottomShadowLayer.frame = imageViewLowerHalf.bounds
-        bottomShadowLayer.colors = [UIColor.blackColor().CGColor, UIColor.clearColor().CGColor]
+        bottomShadowLayer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
         bottomShadowLayer.opacity = 0
         
         imageViewLowerHalf.layer.addSublayer(bottomShadowLayer)
@@ -162,15 +162,15 @@ public class ScoreboardLabelLetter: UIView {
         
         imageViewUpperHalfNextLetter.frame = rectUpperHalf
         imageViewUpperHalfNextLetter.frame.origin = originUpperHalf
-        imageViewUpperHalfNextLetter.contentMode = UIViewContentMode.Center
-        imageViewUpperHalfNextLetter.backgroundColor = UIColor.whiteColor()
-        imageViewUpperHalfNextLetter.layer.mask = maskForRectInSection(Section.Upper, rect: imageViewUpperHalfNextLetter.bounds)
+        imageViewUpperHalfNextLetter.contentMode = UIViewContentMode.center
+        imageViewUpperHalfNextLetter.backgroundColor = UIColor.white
+        imageViewUpperHalfNextLetter.layer.mask = maskForRectInSection(Section.upper, rect: imageViewUpperHalfNextLetter.bounds)
         
         imageViewLowerHalfNextLetter.frame = rectLowerHalf
         imageViewLowerHalfNextLetter.frame.origin = originLowerHalf
-        imageViewLowerHalfNextLetter.contentMode = UIViewContentMode.Center
-        imageViewLowerHalfNextLetter.backgroundColor = UIColor.whiteColor()
-        imageViewLowerHalfNextLetter.layer.mask = maskForRectInSection(Section.Lower, rect: imageViewLowerHalfNextLetter.bounds)
+        imageViewLowerHalfNextLetter.contentMode = UIViewContentMode.center
+        imageViewLowerHalfNextLetter.backgroundColor = UIColor.white
+        imageViewLowerHalfNextLetter.layer.mask = maskForRectInSection(Section.lower, rect: imageViewLowerHalfNextLetter.bounds)
 
         addSubview(imageViewUpperHalfNextLetter)
         addSubview(imageViewLowerHalfNextLetter)
@@ -181,35 +181,35 @@ public class ScoreboardLabelLetter: UIView {
         
         label.text = theNextLetter
         
-        let imageTop = imageHalfForSection(Section.Upper, theView:imageview)
+        let imageTop = imageHalfForSection(Section.upper, theView:imageview)
         imageViewUpperHalfNextLetter.image = imageTop
 
-        let imageBottom = imageHalfForSection(Section.Lower, theView:imageview)
+        let imageBottom = imageHalfForSection(Section.lower, theView:imageview)
         imageViewLowerHalfNextLetter.image = imageBottom
     }
     
-    func flipLetterAfterWait(wait:CFTimeInterval) {
+    func flipLetterAfterWait(_ wait:CFTimeInterval) {
         
         flipToLetterAfterWait(theNextLetter, wait: wait)
     }
     
-    func flipToLetterAfterWait(letter:String, wait:CFTimeInterval)  {
+    func flipToLetterAfterWait(_ letter:String, wait:CFTimeInterval)  {
         
         theNextLetter = letter
         
         prepareForNextLetter()
         
         let rotationAnimation = POPSpringAnimation(propertyNamed: kPOPLayerRotationX)
-        rotationAnimation.springBounciness = 5.0
-        rotationAnimation.dynamicsMass = 2.0
-        rotationAnimation.dynamicsTension = 200
+        rotationAnimation?.springBounciness = 5.0
+        rotationAnimation?.dynamicsMass = 2.0
+        rotationAnimation?.dynamicsTension = 200
         
         
-        rotationAnimation.toValue = 2.8
-        rotationAnimation.delegate = self;
-        rotationAnimation.beginTime = CACurrentMediaTime() + wait
+        rotationAnimation?.toValue = 2.8
+        rotationAnimation?.delegate = self;
+        rotationAnimation?.beginTime = CACurrentMediaTime() + wait
 //        print("\nbeginTime = \(rotationAnimation.beginTime)")
-        rotationAnimation.completionBlock = {(animation, finished) in
+        rotationAnimation?.completionBlock = {(animation, finished) in
             
             if (finished == true) {
                 
@@ -219,14 +219,14 @@ public class ScoreboardLabelLetter: UIView {
             }
         }
 
-        imageViewUpperHalf.layer.pop_addAnimation(rotationAnimation, forKey: "rotationAnimation")
+        imageViewUpperHalf.layer.pop_add(rotationAnimation, forKey: "rotationAnimation")
     }
     
     
-    func pop_animationDidApply(anim: POPAnimation!) {
+    func pop_animationDidApply(_ anim: POPAnimation!) {
         
         
-        if let currentValue = anim.valueForKey("currentValue")?.floatValue {
+        if let currentValue = (anim.value(forKey: "currentValue") as AnyObject).floatValue {
             
             if (currentValue < 1.4) {
                 
@@ -256,27 +256,27 @@ public class ScoreboardLabelLetter: UIView {
         imageViewUpperHalf.removeFromSuperview()
     }
     
-    func pop_animationDidReachToValue(anim: POPAnimation!) {
+    func pop_animationDidReachToValue(_ anim: POPAnimation!) {
         
         self.label.text = theNextLetter
         removeImageViews()
         delegate?.didFinishAnimatingLetter(self)
     }
     
-    func imageHalfForSection(section:Section ,theView:UIView) -> UIImage {
+    func imageHalfForSection(_ section:Section ,theView:UIView) -> UIImage {
         
         //taking a snapShot
         UIGraphicsBeginImageContext(theView.frame.size)
-        theView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        theView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let screenShot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         //returning only upper half
-        let rect = (section == Section.Upper) ? CGRectMake(0, 0, theView.frame.size.width, theView.frame.size.height * 0.5) : CGRectMake(0, theView.frame.size.height * 0.5, theView.frame.size.width, theView.frame.size.height * 0.5)
+        let rect = (section == Section.upper) ? CGRect(x: 0, y: 0, width: theView.frame.size.width, height: theView.frame.size.height * 0.5) : CGRect(x: 0, y: theView.frame.size.height * 0.5, width: theView.frame.size.width, height: theView.frame.size.height * 0.5)
         
         
-        let imageRef = CGImageCreateWithImageInRect(screenShot.CGImage, rect)
-        let half = UIImage(CGImage: imageRef!)
+        let imageRef = screenShot!.cgImage!.cropping(to: rect)
+        let half = UIImage(cgImage: imageRef!)
         
         return half
     }
@@ -291,11 +291,11 @@ public class ScoreboardLabelLetter: UIView {
     }
     
     
-    func maskForRectInSection(section:Section ,rect:CGRect) -> CAShapeLayer {
+    func maskForRectInSection(_ section:Section ,rect:CGRect) -> CAShapeLayer {
         
         let layerMask = CAShapeLayer()
-        let corners = (section == Section.Upper) ? UIRectCorner.TopLeft.union(UIRectCorner.TopRight) : UIRectCorner.BottomLeft.union(UIRectCorner.BottomRight)
-        layerMask.path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSizeMake(5, 5)).CGPath
+        let corners = (section == Section.upper) ? UIRectCorner.topLeft.union(UIRectCorner.topRight) : UIRectCorner.bottomLeft.union(UIRectCorner.bottomRight)
+        layerMask.path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: 5, height: 5)).cgPath
         
         return layerMask
     }

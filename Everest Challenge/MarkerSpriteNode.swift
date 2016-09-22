@@ -18,7 +18,7 @@ class MarkerSpriteNode: SKSpriteNode {
         self.init(imageNamed: "PinkFlag1")
         
         setUpMarker()
-        runAction(markerWave)
+        run(markerWave)
     }
     
     func setUpMarker(){
@@ -26,12 +26,12 @@ class MarkerSpriteNode: SKSpriteNode {
         
         let atlas3 = SKTextureAtlas(named: "PinkFlagSprite")
         
-        let animationMarker = SKAction.animateWithTextures([
+        let animationMarker = SKAction.animate(with: [
             atlas3.textureNamed("PinkFlag1"),
             atlas3.textureNamed("PinkFlag2"),
             atlas3.textureNamed("PinkFlag3")], timePerFrame: 0.5)
         
-        markerWave = SKAction.repeatActionForever(animationMarker)
+        markerWave = SKAction.repeatForever(animationMarker)
         
         
         

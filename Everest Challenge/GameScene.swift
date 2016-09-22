@@ -55,11 +55,11 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     
     let font = UIFont(name: "LCD Solid", size: 12)
     let image = UIImage(named: "WhiteBackground.png")
-    let color = UIColor.blackColor()
+    let color = UIColor.black
     
-    var defaultss:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    var defaultss:UserDefaults = UserDefaults.standard
     var maskingCameraRollChoice:Bool = true
-    var maskOffSet:CGPoint = CGPointZero
+    var maskOffSet:CGPoint = CGPoint.zero
     
     var button: SKNode! = nil
     
@@ -68,20 +68,20 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     var burstNode : SKEmitterNode?
     var burstNode2 : SKEmitterNode?
     
-    override func didMoveToView(view: SKView) {
-        self.popUp.hidden = true
+    override func didMove(to view: SKView) {
+        self.popUp.isHidden = true
         
         self.background = SKSpriteNode(imageNamed: "Mount-Everest Compressed")
         background!.zPosition = 1
-        background!.position = CGPoint(x:CGRectGetMidX(frame), y:CGRectGetMidY(frame))
+        background!.position = CGPoint(x:frame.midX, y:frame.midY)
         addChild(background!)
         
-        scene!.scaleMode = SKSceneScaleMode.AspectFit;
-        scene?.anchorPoint = CGPointZero
+        scene!.scaleMode = SKSceneScaleMode.aspectFit;
+        scene?.anchorPoint = CGPoint.zero
         
         //CURRENT SCORE BOARD
         playerScore = ScoreSpriteNode()
-        playerScore.position = CGPointMake(220,640)
+        playerScore.position = CGPoint(x: 220,y: 640)
         playerScore!.zPosition = 2
         addChild(playerScore)
 
@@ -92,7 +92,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         
         let font = UIFont(name: "LCD Solid", size: 12)
         let image = UIImage(named: "WhiteBackground.png")
-        let color = UIColor.blackColor()
+        let color = UIColor.black
        
         label = ScoreboardLabel(backgroundImage: image! ,text:" ", flipToText: " ", font:font!, textColor:color)
         label.interval = Double(0.2) //each letter flip time
@@ -124,7 +124,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
                 self.labelCalories!.flip(false)
                 self.labelCalories!.stopFlipping()
                 
-        let labelStart = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText: "06/23", font:self.font!, textColor:self.color)
+        let labelStart = ScoreboardLabel(backgroundImage: self.image! ,text:" ", flipToText: "09/22", font:self.font!, textColor:self.color)
                 labelStart.center = CGPoint(x: 190, y: 95)
                 view.addSubview(labelStart)
                 labelStart.flip(false)
@@ -132,15 +132,14 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             }
         }
         
-        
         label.center = CGPoint(x: 0, y: 0)
         //view.addSubview(label)
         label.flip(true)
         label.stopFlipping()
         
         sprite = PlayerSpriteNode()
-        sprite!.xScale = 6
-        sprite!.yScale = 3
+        sprite!.xScale = 1
+        sprite!.yScale = 1
         sprite!.zPosition = 3
         print("frame on the GameScene \(frame)")
         //sprite!.position = CGPointMake(frame.width/2, frame.height/2)
@@ -186,18 +185,18 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         sunSprite!.xScale = 1.25
         sunSprite!.yScale = 1.25
         sunSprite!.zPosition = 3
-        sunSprite!.position = CGPointMake(902, 680)
+        sunSprite!.position = CGPoint(x: 902, y: 680)
         self.addChild(sunSprite!)
         
         flagSprite = FlagSpriteNode()
         flagSprite!.xScale = 1
         flagSprite!.yScale = 1
         flagSprite!.zPosition = 3
-        flagSprite!.position = CGPointMake(660, 670)
+        flagSprite!.position = CGPoint(x: 660, y: 670)
         self.addChild(flagSprite!)
         
         startSprite = SKSpriteNode(imageNamed: "sign")
-        startSprite?.position = CGPointMake(900, 100)
+        startSprite?.position = CGPoint(x: 900, y: 100)
         startSprite?.zPosition = 6
         startSprite!.xScale = 0.35
         startSprite!.yScale = 0.35
@@ -205,114 +204,125 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.addChild(startSprite!)
     }
     
-    func moveStartToFirstBaseCamp(start: CGPoint, firstBaseCamp: CGPoint) -> Void {
+    func moveStartToFirstBaseCamp(_ start: CGPoint, firstBaseCamp: CGPoint) -> Void {
         moving = true
         
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, start.x, start.y)
-        CGPathAddLineToPoint(path, nil, firstBaseCamp.x, firstBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 25.0)
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: start.x, y: start.y))
+        path.addLine(to: CGPoint(x: firstBaseCamp.x, y: firstBaseCamp.y))
+        
+        //CGPathMoveToPoint(path, nil, start.x, start.y)
+        //CGPathAddLineToPoint(path, nil, firstBaseCamp.x, firstBaseCamp.y)
+        let destination = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 3.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
-        self.sprite!.runAction(SKAction.sequence([destination]))
-        {
+        self.sprite!.run(SKAction.sequence([destination]), completion: {
             self.moving = false
             self.popUp.customizeTitle("First Base Camp")
             self.popUp.customizeFact("CONGRATS on reaching your first Base Camp! Did you know... Mount Everest was first climbed in 1953. Some of the benefits of climbing include exercising bones and muscles, improving strength, bone density and muscle tone. Good job. ")
             self.popUp.customizeButton("Keep Climbing")
-            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
-        }
+            self.perform(#selector(self.showPopUp), with: nil, afterDelay: 1)
+        })
+        
     }
     
-    func moveFirstToSecondBaseCamp(firstBaseCamp: CGPoint, secondBaseCamp: CGPoint) -> Void {
+    func moveFirstToSecondBaseCamp(_ firstBaseCamp: CGPoint, secondBaseCamp: CGPoint) -> Void {
         moving = true
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, firstBaseCamp.x, firstBaseCamp.y)
-        CGPathAddLineToPoint(path, nil, secondBaseCamp.x, secondBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: firstBaseCamp.x, y: firstBaseCamp.y))
+        path.addLine(to: CGPoint(x: secondBaseCamp.x, y: secondBaseCamp.y))
+        //CGPathMoveToPoint(path, nil, firstBaseCamp.x, firstBaseCamp.y)
+        //CGPathAddLineToPoint(path, nil, secondBaseCamp.x, secondBaseCamp.y)
+        let destination = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 3.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
-        self.sprite!.runAction(SKAction.sequence([destination]))
-        {
+        self.sprite!.run(SKAction.sequence([destination]), completion: {
             self.moving = false
             self.popUp.customizeTitle("Second Base Camp")
             self.popUp.customizeFact("CONGRATS on reaching your second Base Camp. Some motivation: The youngest person to climb Everest is American teenager Jordan Romero, who was 13 years old when he reached the summit on 22 May, 2010.")
             self.popUp.customizeButton("Keep Climbing")
-            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
-        }
+            self.perform(#selector(self.showPopUp), with: nil, afterDelay: 1)
+        })
+        
     }
     
-    func moveSecondToThirdBaseCamp(secondBaseCamp: CGPoint, thirdBaseCamp: CGPoint) -> Void {
+    func moveSecondToThirdBaseCamp(_ secondBaseCamp: CGPoint, thirdBaseCamp: CGPoint) -> Void {
         moving = true
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, secondBaseCamp.x, secondBaseCamp.y)
-        CGPathAddLineToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: secondBaseCamp.x, y: secondBaseCamp.y))
+        path.addLine(to: CGPoint(x: thirdBaseCamp.x, y: thirdBaseCamp.y))
+        //CGPathMoveToPoint(path, nil, secondBaseCamp.x, secondBaseCamp.y)
+        //CGPathAddLineToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
+        let destination = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 3.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
-        self.sprite!.runAction(SKAction.sequence([destination]))
-        {
+        self.sprite!.run(SKAction.sequence([destination]), completion: {
             self.moving = false
             self.popUp.customizeTitle("Third Base Camp")
             self.popUp.customizeFact("GETTING CLOSER! The oldest person to reach the summit of Everest is Miura Yiuchiro from Japan, at the age of 80 years old. Good thing climbing gets you into shape without putting too much pressure on your knees and feet!")
             self.popUp.customizeButton("Onwards and Upwards")
-            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
-        }
+            self.perform(#selector(self.showPopUp), with: nil, afterDelay: 1)
+        })
+        
     }
     
-    func moveThirdToFourthBaseCamp(thirdBaseCamp: CGPoint, fourthBaseCamp: CGPoint) -> Void {
+    func moveThirdToFourthBaseCamp(_ thirdBaseCamp: CGPoint, fourthBaseCamp: CGPoint) -> Void {
         moving = true
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
-        CGPathAddLineToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 5.0)
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: thirdBaseCamp.x, y: thirdBaseCamp.y))
+        path.addLine(to: CGPoint(x: fourthBaseCamp.x, y: fourthBaseCamp.y))
+        //CGPathMoveToPoint(path, nil, thirdBaseCamp.x, thirdBaseCamp.y)
+        //CGPathAddLineToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
+        let destination = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 3.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
-        self.sprite!.runAction(SKAction.sequence([destination]))
-        {
+        self.sprite!.run(SKAction.sequence([destination]), completion: {
             self.moving = false
             self.popUp.customizeTitle("Fourth Base Camp")
             self.popUp.customizeFact("ALMOST THERE! Did you know... Anything above 8,000 metres is known as the Death Zone. Climbers suffer altitude sickness and headaches and risk life-threatening oedemas due to the thin, dry air.")
             self.popUp.customizeButton("Keep Climbing")
-             self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
-        }
+             self.perform(#selector(self.showPopUp), with: nil, afterDelay: 1)
+        })
+        
     }
     
-    func moveFourthBaseCampToSummit(fourthBaseCamp: CGPoint, summit: CGPoint) -> Void {
+    func moveFourthBaseCampToSummit(_ fourthBaseCamp: CGPoint, summit: CGPoint) -> Void {
         moving = true
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
-        CGPathAddLineToPoint(path, nil, summit.x, summit.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 3.0)
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: fourthBaseCamp.x, y: fourthBaseCamp.y))
+        path.addLine(to: CGPoint(x: summit.x, y: summit.y))
+        //CGPathMoveToPoint(path, nil, fourthBaseCamp.x, fourthBaseCamp.y)
+        //CGPathAddLineToPoint(path, nil, summit.x, summit.y)
+        let destination = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 3.0)
         //        let reverseSecondBaseCamp = secondBaseCamp.reversedAction()
-        self.sprite!.runAction(SKAction.sequence([destination]))
-        {
+        self.sprite!.run(SKAction.sequence([destination]), completion: {
             self.moving = false
             self.popUp.customizeTitle("The Summit")
             self.popUp.customizeFact("CONGRATULATIONS... You have reached the summit of Mount Everest - the tallest mountain in the world of 8,848 metres high. That’s the height at which passenger aeroplanes fly at!")
             self.popUp.customizeButton("Enjoy the view")
-            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 4)
+            self.perform(#selector(self.showPopUp), with: nil, afterDelay: 4)
             
             //baby im a firework
-            let burstPath = NSBundle.mainBundle().pathForResource("Spark",
+            let burstPath = Bundle.main.path(forResource: "Spark",
                                                                   ofType: "sks")
-            self.burstNode = NSKeyedUnarchiver.unarchiveObjectWithFile(burstPath!)
+            self.burstNode = NSKeyedUnarchiver.unarchiveObject(withFile: burstPath!)
                 as? SKEmitterNode
-            self.burstNode!.position = CGPointMake(200, 400)
+            self.burstNode!.position = CGPoint(x: 200, y: 400)
             self.burstNode!.zPosition = 6
             self.burstNode!.name = "firework"
             self.burstNode!.targetNode = self.scene
             self.background!.addChild(self.burstNode!)
             
-            self.burstNode2 = NSKeyedUnarchiver.unarchiveObjectWithFile(burstPath!)
+            self.burstNode2 = NSKeyedUnarchiver.unarchiveObject(withFile: burstPath!)
                 as? SKEmitterNode
-            self.burstNode2!.position = CGPointMake(100, 400)
+            self.burstNode2!.position = CGPoint(x: 100, y: 400)
             self.burstNode2!.zPosition = 6
             self.burstNode2!.name = "firework"
             self.burstNode2!.targetNode = self.scene
             self.background!.addChild(self.burstNode2!)
             //burstNode2.removeFromParent()
              //self.popUp.hidden = false
-        }
+        })
+        
     }
 
-    func returnToStart(summit: CGPoint, start: CGPoint) -> Void {
+    func returnToStart(_ summit: CGPoint, start: CGPoint) -> Void {
         //REMOVE NORMAL SPRITE AND ADD SLIDING SPRITE 
         
         self.sprite!.removeFromParent()
@@ -322,18 +332,19 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.slidingSprite.position = summit
         self.addChild(self.slidingSprite)
         
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, self.summit.x, self.summit.y)
-        CGPathAddLineToPoint(path, nil, self.start.x, self.start.y)
-        let destination = SKAction.followPath(path, asOffset: false, orientToPath: false, duration: 6.0)
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: self.summit.x, y: self.summit.y))
+        path.addLine(to: CGPoint(x: self.start.x, y: self.start.y))
+        //CGPathMoveToPoint(path, nil, self.summit.x, self.summit.y)
+        //CGPathAddLineToPoint(path, nil, self.start.x, self.start.y)
+        let destination = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 6.0)
         //CHANGE TO SLIDING SPRITE
-        self.slidingSprite.runAction(SKAction.sequence([destination]))
-        {
+        self.slidingSprite.run(SKAction.sequence([destination]), completion: {
             //REMOVE SLIDING SPRITE AND ADD NORMAL SPRITE. might have to move just above curly bracket
             self.slidingSprite.removeFromParent()
             self.addChild(self.sprite!)
-            self.sprite!.xScale = 6
-            self.sprite!.yScale = 3
+            self.sprite!.xScale = 1
+            self.sprite!.yScale = 1
             self.sprite!.zPosition = 3
             self.sprite!.position = start
             
@@ -341,39 +352,40 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
             self.popUp.customizeTitle("Home at Last")
             self.popUp.customizeFact("You have now joined a group of over 4000 people that have climbed Mount Everest")
             self.popUp.customizeButton("Done")
-            self.performSelector(#selector(self.showPopUp), withObject: nil, afterDelay: 1)
-        }
+            self.perform(#selector(self.showPopUp), with: nil, afterDelay: 1)
+        })
+        
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for touch in touches {
             
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
-            if sprite!.containsPoint(location) {
-                getPhotoFromSource(UIImagePickerControllerSourceType.Camera)
+            if sprite!.contains(location) {
+                getPhotoFromSource(UIImagePickerControllerSourceType.camera)
             }
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Loop over all the touches in this event
         for touch: AnyObject in touches {
             // Get the location of the touch in this scene
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             // Check if the location of the touch is within the button's bounds
-            if startSprite!.containsPoint(location) {
-                if self.sprite!.containsPoint(start) {
+            if startSprite!.contains(location) {
+                if self.sprite!.contains(start) {
                     self.moveStartToFirstBaseCamp(start, firstBaseCamp: baseCamp1)
                     //fade button off screen
-                    let fadeAway = SKAction.fadeOutWithDuration(1)
-                    self.startSprite!.runAction(SKAction.sequence([fadeAway]))
+                    let fadeAway = SKAction.fadeOut(withDuration: 1)
+                    self.startSprite!.run(SKAction.sequence([fadeAway]))
                 }
-                if self.sprite!.containsPoint(summit) {
+                if self.sprite!.contains(summit) {
                     self.returnToStart(summit, start: start)
-                    let fadeAway = SKAction.fadeOutWithDuration(1)
-                    self.startSprite!.runAction(SKAction.sequence([fadeAway]))
+                    let fadeAway = SKAction.fadeOut(withDuration: 1)
+                    self.startSprite!.run(SKAction.sequence([fadeAway]))
                 }
             }
         }
@@ -408,7 +420,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         }
     }
     
-    func moveGirlToNextCampAtPoint(point: CGPoint){
+    func moveGirlToNextCampAtPoint(_ point: CGPoint){
         sprite?.position = point
 
         //        CGPathMoveToPoint(route, nil, dataManager.currentBaseCamp.x, dataManager.currentBaseCamp.y)
@@ -418,7 +430,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     
 
     //get data from y position for labels
-    override func update(currentTime: NSTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         if (moving) {
 //    NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
             
@@ -466,7 +478,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
 //        self.time = self.time + 1
 //    }
     
-    func setDistance(previousDistanceTotal: String, distanceTotal: String) {
+    func setDistance(_ previousDistanceTotal: String, distanceTotal: String) {
         self.labelDistance!.removeFromSuperview()
         self.labelDistance = ScoreboardLabel(backgroundImage: self.image!, text:previousDistanceTotal, flipToText: distanceTotal, font:self.font!, textColor:self.color)
         self.labelDistance!.center = CGPoint(x: 190, y: 18)
@@ -485,7 +497,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         self.labelCamp!.stopFlipping()
     }
     
-    func setSteps(previousSteps: String, totalSteps: String) {
+    func setSteps(_ previousSteps: String, totalSteps: String) {
         self.labelSteps!.removeFromSuperview()
         self.labelSteps = ScoreboardLabel(backgroundImage: self.image! ,text:previousSteps, flipToText:totalSteps, font:self.font!, textColor:self.color)
         self.labelSteps!.center = CGPoint(x: 190, y: 54)
@@ -495,7 +507,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
 
     }
     
-    func setCalories(previousCalories: String, totalCalories: String) {
+    func setCalories(_ previousCalories: String, totalCalories: String) {
         self.labelCalories!.removeFromSuperview()
         self.labelCalories = ScoreboardLabel(backgroundImage: self.image! ,text:previousCalories, flipToText:totalCalories, font:self.font!, textColor:self.color)
         self.labelCalories!.center = CGPoint(x: 190, y: 74)
@@ -548,7 +560,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
         return 0.0
     }
     
-    func getCampDistance(previousCamp:(CGPoint), nextCamp:(CGPoint)) -> Double {
+    func getCampDistance(_ previousCamp:(CGPoint), nextCamp:(CGPoint)) -> Double {
         //convert coordinates to screen size
         
         //let xDist = CGFloat(nextCamp.x - previousCamp.x)
@@ -558,7 +570,7 @@ class GameScene: SKScene, UIImagePickerControllerDelegate, UINavigationControlle
     }
     
     func showPopUp() {
-        self.popUp.hidden = false
+        self.popUp.isHidden = false
     }
     
     

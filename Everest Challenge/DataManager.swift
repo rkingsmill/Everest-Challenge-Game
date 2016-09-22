@@ -10,7 +10,7 @@ import Foundation
 
 class DataManager: NSObject {
     
-    var defaults = NSUserDefaults.standardUserDefaults()
+    var defaults = UserDefaults.standard
     
     let floorTracker:FloorTracker
     
@@ -19,14 +19,14 @@ class DataManager: NSObject {
     }
     
     func saveUserDefaults() {
-        self.defaults.setValue(NSDate(), forKey: "LastDate")
+        self.defaults.setValue(Date(), forKey: "LastDate")
         self.defaults.setValue(self.floorTracker.currentHeight, forKey: "Height")
         print("current height before saving", self.floorTracker.currentHeight)
     }
     
     func fetchDefaults() {
-        let lastLogoutDate = defaults.valueForKey("LastDate") as? NSDate ?? NSDate()
-        let lastSavedHeight = self.defaults.valueForKey("Height") as? Double ?? 0.0
+        let lastLogoutDate = defaults.value(forKey: "LastDate") as? Date ?? Date()
+        let lastSavedHeight = self.defaults.value(forKey: "Height") as? Double ?? 0.0
         print("last logout", lastLogoutDate)
         print("last saved", lastSavedHeight)
         self.floorTracker.lastLoginDate = lastLogoutDate
@@ -34,22 +34,22 @@ class DataManager: NSObject {
     }
     
     func getStartDate() {
-        guard let startDate = self.defaults.objectForKey("StartDate") else {
+        guard let startDate = self.defaults.object(forKey: "StartDate") else {
             print("initial startdate set")
-            self.defaults.setObject(NSDate(), forKey: "StartDate")
+            self.defaults.set(Date(), forKey: "StartDate")
             return
         }
         print("start Date already set as:", startDate)
     }
 
     func restartGame() {
-        self.defaults.setValue(NSNumber(float:0.0), forKey: "Height")
+        self.defaults.setValue(NSNumber(value: 0.0 as Float), forKey: "Height")
         self.floorTracker.currentHeight = 0
         self.resetStartDate()
     }
     
     func resetStartDate() {
-        self.defaults.setValue(NSDate(), forKey: "StartDate")
+        self.defaults.setValue(Date(), forKey: "StartDate")
     }
     
 }

@@ -18,15 +18,15 @@ class FloorTracker: NSObject {
         didSet {
             if currentHeight >= mountainHeightInFlights {
                 // fix this
-                pedometer.stopPedometerUpdates()
-                NSNotificationCenter.defaultCenter().postNotificationName("GameDidFinishNotification", object: nil)
+                pedometer.stopUpdates()
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "GameDidFinishNotification"), object: nil)
             } else {
-                NSNotificationCenter.defaultCenter().postNotificationName("PedometerDidUpdateNotification", object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "PedometerDidUpdateNotification"), object: nil)
             }
         }
     }
     
-    var lastLoginDate: NSDate?
+    var lastLoginDate: Date?
     
     //comment out self.pedometerDidUpdate and add startFakePedometerUpdate for demo
     
@@ -38,7 +38,7 @@ class FloorTracker: NSObject {
     }
     
     func pedometerDidUpdate() {
-        pedometer.startPedometerUpdatesFromDate(lastLoginDate!) { (data: CMPedometerData?, error: NSError?) in
+        /* pedometer.startUpdates(from: lastLoginDate!) { (data: CMPedometerData?, error: NSError?) in
             
             guard CMPedometer.isFloorCountingAvailable() else {
                 print("No Floor counting, sorry")
@@ -56,7 +56,8 @@ class FloorTracker: NSObject {
             self.currentHeight = floorsAscended + self.lastSavedHeight!
             print("current height", self.currentHeight)
            
-        }
+        } as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler as! CMPedometerHandler
+ */
     }
     
     //simulated data for demo
@@ -66,7 +67,7 @@ class FloorTracker: NSObject {
       //  NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(FloorTracker.update), userInfo: nil, repeats: true)
     }
     
-    @objc private func update(){
+    @objc fileprivate func update(){
         self.currentHeight = self.currentHeight + 1.0
     }
 }

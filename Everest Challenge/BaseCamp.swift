@@ -32,7 +32,7 @@ class BaseCamp {
         return CGPoint(x: self.x, y: self.y)
     }
     
-    func calculateDistanceWithPreviousCamp(previousCamp:BaseCamp, frameSize:CGSize) -> Double {
+    func calculateDistanceWithPreviousCamp(_ previousCamp:BaseCamp, frameSize:CGSize) -> Double {
             //convert coordinates to screen size
             let screenSizePreviousX = previousCamp.x * frameSize.width
             let screenSizePreviousY = previousCamp.y * frameSize.height

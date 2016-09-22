@@ -30,33 +30,33 @@ class PopUp: UIView {
     
     func setupPopUp() {
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
 
         //round pop up corners
 //        self.layer.cornerRadius = 2.0
 //        self.clipsToBounds = true
         //set shadow and round it
-        self.layer.shadowColor = UIColor.whiteColor().CGColor
+        self.layer.shadowColor = UIColor.white.cgColor
         self.layer.shadowOpacity = 1
-        self.layer.shadowOffset = CGSizeZero
+        self.layer.shadowOffset = CGSize.zero
         self.layer.shadowRadius = 15
         self.layer.masksToBounds = false
         self.customizeImages()
     }
     
-    func customizeButton(text:String) {
+    func customizeButton(_ text:String) {
         //okButton.titleLabel?.text = text
         //self.layoutIfNeeded()
-        okButton.setTitle(text, forState: UIControlState.Normal)
+        okButton.setTitle(text, for: UIControlState())
         okButton.titleLabel?.font = UIFont(name: "LCD Solid", size: 14)
     }
     
-    func customizeTitle(text:String) {
+    func customizeTitle(_ text:String) {
         titleLabel.text = text
         titleLabel.font = UIFont(name: "LCD Solid", size: 14)
     }
     
-    func customizeFact(text:String) {
+    func customizeFact(_ text:String) {
         factLabel.text = text
         factLabel.font = UIFont(name: "LCD Solid", size: 10)
     }

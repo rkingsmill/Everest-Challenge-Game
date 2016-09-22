@@ -11,14 +11,14 @@ import UIKit
 class Path {
     
     var baseCamps = [BaseCamp]()
-    private var totalDistanceForScreenSize : Double?
+    fileprivate var totalDistanceForScreenSize : Double?
     let frameSize: CGSize
     
     var currentBaseCamp:Int = 0 {
         didSet {
             print("current basecamp was set \(currentBaseCamp)")
             // do something here to notify the viewcontroller that you need to move to the appropriate base camp
-            NSNotificationCenter.defaultCenter().postNotificationName("MoveToCampNotification", object: nil, userInfo: ["indexOfCurrentCamp": currentBaseCamp ])
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "MoveToCampNotification"), object: nil, userInfo: ["indexOfCurrentCamp": currentBaseCamp ])
         }
     }
     
@@ -38,7 +38,7 @@ class Path {
     
     var nextCampHeight: Float?
     
-    func currentCampForHeight(currentHeight:Double) {
+    func currentCampForHeight(_ currentHeight:Double) {
         
         var total:Double = 0.0
         
@@ -60,7 +60,7 @@ class Path {
         }
     }
     
-    private func getTotalDistanceOfBaseCamps() {
+    fileprivate func getTotalDistanceOfBaseCamps() {
         var total:Double = 0.0
         for i in 1..<baseCamps.count {
             let previousCamp = baseCamps[i-1]

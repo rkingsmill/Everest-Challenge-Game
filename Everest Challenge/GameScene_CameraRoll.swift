@@ -11,7 +11,7 @@ import SpriteKit
 
 extension GameScene {
     
-    func getPhotoFromSource(source:UIImagePickerControllerSourceType) {
+    func getPhotoFromSource(_ source:UIImagePickerControllerSourceType) {
         
         //change photo library to camera
         if UIImagePickerController.isSourceTypeAvailable(source)
@@ -23,26 +23,26 @@ extension GameScene {
         imagePicker.sourceType = source
         imagePicker.allowsEditing = true
             
-            if (source == .Camera) {
-        imagePicker.cameraDevice = .Front
+            if (source == .camera) {
+        imagePicker.cameraDevice = .front
             }
         
         let vc:UIViewController = self.view!.window!.rootViewController!
-        vc.presentViewController(imagePicker, animated: true, completion: nil)
+        vc.present(imagePicker, animated: true, completion: nil)
     }
 }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        if (picker.sourceType == UIImagePickerControllerSourceType.PhotoLibrary || picker.sourceType == UIImagePickerControllerSourceType.Camera) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if (picker.sourceType == UIImagePickerControllerSourceType.photoLibrary || picker.sourceType == UIImagePickerControllerSourceType.camera) {
             
             //do something with image
             if let cameraRollPicture = info[UIImagePickerControllerEditedImage] as? UIImage {
                
-                if let deleteNode:SKNode = self.childNodeWithName("CameraRollPicture") {
+                if let deleteNode:SKNode = self.childNode(withName: "CameraRollPicture") {
                     deleteNode.removeFromParent()
                 }
                 
-                defaultss.setObject(UIImagePNGRepresentation(cameraRollPicture), forKey: "CameraRollPicture")
+                defaultss.set(UIImagePNGRepresentation(cameraRollPicture), forKey: "CameraRollPicture")
                 
                 if (maskingCameraRollChoice == false) {
                     
@@ -66,29 +66,29 @@ extension GameScene {
                 } else {
                     
                     let newMaskString:String = "{ 0, 0 }"
-                    defaultss.setObject(newMaskString, forKey:"MaskOffset")
+                    defaultss.set(newMaskString, forKey:"MaskOffset")
                     
-                    let wait:SKAction = SKAction.waitForDuration(1/60)
-                    let run:SKAction = SKAction.runBlock{
+                    let wait:SKAction = SKAction.wait(forDuration: 1/60)
+                    let run:SKAction = SKAction.run{
                         self.revealMaskedCameraRollImage();
                     }
                     let seq:SKAction = SKAction.sequence([wait, run])
-                    self.runAction(seq)
+                    self.run(seq)
                 }
             }
         }
         
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
         picker.delegate = nil
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
         picker.delegate = nil
     }
     
     func revealMaskedCameraRollImage() {
-        if let imageDataAsDefaults:NSData = defaultss.objectForKey("CameraRollPicture") as? NSData {
+        if let imageDataAsDefaults:Data = defaultss.object(forKey: "CameraRollPicture") as? Data {
             let someImage: UIImage = UIImage(data:imageDataAsDefaults)!
             
             if let face = face {
